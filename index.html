@@ -861,6 +861,8 @@
               <article class="collection-card-home"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80" alt="CERAVO bedroom surfaces" /><h3>Bedroom</h3></article>
               <article class="collection-card-home"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="CERAVO kitchen surfaces" /><h3>Kitchen</h3></article>
               <article class="collection-card-home"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="CERAVO living room surfaces" /><h3>Living Room</h3></article>
+              <article class="collection-card-home"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="CERAVO washroom surfaces" /><h3>Washroom</h3></article>
+              <article class="collection-card-home"><img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=900&q=80" alt="CERAVO parking surfaces" /><h3>Parking</h3></article>
             </div>
           </div>
 
@@ -886,6 +888,8 @@
               <button class="collection-dot is-active" type="button" data-collection-dot="0" aria-label="Show first collection card"></button>
               <button class="collection-dot" type="button" data-collection-dot="1" aria-label="Show second collection card"></button>
               <button class="collection-dot" type="button" data-collection-dot="2" aria-label="Show third collection card"></button>
+              <button class="collection-dot" type="button" data-collection-dot="3" aria-label="Show fourth collection card"></button>
+              <button class="collection-dot" type="button" data-collection-dot="4" aria-label="Show fifth collection card"></button>
             </div>
             <button class="collection-arrow" type="button" data-collection-next aria-label="Next collection">&#8594;</button>
           </div>
@@ -1021,6 +1025,14 @@
 
       const activeCollectionTrack = () => document.querySelector('.collection-panel.is-active .collection-track');
 
+      const syncCollectionDots = () => {
+        const cardCount = activeCollectionTrack().querySelectorAll('.collection-card-home').length;
+        collectionDots.forEach((dot, index) => {
+          dot.hidden = index >= cardCount;
+          dot.classList.toggle('is-active', index === activeCollectionIndex);
+        });
+      };
+
       const setCollectionTab = (tabName) => {
         collectionTabs.forEach((tab) => {
           const isActive = tab.dataset.collectionTab === tabName;
@@ -1031,7 +1043,7 @@
           panel.classList.toggle('is-active', panel.dataset.collectionPanel === tabName);
         });
         activeCollectionIndex = 0;
-        collectionDots.forEach((dot, index) => dot.classList.toggle('is-active', index === 0));
+        syncCollectionDots();
       };
 
       collectionTabs.forEach((tab) => {
@@ -1042,12 +1054,13 @@
         const track = activeCollectionTrack();
         const card = track.querySelector('.collection-card-home');
         const distance = card.getBoundingClientRect().width + 18;
-        activeCollectionIndex = Math.max(0, Math.min(2, activeCollectionIndex + direction));
+        const lastCardIndex = track.querySelectorAll('.collection-card-home').length - 1;
+        activeCollectionIndex = Math.max(0, Math.min(lastCardIndex, activeCollectionIndex + direction));
         track.scrollTo({
           left: distance * activeCollectionIndex,
           behavior: reducedMotion ? 'auto' : 'smooth'
         });
-        collectionDots.forEach((dot, index) => dot.classList.toggle('is-active', index === activeCollectionIndex));
+        syncCollectionDots();
       };
 
       document.querySelector('[data-collection-previous]').addEventListener('click', () => scrollCollection(-1));
@@ -1058,6 +1071,8 @@
           scrollCollection(0);
         });
       });
+
+      syncCollectionDots();
 
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {

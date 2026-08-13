@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bedroom Tiles | CERAVO TILES &amp; SURFACES</title>
+    <meta name="description" content="Explore CERAVO bedroom tile collections with refined marble, stone, wood, and matte finishes." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root { --ink: #111; --paper: #f6f4f1; --line: rgba(17,17,17,.14); }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; }
+      a { color: inherit; }
+      .topbar { min-height: 88px; display: flex; align-items: center; justify-content: space-between; padding: 12px 5%; background: #fff; border-bottom: 1px solid var(--line); }
+      .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+      .brand-mark { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; font: 32px/1 'Cormorant Garamond', serif; }
+      .brand-wordmark { display: block; font: 700 clamp(23px, 3vw, 36px)/.85 'Cormorant Garamond', serif; letter-spacing: .1em; }
+      .brand-subtitle { display: block; margin-top: 5px; font-size: 9px; letter-spacing: .25em; }
+      .icon-button { width: 36px; height: 36px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; }
+      .hero { display: none; }
+      .hero h1 { max-width: 700px; margin: 0; font: 600 clamp(44px, 7vw, 86px)/.86 'Cormorant Garamond', serif; }
+      .hero p { max-width: 470px; margin: 14px 0 0; font-size: 14px; line-height: 1.7; }
+      .listing-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding: 34px 3.3% 18px; }
+      .eyebrow { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+      .listing-header h2 { margin: 0; font: 600 clamp(36px, 5vw, 60px)/.9 'Cormorant Garamond', serif; }
+      .listing-header > p { max-width: 370px; margin: 0; color: rgba(17,17,17,.68); font-size: 13px; line-height: 1.7; }
+      .filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 3.3% 22px; }
+      .filter { padding: 10px 16px; border: 1px solid var(--ink); background: transparent; font: 600 11px 'Inter', sans-serif; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+      .filter.is-active, .filter:hover { background: var(--ink); color: #fff; }
+      .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding: 0 3.3% 22px; background: #f7f7f7; }
+      .product-card { min-width: 0; background: transparent; }
+      .product-card[hidden] { display: none; }
+      .product-card img { display: block; width: 100%; aspect-ratio: 1.47; object-fit: cover; }
+      .product-body { padding: 12px 0 14px; }
+      .product-body h3 { margin: 0; color: rgba(17,17,17,.58); font-size: 19px; font-weight: 400; letter-spacing: 0; text-transform: none; }
+      .product-meta { margin: 10px 0 0; color: rgba(17,17,17,.48); font-size: 18px; line-height: 1.55; }
+      .product-actions { display: none; }
+      .listing-dots { display: flex; justify-content: center; gap: 12px; padding: 22px 0 42px; background: #f7f7f7; }
+      .listing-dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: #c7c7c7; }
+      .listing-dot.is-active { background: #333; }
+      .product-actions a { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
+      .bottom-actions { display: grid; grid-template-columns: 1fr 1fr; min-height: 64px; background: #000; color: #fff; }
+      .bottom-action { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
+      .bottom-action + .bottom-action { border-left: 1px solid rgba(255,255,255,.5); }
+      .site-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 34px 5% 92px; background: #111; color: #fff; }
+      .footer-brand { font: 30px 'Cormorant Garamond', serif; letter-spacing: .12em; }
+      .footer-copy, .footer-links { margin: 6px 0 0; color: rgba(255,255,255,.68); font-size: 12px; }
+      .footer-links { display: flex; gap: 18px; align-items: end; }
+      .footer-links a { color: #fff; text-decoration: none; }
+      .site-menu { position: fixed; inset: 0; z-index: 5; display: flex; justify-content: flex-end; visibility: hidden; opacity: 0; background: rgba(0,0,0,.35); transition: opacity .25s ease, visibility .25s ease; }
+      .site-menu.is-open { visibility: visible; opacity: 1; }
+      .site-menu-panel { width: min(420px, 88vw); height: 100%; padding: 110px 32px 32px; background: #fff; transform: translateX(100%); transition: transform .3s ease; }
+      .site-menu.is-open .site-menu-panel { transform: translateX(0); }
+      .site-menu-link { display: block; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 600; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+      @media (max-width: 760px) { .listing-header { display: block; } .listing-header h2 { margin-bottom: 18px; } .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .product-body { padding: 10px 0 12px; } .product-body h3 { font-size: 14px; } .product-meta { font-size: 13px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
+      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .listing-header, .filters { padding-left: 16px; padding-right: 16px; } .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 8px; overflow: visible; padding: 0 16px 14px; } .product-card { min-width: 0; } .product-card img { aspect-ratio: .76; } .product-body { padding-top: 8px; } .product-body h3 { font-size: 10px; line-height: 1.25; } .product-meta { margin-top: 5px; font-size: 9px; line-height: 1.35; } .listing-dots { padding-top: 16px; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
+    <main>
+      <section class="hero"><div><h1>Bedroom tiles with a softer point of view.</h1><p>Warm surfaces, quiet texture, and considered finishes for restful spaces.</p></div></section>
+      <section class="listing-header"><div><p class="eyebrow">CERAVO bedroom collection</p><h2>Choose your atmosphere.</h2></div><p>Explore materials selected to bring warmth, depth, and balance to the bedroom.</p></section>
+      <div class="filters" role="group" aria-label="Filter bedroom tile collections"><button class="filter is-active" type="button" data-filter="all">All collections</button><button class="filter" type="button" data-filter="marble">Marble Effect</button><button class="filter" type="button" data-filter="stone">Stone Effect</button><button class="filter" type="button" data-filter="wood">Wood Effect</button><button class="filter" type="button" data-filter="matte">Matte</button></div>
+      <section class="product-grid" aria-label="Bedroom tile collections">
+        <article class="product-card" data-category="marble"><img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=900&q=80" alt="Marmora beige bedroom tile collection" /><div class="product-body"><h3>Marmora Beige</h3><p class="product-meta">Marble Effect · Matte<br />1200 × 600 mm · Ivory</p><div class="product-actions"><a href="#">View Details</a><a href="#">Enquire Now</a></div></div></article>
+        <article class="product-card" data-category="stone"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="Terra stone bedroom tile collection" /><div class="product-body"><h3>Terra Stone</h3><p class="product-meta">Stone Effect · Natural<br />600 × 600 mm · Taupe</p><div class="product-actions"><a href="#">View Details</a><a href="#">Enquire Now</a></div></div></article>
+        <article class="product-card" data-category="wood"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80" alt="Oakline wood bedroom tile collection" /><div class="product-body"><h3>Oakline Warm</h3><p class="product-meta">Wood Effect · Satin<br />1200 × 200 mm · Honey</p><div class="product-actions"><a href="#">View Details</a><a href="#">Enquire Now</a></div></div></article>
+        <article class="product-card" data-category="matte"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80" alt="Calm matte bedroom tile collection" /><div class="product-body"><h3>Calm Matte</h3><p class="product-meta">Matt Finish · Soft Touch<br />600 × 1200 mm · Sand</p><div class="product-actions"><a href="#">View Details</a><a href="#">Enquire Now</a></div></div></article>
+      </section>
+      <div class="listing-dots" aria-label="Bedroom listing pages"><button class="listing-dot is-active" type="button" aria-label="Listing page 1"></button><button class="listing-dot" type="button" aria-label="Listing page 2"></button></div>
+    </main>
+    <div class="bottom-actions"><a class="bottom-action" href="showroom.html">Showroom Locator</a><a class="bottom-action" href="#">Request a Call</a></div>
+    <footer class="site-footer"><div><div class="footer-brand">CERAVO</div><p class="footer-copy">Tiles &amp; Surfaces for considered spaces.</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="tiles.html">Tiles</a><a href="bathware.html">Bathware</a></nav></footer>
+    <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="#">Contact Us</a></nav></div>
+    <script>
+      const menu = document.querySelector('#site-menu');
+      const menuButton = document.querySelector('[aria-controls="site-menu"]');
+      const setMenuState = (isOpen) => { menu.classList.toggle('is-open', isOpen); menu.setAttribute('aria-hidden', String(!isOpen)); menuButton.setAttribute('aria-expanded', String(isOpen)); document.body.style.overflow = isOpen ? 'hidden' : ''; };
+      menuButton.addEventListener('click', () => setMenuState(!menu.classList.contains('is-open')));
+      menu.addEventListener('click', (event) => { if (event.target === menu) setMenuState(false); });
+      menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuState(false)));
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenuState(false); });
+      document.querySelectorAll('[data-filter]').forEach((filterButton) => filterButton.addEventListener('click', () => { const filter = filterButton.dataset.filter; document.querySelectorAll('[data-filter]').forEach((button) => button.classList.toggle('is-active', button === filterButton)); document.querySelectorAll('.product-card').forEach((card) => { card.hidden = filter !== 'all' && card.dataset.category !== filter; }); }));
+    </script>
+  </body>
+</html>

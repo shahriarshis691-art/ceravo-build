@@ -67,16 +67,21 @@
       }
 
       .topbar {
-        background: #fff;
-        color: #111;
-        border-bottom: 1px solid rgba(17,17,17,0.08);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        background: transparent;
+        color: #fff;
+        border-bottom: 0;
       }
 
       .brand-mark {
         width: 64px;
         height: 64px;
         border-radius: 50%;
-        border: 2px solid #111;
+        border: 2px solid rgba(255,255,255,0.95);
         background: transparent;
         font-family: 'Cormorant Garamond', serif;
         font-size: 42px;
@@ -84,7 +89,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #111;
+        color: rgba(255,255,255,0.95);
       }
 
       .ceravo-wordmark {
@@ -170,7 +175,7 @@
 
       .hero {
         position: relative;
-        height: 360px;
+        height: 550px;
         overflow: hidden;
         background: #111;
       }
@@ -215,24 +220,49 @@
         text-align: center;
         color: rgba(255,255,255,0.95);
         z-index: 1;
-        width: 100%;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
+        width: min(92%, 620px);
+        letter-spacing: 0;
+        text-transform: none;
       }
 
       .hero-copy span {
         display: inline-block;
-        padding: 17px 28px;
+        padding: 0;
+        background: transparent;
+        font-family: 'Inter', sans-serif;
+        font-size: clamp(25px, 4vw, 42px);
+        letter-spacing: 0;
+        font-weight: 700;
+        line-height: 1.1;
+        text-shadow: 0 2px 14px rgba(0,0,0,0.45);
+      }
+
+      .hero-copy span::after {
+        content: 'Refined surfaces for considered spaces';
+        display: block;
+        margin-top: 8px;
+        font-size: clamp(14px, 2vw, 20px);
+        font-weight: 400;
+        line-height: 1.2;
+      }
+
+      .hero-copy::after {
+        content: 'DISCOVER MORE';
+        display: block;
+        width: fit-content;
+        margin: 28px auto 0;
+        padding: 16px 24px;
         background: #000;
-        font-size: 15px;
-        letter-spacing: 0.12em;
+        color: #fff;
+        font-size: 14px;
         font-weight: 500;
-        text-shadow: 0 2px 14px rgba(0,0,0,0.35);
+        letter-spacing: 0.08em;
       }
 
       .hero-controls {
         position: absolute;
-        inset: auto 24px 24px;
+        inset: 50% 18px auto;
+        transform: translateY(-50%);
         z-index: 3;
         display: flex;
         align-items: center;
@@ -240,10 +270,11 @@
       }
 
       .hero-control {
-        width: 38px;
-        height: 38px;
-        border: 1px solid rgba(255,255,255,0.7);
-        background: rgba(0,0,0,0.25);
+        width: 48px;
+        height: 48px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.42);
         color: #fff;
         cursor: pointer;
         font-size: 20px;
@@ -251,7 +282,7 @@
       }
 
       .hero-dots {
-        display: flex;
+        display: none;
         gap: 8px;
         align-items: center;
       }
@@ -314,6 +345,11 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        width: auto;
+      }
+
+      .topbar .header-inner {
+        flex-wrap: nowrap;
       }
 
       .top-text {
@@ -332,11 +368,11 @@
       }
 
       .topbar .ceravo-wordmark {
-        color: #111;
+        color: #fff;
       }
 
       .topbar .sub-wordmark {
-        color: rgba(17,17,17,0.7) !important;
+        color: rgba(255,255,255,0.78) !important;
       }
 
       .topbar-actions .search-text,
@@ -346,13 +382,13 @@
       }
 
       .topbar .action-icon {
-        border-color: rgba(17,17,17,0.8);
-        color: #111;
+        border-color: rgba(255,255,255,0.75);
+        color: #fff;
         background: transparent;
       }
 
       .topbar .action-icon svg {
-        color: #111 !important;
+        color: #fff !important;
       }
 
       .showcase-followup {
@@ -478,7 +514,7 @@
 
       @media (max-width: 767px) {
         .topbar .header-inner {
-          flex-wrap: wrap;
+          flex-wrap: nowrap;
           gap: 12px;
           min-height: auto;
           padding-top: 14px;
@@ -488,7 +524,7 @@
         .header-left,
         .topbar-actions {
           min-width: 0;
-          width: 100%;
+          width: auto;
         }
 
         .header-left {
@@ -498,7 +534,7 @@
 
         .brand-group {
           order: 1;
-          width: 100%;
+          width: auto;
           justify-content: center;
         }
 
@@ -506,6 +542,7 @@
           order: 3;
           justify-content: space-between;
           gap: 8px;
+          min-width: auto !important;
         }
 
         .topbar-actions .search-text,
@@ -536,7 +573,7 @@
         }
 
         .hero {
-          height: 360px;
+          height: 550px;
         }
 
         .showcase-followup {
@@ -576,6 +613,15 @@
         .action-icon {
           width: 30px;
           height: 30px;
+        }
+
+        .hero-controls {
+          inset-inline: 12px;
+        }
+
+        .hero-control {
+          width: 44px;
+          height: 44px;
         }
       }
     </style>

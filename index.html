@@ -442,6 +442,36 @@
         text-align: center;
       }
 
+      .fittings-showcase {
+        padding: 42px 0 48px;
+        background: #fff;
+        color: #111;
+      }
+
+      .fittings-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin: 0 16px 24px;
+      }
+
+      .fittings-heading h2 {
+        margin: 0;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(32px, 5vw, 52px);
+        font-weight: 600;
+        line-height: 0.9;
+      }
+
+      .fittings-heading p {
+        max-width: 320px;
+        margin: 0;
+        color: rgba(17,17,17,0.66);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
       .collection-navigation {
         display: flex;
         align-items: center;
@@ -733,6 +763,14 @@
           padding: 32px 16px;
         }
 
+        .fittings-heading {
+          display: block;
+        }
+
+        .fittings-heading h2 {
+          margin-bottom: 16px;
+        }
+
         .showcase-followup-image {
           height: 220px;
         }
@@ -862,11 +900,10 @@
           <a class="brand-showcase-name" href="ghorwa-tea.html">GHORWA TEA</a>
         </section>
 
-        <section class="collection-showcase" aria-label="Explore CERAVO collections">
+        <section class="collection-showcase" aria-label="Explore CERAVO categories">
           <h2 class="collection-showcase-heading">Explore CERAVO Collections</h2>
           <div class="collection-tabs" role="tablist" aria-label="Collection categories">
-              <button class="collection-tab is-active" type="button" role="tab" aria-selected="true" data-collection-tab="locations">CATEGORIES</button>
-              <button class="collection-tab" type="button" role="tab" aria-selected="false" data-collection-tab="fittings">FITTINGS</button>
+            <button class="collection-tab is-active" type="button" role="tab" aria-selected="true" data-collection-tab="locations">CATEGORIES</button>
             <a class="collection-tab" href="brands.html">BRANDS</a>
           </div>
 
@@ -880,15 +917,6 @@
             </div>
           </div>
 
-          <div class="collection-panel" data-collection-panel="fittings" role="tabpanel" aria-label="CERAVO fittings">
-            <div class="collection-track">
-              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80" alt="CERAVO basin fittings" /><h3>Basins</h3></a>
-              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="CERAVO faucet fittings" /><h3>Faucets</h3></a>
-              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=900&q=80" alt="CERAVO shower fittings" /><h3>Showers</h3></a>
-              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80" alt="CERAVO bathroom accessories" /><h3>Accessories</h3></a>
-            </div>
-          </div>
-
           <div class="collection-navigation" aria-label="Collection carousel controls">
             <button class="collection-arrow" type="button" data-collection-previous aria-label="Previous collection">&#8592;</button>
             <div class="collection-dots">
@@ -899,6 +927,22 @@
               <button class="collection-dot" type="button" data-collection-dot="4" aria-label="Show fifth collection card"></button>
             </div>
             <button class="collection-arrow" type="button" data-collection-next aria-label="Next collection">&#8594;</button>
+          </div>
+        </section>
+
+        <section class="fittings-showcase" aria-label="Explore CERAVO fittings">
+          <div class="fittings-heading">
+            <div>
+              <p class="eyebrow">CERAVO bathware</p>
+              <h2>Fittings for considered rituals.</h2>
+            </div>
+            <p>Refined forms and tactile finishes for the details that complete a space.</p>
+          </div>
+          <div class="collection-track">
+            <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80" alt="CERAVO basin fittings" /><h3>Basins</h3></a>
+            <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="CERAVO faucet fittings" /><h3>Faucets</h3></a>
+            <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=900&q=80" alt="CERAVO shower fittings" /><h3>Showers</h3></a>
+            <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80" alt="CERAVO bathroom accessories" /><h3>Accessories</h3></a>
           </div>
         </section>
 

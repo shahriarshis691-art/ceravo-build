@@ -332,6 +332,85 @@
         border-left: 1px solid rgba(255,255,255,0.5);
       }
 
+      .site-menu {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: flex;
+        justify-content: flex-end;
+        visibility: hidden;
+        background: rgba(0,0,0,0.35);
+        opacity: 0;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+      }
+
+      .site-menu.is-open {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .site-menu-panel {
+        width: min(420px, 88vw);
+        height: 100%;
+        padding: 110px 32px 32px;
+        background: #fff;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .site-menu.is-open .site-menu-panel {
+        transform: translateX(0);
+      }
+
+      .site-menu-link {
+        display: block;
+        padding: 18px 0;
+        border-bottom: 1px solid rgba(17,17,17,0.14);
+        color: #111;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .site-footer {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 32px;
+        align-items: end;
+        padding: 38px 5% 92px;
+        background: #111;
+        color: #fff;
+      }
+
+      .site-footer-brand {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 32px;
+        letter-spacing: 0.12em;
+      }
+
+      .site-footer-copy,
+      .site-footer-links {
+        margin: 8px 0 0;
+        color: rgba(255,255,255,0.68);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .site-footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px 20px;
+        margin: 0;
+      }
+
+      .site-footer-links a {
+        color: #fff;
+        text-decoration: none;
+      }
+
       .top-text-sep {
         opacity: 0.7;
       }
@@ -472,7 +551,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16 19v-1a4 4 0 00-4-4H8a4 4 0 00-4 4v1m14 0v-1a4 4 0 00-3-3.87M13 5a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
             </span>
-            <button type="button" class="action-icon" aria-label="Open menu">☰</button>
+            <button type="button" class="action-icon" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">☰</button>
           </div>
         </div>
       </header>
@@ -519,9 +598,63 @@
         <a class="bottom-action" href="#">Showroom Locator</a>
         <a class="bottom-action" href="#">Request a Call</a>
       </div>
+
+      <footer class="site-footer">
+        <div>
+          <div class="site-footer-brand">CERAVO</div>
+          <p class="site-footer-copy">Tiles &amp; Surfaces for considered spaces.</p>
+        </div>
+        <nav class="site-footer-links" aria-label="Footer navigation">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </nav>
+      </footer>
+    </div>
+
+    <div class="site-menu" id="site-menu" aria-hidden="true">
+      <nav class="site-menu-panel" aria-label="Menu">
+        <a class="site-menu-link" href="#">Tiles</a>
+        <a class="site-menu-link" href="#">Bathware</a>
+        <a class="site-menu-link" href="#">Digital Visualizer</a>
+        <a class="site-menu-link" href="#">Ceravo Solution</a>
+        <a class="site-menu-link" href="#">Downloads</a>
+        <a class="site-menu-link" href="#">Professional</a>
+        <a class="site-menu-link" href="#">Contact Us</a>
+      </nav>
     </div>
 
     <script>
+      const menu = document.querySelector('#site-menu');
+      const menuButton = document.querySelector('[aria-controls="site-menu"]');
+
+      const setMenuState = (isOpen) => {
+        menu.classList.toggle('is-open', isOpen);
+        menu.setAttribute('aria-hidden', String(!isOpen));
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      };
+
+      menuButton.addEventListener('click', () => {
+        setMenuState(!menu.classList.contains('is-open'));
+      });
+
+      menu.addEventListener('click', (event) => {
+        if (event.target === menu) {
+          setMenuState(false);
+        }
+      });
+
+      menu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMenuState(false));
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          setMenuState(false);
+        }
+      });
+
       document.querySelectorAll('.nav-item').forEach((item) => {
         item.addEventListener('click', (e) => {
           e.preventDefault();

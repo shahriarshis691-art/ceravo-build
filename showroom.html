@@ -71,5 +71,6 @@
       const citySearch = document.querySelector('#city-search');
       citySearch.addEventListener('input', () => { const query = citySearch.value.trim().toLowerCase(); document.querySelectorAll('.store-card').forEach((card) => { card.hidden = query && !card.dataset.city.includes(query); }); });
     </script>
+    <div class="contact-float" style="position:fixed;right:18px;bottom:18px;z-index:30;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><a href="tel:+8801979614216" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#171513;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">Call Now</a><a href="https://wa.me/8801979614216?text=Hello%20CERAVO%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#1d8b55;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">WhatsApp</a></div>
   </body>
 </html>

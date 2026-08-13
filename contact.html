@@ -43,7 +43,7 @@
   <main>
     <section class="intro"><span class="eyebrow">Begin a considered project</span><h1>Let us help shape your space.</h1><p>Tell us what you are looking for and a CERAVO specialist can help with surfaces, bathware, fittings, samples, or a showroom visit.</p></section>
     <section class="form-wrap">
-      <form id="contact-form" action="mailto:info@ceravo.online" method="post" enctype="text/plain">
+      <form id="contact-form">
         <h2 class="form-heading">Request a consultation.</h2>
         <div class="form-grid">
           <label>Name<input name="name" type="text" autocomplete="name" required /></label>
@@ -62,7 +62,14 @@
   <script>
     const contactForm = document.querySelector('#contact-form');
     const contactSuccess = document.querySelector('#contact-success');
-    contactForm.addEventListener('submit', () => contactSuccess.classList.add('is-visible'));
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(contactForm);
+      const subject = `CERAVO enquiry: ${formData.get('interest')}`;
+      const body = [...formData.entries()].map(([key, value]) => `${key}: ${value}`).join('\n');
+      window.location.href = `mailto:info@ceravo.online?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      contactSuccess.classList.add('is-visible');
+    });
   </script>
 </body>
 </html>

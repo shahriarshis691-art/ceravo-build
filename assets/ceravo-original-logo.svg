@@ -1,0 +1,55 @@
+<svg width="1000" height="420" viewBox="0 0 1000 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .icon-dark { fill: #223A4D; }
+      .icon-mid { fill: #2D4B63; }
+      .tile-1 { fill: #D6D0CA; }
+      .tile-2 { fill: #E2D6C6; }
+      .tile-3 { fill: #B9B4B1; }
+      .tile-4 { fill: #D6C4A9; }
+      .line { fill: #223A4D; }
+      .text { fill: #223A4D; font-family: 'Cormorant Garamond', serif; }
+      .tag { fill: #7A726A; font-family: 'Inter', Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <g transform="translate(0 10)">
+    <g transform="translate(10,20)">
+      <path d="M168 0L335 105L168 210L0 105L168 0Z" class="icon-dark"/>
+      <path d="M168 210L335 105V260L168 365L0 260V105L168 210Z" class="icon-mid"/>
+
+      <path d="M58 110L168 50L277 110V210L168 270L58 210V110Z" fill="#F5F0EA" opacity="0.97"/>
+      <path d="M58 110L168 50L277 110V210L168 270L58 210V110Z" stroke="#223A4D" stroke-width="6" opacity="0.18"/>
+
+      <path d="M92 125L168 77L244 125V196L168 244L92 196V125Z" fill="#E8E3DC"/>
+      <path d="M92 125L168 77L244 125V196L168 244L92 196V125Z" stroke="#223A4D" stroke-width="3" opacity="0.08"/>
+
+      <path d="M120 135L168 105L216 135V186L168 216L120 186V135Z" class="tile-3"/>
+      <path d="M168 105L216 135L168 166L120 135L168 105Z" class="tile-2"/>
+      <path d="M120 135L168 166V216L120 186V135Z" class="tile-1"/>
+      <path d="M168 166L216 135V186L168 216V166Z" class="tile-4"/>
+
+      <path d="M300 58L380 109V220L300 272L220 220V109L300 58Z" class="icon-dark"/>
+      <path d="M274 92L300 73L325 92V151L300 171L274 151V92Z" fill="#E7D9C8"/>
+      <path d="M316 110L382 155L300 220L220 155L300 110H316Z" fill="#F7F3EE" opacity="0.96"/>
+      <path d="M220 155H300L382 155L300 220L220 155Z" fill="#D4CCC3" opacity="0.75"/>
+
+      <path d="M322 58L395 104L382 119L300 70L322 58Z" class="line"/>
+      <path d="M300 70L220 120L234 136L300 95L366 136L380 120L300 70Z" fill="#2B4257"/>
+
+      <path d="M404 160C420 160 434 174 434 190V224C434 239 420 252 404 252H375C362 252 351 241 351 228V211C351 195 362 184 375 184H390V160H404Z" class="icon-dark"/>
+      <path d="M375 170H404C412 170 419 177 419 185V220C419 228 412 235 404 235H375C367 235 360 228 360 220V185C360 177 367 170 375 170Z" fill="#E1DDDA" opacity="0.8"/>
+      <path d="M350 214H238V235H350V214Z" class="icon-dark"/>
+      <path d="M324 228H290C282 228 275 235 275 243V257H339V243C339 235 332 228 324 228Z" fill="#F5F0EA"/>
+      <path d="M227 234H316V248H227V234Z" class="icon-dark"/>
+      <path d="M372 174L420 174C431 174 440 183 440 194V195C440 206 431 215 420 215H372L372 174Z" fill="#1F3651" opacity="0.7"/>
+      <path d="M394 162L408 108C410 92 423 79 438 79H440V96H441C426 96 416 106 414 120L406 166L394 162Z" class="icon-dark"/>
+    </g>
+
+    <g transform="translate(500 70)">
+      <text x="0" y="110" font-size="140" font-weight="500" letter-spacing="4" class="text">CERAVO</text>
+      <line x1="15" y1="182" x2="450" y2="182" stroke="#B7AA9F" stroke-width="2"/>
+      <text x="0" y="240" font-size="28" font-weight="500" letter-spacing="8" class="tag">TILES • FITTINGS • BATH • DEVELOPMENT</text>
+    </g>
+  </g>
+</svg>

@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tiles | CERAVO TILES &amp; SURFACES</title>
-    <meta name="description" content="Explore CERAVO tile collections for refined residential and commercial interiors." />
+    <title>Bathware | CERAVO TILES &amp; SURFACES</title>
+    <meta name="description" content="Explore CERAVO bathware collections for refined residential and commercial interiors." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -13,20 +13,19 @@
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
       body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; }
-      a { color: inherit; }
       .topbar { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 5%; background: #fff; border-bottom: 1px solid var(--line); }
-      .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+      .brand { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
       .brand-mark { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; font: 32px/1 'Cormorant Garamond', serif; }
-      .brand-wordmark { font: 700 clamp(23px, 3vw, 36px)/.85 'Cormorant Garamond', serif; letter-spacing: .1em; }
-      .brand-subtitle { margin-top: 5px; font-size: 9px; letter-spacing: .25em; }
-      .header-actions { display: flex; align-items: center; gap: 10px; }
+      .brand-wordmark { display: block; font: 700 clamp(23px, 3vw, 36px)/.85 'Cormorant Garamond', serif; letter-spacing: .1em; }
+      .brand-subtitle { display: block; margin-top: 5px; font-size: 9px; letter-spacing: .25em; }
       .icon-button { width: 36px; height: 36px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; }
-      .hero { min-height: 310px; display: flex; align-items: end; padding: 38px 5%; color: #fff; background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.58)), url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80') center/cover; }
-      .hero h1 { max-width: 620px; margin: 0; font: 600 clamp(42px, 7vw, 84px)/.88 'Cormorant Garamond', serif; letter-spacing: .02em; }
-      .hero p { max-width: 470px; margin: 14px 0 0; font-size: 14px; line-height: 1.7; }
-      .collection-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding: 44px 5% 24px; }
+      .hero { min-height: 310px; display: flex; align-items: end; padding: 38px 5%; color: #fff; background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.62)), url('https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1800&q=80') center/cover; }
+      .hero h1 { max-width: 650px; margin: 0; font: 600 clamp(42px, 7vw, 84px)/.88 'Cormorant Garamond', serif; }
+      .hero p { max-width: 480px; margin: 14px 0 0; font-size: 14px; line-height: 1.7; }
+      .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding: 44px 5% 24px; }
       .eyebrow { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
-      .collection-header h2 { margin: 0; font: 600 clamp(34px, 5vw, 58px)/.9 'Cormorant Garamond', serif; }
+      .section-heading h2 { margin: 0; font: 600 clamp(34px, 5vw, 58px)/.9 'Cormorant Garamond', serif; }
+      .section-heading > p { max-width: 360px; margin: 0; color: rgba(17,17,17,.68); font-size: 13px; line-height: 1.7; }
       .filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 5% 24px; }
       .filter { padding: 10px 16px; border: 1px solid var(--ink); background: transparent; font: 600 11px 'Inter', sans-serif; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
       .filter.is-active, .filter:hover { background: var(--ink); color: #fff; }
@@ -51,37 +50,26 @@
       .site-menu-panel { width: min(420px, 88vw); height: 100%; padding: 110px 32px 32px; background: #fff; transform: translateX(100%); transition: transform .3s ease; }
       .site-menu.is-open .site-menu-panel { transform: translateX(0); }
       .site-menu-link { display: block; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 600; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
-      @media (max-width: 700px) { .collection-header { display: block; } .collection-header h2 { margin-bottom: 18px; } .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .collection-card-body { padding: 12px; } .collection-card h3 { font-size: 12px; } .collection-card p { font-size: 11px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
-      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .hero { min-height: 270px; padding-inline: 16px; } .collection-header, .filters, .collection-grid { padding-left: 16px; padding-right: 16px; } .collection-grid { grid-template-columns: 1fr; } }
+      @media (max-width: 700px) { .section-heading { display: block; } .section-heading h2 { margin-bottom: 18px; } .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .collection-card-body { padding: 12px; } .collection-card h3 { font-size: 12px; } .collection-card p { font-size: 11px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
+      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .hero { min-height: 270px; padding-inline: 16px; } .section-heading, .filters, .collection-grid { padding-left: 16px; padding-right: 16px; } .collection-grid { grid-template-columns: 1fr; } }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
     </style>
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a>
-      <div class="header-actions"><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></div>
-    </header>
-
+    <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
     <main>
-      <section class="hero"><div><h1>Tiles with a point of view.</h1><p>Explore considered surfaces for rooms that stay with you.</p></div></section>
-      <section class="collection-header"><div><p class="eyebrow">CERAVO collections</p><h2>Find your surface.</h2></div><p>Material, tone, and texture brought together for elevated interiors.</p></section>
-      <div class="filters" role="group" aria-label="Filter tile collections">
-        <button class="filter is-active" type="button" data-filter="all">All collections</button>
-        <button class="filter" type="button" data-filter="stone">Stone</button>
-        <button class="filter" type="button" data-filter="marble">Marble</button>
-        <button class="filter" type="button" data-filter="textured">Textured</button>
-      </div>
-      <section class="collection-grid" aria-label="Tile collections">
-        <article class="collection-card" data-category="stone"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80" alt="Warm stone tile interior" /><div class="collection-card-body"><h3>Terra Stone</h3><p>Warm mineral tones with a quiet architectural finish.</p><a href="#">View collection</a></div></article>
-        <article class="collection-card" data-category="marble"><img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=900&q=80" alt="Marble surface in a refined interior" /><div class="collection-card-body"><h3>Vein Marble</h3><p>Layered movement for spaces with a confident point of view.</p><a href="#">View collection</a></div></article>
-        <article class="collection-card" data-category="textured"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="Textured tile surface in a modern space" /><div class="collection-card-body"><h3>Form Texture</h3><p>Tactile surfaces that bring depth to everyday rituals.</p><a href="#">View collection</a></div></article>
+      <section class="hero"><div><h1>Bathware for quiet rituals.</h1><p>Refined forms and enduring finishes for the most personal room in the home.</p></div></section>
+      <section class="section-heading"><div><p class="eyebrow">CERAVO bathware</p><h2>Begin with balance.</h2></div><p>Fixtures and fittings selected to bring proportion, texture, and calm to the everyday.</p></section>
+      <div class="filters" role="group" aria-label="Filter bathware collections"><button class="filter is-active" type="button" data-filter="all">All collections</button><button class="filter" type="button" data-filter="basins">Basins</button><button class="filter" type="button" data-filter="faucets">Faucets</button><button class="filter" type="button" data-filter="showers">Showers</button></div>
+      <section class="collection-grid" aria-label="Bathware collections">
+        <article class="collection-card" data-category="basins"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80" alt="Minimal bathroom basin" /><div class="collection-card-body"><h3>Form Basins</h3><p>Clean silhouettes shaped for considered bathroom spaces.</p><a href="#">View collection</a></div></article>
+        <article class="collection-card" data-category="faucets"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="Brushed faucet in a refined bathroom" /><div class="collection-card-body"><h3>Brushed Faucets</h3><p>Balanced fittings with a tactile finish and quiet presence.</p><a href="#">View collection</a></div></article>
+        <article class="collection-card" data-category="showers"><img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=900&q=80" alt="Modern shower in a calm bathroom" /><div class="collection-card-body"><h3>Rain Showers</h3><p>Immersive forms designed around restorative daily rituals.</p><a href="#">View collection</a></div></article>
       </section>
     </main>
-
     <div class="bottom-actions"><a class="bottom-action" href="#">Showroom Locator</a><a class="bottom-action" href="#">Request a Call</a></div>
-    <footer class="site-footer"><div><div class="footer-brand">CERAVO</div><p class="footer-copy">Tiles &amp; Surfaces for considered spaces.</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="#">Contact</a><a href="#">Privacy</a></nav></footer>
+    <footer class="site-footer"><div><div class="footer-brand">CERAVO</div><p class="footer-copy">Tiles &amp; Surfaces for considered spaces.</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="tiles.html">Tiles</a><a href="#">Contact</a></nav></footer>
     <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="#">Digital Visualizer</a><a class="site-menu-link" href="#">Contact Us</a></nav></div>
-
     <script>
       const menu = document.querySelector('#site-menu');
       const menuButton = document.querySelector('[aria-controls="site-menu"]');

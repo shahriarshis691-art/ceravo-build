@@ -28,6 +28,7 @@
     .spec dd { margin: 7px 0 0; font-size: 14px; }
     .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
     .action { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--ink); color: #fff; background: var(--ink); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
+    .action.sample { border-color: var(--accent); color: var(--accent); background: transparent; }
     .action.secondary { color: var(--ink); background: transparent; }
     .empty { padding: 10vw; text-align: center; }
     @media (max-width: 760px) { main { display: block; } .visual { min-height: 43vh; } .content { padding: 44px 7%; } }
@@ -55,7 +56,7 @@
       page.innerHTML = '<section class="empty"><span class="eyebrow">CERAVO collections</span><h1>Collection not found.</h1><p>Please return to the catalogue and choose a collection to explore.</p><a class="action" href="tiles.html">Back to collections</a></section>';
     } else {
       document.title = `${product.name} | CERAVO`;
-      page.innerHTML = `<div class="visual" style="background-image:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.42)),url('${product.image}')" role="img" aria-label="${product.name} collection"></div><section class="content"><span class="eyebrow">${product.eyebrow}</span><h1>${product.name}</h1><p class="description">${product.description}</p><dl class="specs"><div class="spec"><dt>Category</dt><dd>${product.category}</dd></div><div class="spec"><dt>Finish</dt><dd>${product.finish}</dd></div><div class="spec"><dt>Size</dt><dd>${product.size}</dd></div><div class="spec"><dt>Application</dt><dd>${product.application}</dd></div></dl><div class="actions"><a class="action" href="contact.html?interest=${encodeURIComponent(product.name)}">Request details</a><a class="action secondary" href="tel:+8801979614216">Call Now</a></div></section>`;
+      page.innerHTML = `<div class="visual" style="background-image:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.42)),url('${product.image}')" role="img" aria-label="${product.name} collection"></div><section class="content"><span class="eyebrow">${product.eyebrow}</span><h1>${product.name}</h1><p class="description">${product.description}</p><dl class="specs"><div class="spec"><dt>Category</dt><dd>${product.category}</dd></div><div class="spec"><dt>Finish</dt><dd>${product.finish}</dd></div><div class="spec"><dt>Size</dt><dd>${product.size}</dd></div><div class="spec"><dt>Application</dt><dd>${product.application}</dd></div></dl><div class="actions"><a class="action" href="contact.html?interest=${encodeURIComponent(product.name)}">Request details</a><a class="action sample" href="contact.html?interest=${encodeURIComponent(product.name)}&request=sample">Request a sample</a><a class="action secondary" href="tel:+8801979614216">Call Now</a></div></section>`;
     }
   </script>
 </body>

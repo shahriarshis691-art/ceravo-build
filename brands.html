@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brands | CERAVO TILES &amp; SURFACES</title>
+    <meta name="description" content="Explore the CERAVO group of brands and their distinct points of view." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root { --ink: #111; --paper: #f6f4f1; --line: rgba(17,17,17,.14); }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; }
+      a { color: inherit; }
+      .topbar { min-height: 88px; display: flex; align-items: center; justify-content: space-between; padding: 12px 5%; background: #fff; border-bottom: 1px solid var(--line); }
+      .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+      .brand-mark { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; font: 32px/1 'Cormorant Garamond', serif; }
+      .brand-wordmark { display: block; font: 700 clamp(23px, 3vw, 36px)/.85 'Cormorant Garamond', serif; letter-spacing: .1em; }
+      .brand-subtitle { display: block; margin-top: 5px; font-size: 9px; letter-spacing: .25em; }
+      .icon-button { width: 36px; height: 36px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; }
+      .hero { min-height: 330px; display: flex; align-items: end; padding: 40px 5%; color: #fff; background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.66)), url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=80') center/cover; }
+      .hero h1 { max-width: 660px; margin: 0; font: 600 clamp(44px, 7vw, 86px)/.86 'Cormorant Garamond', serif; }
+      .hero p { max-width: 470px; margin: 14px 0 0; font-size: 14px; line-height: 1.7; }
+      .brands-section { padding: 44px 5% 64px; }
+      .eyebrow { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+      .brands-section h2 { margin: 0 0 28px; font: 600 clamp(36px, 5vw, 60px)/.9 'Cormorant Garamond', serif; }
+      .brand-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .brand-card { position: relative; min-height: 280px; display: flex; align-items: end; overflow: hidden; color: #fff; text-decoration: none; background: #222; }
+      .brand-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.74)); }
+      .brand-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; }
+      .brand-card:hover img { transform: scale(1.04); }
+      .brand-card-logo { object-fit: contain !important; padding: 24%; background: #111; }
+      .brand-card-logo.khadim { padding: 18%; background: #fff; }
+      .fresh-brand { background: #fff; color: #111; }
+      .fresh-brand::before { background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.18)); }
+      .fresh-brand-visual { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px 18px 68px; background: #fff; }
+      .fresh-brand-visual svg { display: block; width: min(82%, 340px); height: auto; }
+      .brand-card-content { position: relative; z-index: 1; padding: 24px; }
+      .brand-card h3 { margin: 0; font: 600 clamp(28px, 4vw, 48px)/.9 'Cormorant Garamond', serif; letter-spacing: .04em; }
+      .brand-card p { margin: 10px 0 0; color: rgba(255,255,255,.8); font-size: 12px; line-height: 1.6; }
+      .bottom-actions { display: grid; grid-template-columns: 1fr 1fr; min-height: 64px; background: #000; color: #fff; }
+      .bottom-action { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
+      .bottom-action + .bottom-action { border-left: 1px solid rgba(255,255,255,.5); }
+      .site-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 34px 5% 92px; background: #111; color: #fff; }
+      .footer-brand { font: 30px 'Cormorant Garamond', serif; letter-spacing: .12em; }
+      .footer-copy, .footer-links { margin: 6px 0 0; color: rgba(255,255,255,.68); font-size: 12px; }
+      .footer-links { display: flex; gap: 18px; align-items: end; }
+      .footer-links a { color: #fff; text-decoration: none; }
+      .site-menu { position: fixed; inset: 0; z-index: 5; display: flex; justify-content: flex-end; visibility: hidden; opacity: 0; background: rgba(0,0,0,.35); transition: opacity .25s ease, visibility .25s ease; }
+      .site-menu.is-open { visibility: visible; opacity: 1; }
+      .site-menu-panel { width: min(420px, 88vw); height: 100%; padding: 110px 32px 32px; background: #fff; transform: translateX(100%); transition: transform .3s ease; }
+      .site-menu.is-open .site-menu-panel { transform: translateX(0); }
+      .site-menu-link { display: block; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 600; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+      @media (max-width: 650px) { .brand-grid { grid-template-columns: 1fr; gap: 10px; } .brand-card { min-height: 220px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
+      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .hero { min-height: 280px; padding-inline: 16px; } .brands-section { padding-inline: 16px; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
+    <main>
+      <section class="hero"><div><h1>Bangladesh ceramic partners.</h1><p>CERAVO provides considered tile surfaces from trusted ceramic companies.</p></div></section>
+      <section class="brands-section"><p class="eyebrow">CERAVO tile providers</p><h2>Meet the brands.</h2><div class="brand-grid"><a class="brand-card" href="#"><img class="brand-card-logo khadim" src="assets/khadim-ceramic-logo.svg" alt="Official Khadim Ceramic logo" /><div class="brand-card-content"><h3>KHADIM CERAMIC</h3><p>CERAVO tile provider · Bangladesh</p></div></a><a class="brand-card fresh-brand" href="#"><div class="fresh-brand-visual" aria-label="Fresh Ceramic logo"><svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fresh Ceramics logo"><g fill="none" fill-rule="evenodd"><g transform="translate(20 24)"><path d="M0 0h120v120H0z" fill="#f5f5f3" stroke="#b9b8b5" stroke-width="6"/><path d="M14 14h92v92H14z" fill="none" stroke="#c1c0be" stroke-width="4"/><path d="M46 24h30v60H46zm-24 0h18v60H22zm62 0h18v60h-18zM32 38h56v18H32zm0 32h56v18H32z" fill="#d4d2cf"/><path d="M32 18V6h56v12M18 32H6v56h12M18 102H6v12h12M96 32h12v56H96M96 102h12v12H96" stroke="#d4d2cf" stroke-width="4" stroke-linecap="square"/></g><g transform="translate(160 54)"><text x="0" y="84" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="92" fill="#ed3b34" letter-spacing="-3">Fresh</text><text x="4" y="132" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-style="italic" fill="#ed3b34" letter-spacing="1">Ceramics</text></g></g></svg></div><div class="brand-card-content"><h3>FRESH CERAMIC</h3><p>CERAVO tile provider · Bangladesh</p></div></a><a class="brand-card" href="#"><img class="brand-card-logo" src="assets/dbl-ceramics-logo.svg" alt="Official DBL Ceramics logo" /><div class="brand-card-content"><h3>DBL CERAMIC</h3><p>CERAVO tile provider · Bangladesh</p></div></a><a class="brand-card" href="#"><div class="brand-card-content"><h3>GREAT WALL CERAMIC</h3><p>CERAVO tile provider · Bangladesh</p></div></a></div></section>
+    </main>
+    <div class="bottom-actions"><a class="bottom-action" href="showroom.html">Showroom Locator</a><a class="bottom-action" href="#">Request a Call</a></div>
+    <footer class="site-footer"><div><div class="footer-brand">CERAVO</div><p class="footer-copy">Tiles &amp; Surfaces for considered spaces.</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="tiles.html">Tiles</a><a href="bathware.html">Bathware</a></nav></footer>
+    <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="#">Contact Us</a></nav></div>
+    <script>
+      const menu = document.querySelector('#site-menu');
+      const menuButton = document.querySelector('[aria-controls="site-menu"]');
+      const setMenuState = (isOpen) => { menu.classList.toggle('is-open', isOpen); menu.setAttribute('aria-hidden', String(!isOpen)); menuButton.setAttribute('aria-expanded', String(isOpen)); document.body.style.overflow = isOpen ? 'hidden' : ''; };
+      menuButton.addEventListener('click', () => setMenuState(!menu.classList.contains('is-open')));
+      menu.addEventListener('click', (event) => { if (event.target === menu) setMenuState(false); });
+      menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuState(false)));
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenuState(false); });
+    </script>
+  </body>
+</html>

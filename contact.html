@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact CERAVO | Tiles &amp; Surfaces</title>
+  <meta name="description" content="Request a CERAVO tile, bathware, fittings, or showroom consultation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink: #171513; --paper: #f5f0eb; --accent: #776b61; --line: rgba(23,21,19,.16); }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Manrope, sans-serif; }
+    a { color: inherit; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 6%; background: #fff; border-bottom: 1px solid var(--line); }
+    .brand { font: 700 28px/1 'Cormorant Garamond', serif; letter-spacing: .16em; text-decoration: none; }
+    .back { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
+    main { display: grid; grid-template-columns: .85fr 1.15fr; min-height: calc(100vh - 81px); }
+    .intro { display: flex; flex-direction: column; justify-content: center; padding: 9%; color: #fff; background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.58)), url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=80') center/cover; }
+    .eyebrow { color: #c8a86e; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { margin: 14px 0 18px; font: 600 clamp(52px, 8vw, 100px)/.82 'Cormorant Garamond', serif; }
+    .intro p { max-width: 390px; color: rgba(255,255,255,.78); line-height: 1.8; }
+    .form-wrap { display: flex; align-items: center; padding: 8%; background: #fff; }
+    form { width: 100%; max-width: 620px; }
+    .form-heading { margin: 0 0 26px; font: 600 clamp(34px, 5vw, 58px)/.9 'Cormorant Garamond', serif; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    label { display: grid; gap: 8px; color: rgba(23,21,19,.7); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    input, select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 0; padding: 13px 14px; color: var(--ink); background: #fbfaf8; font: 14px Manrope, sans-serif; }
+    textarea { min-height: 130px; resize: vertical; }
+    .field-full { grid-column: 1 / -1; }
+    .submit-row { display: flex; align-items: center; gap: 18px; margin-top: 24px; }
+    button { border: 1px solid var(--ink); padding: 13px 18px; color: #fff; background: var(--ink); font: 700 11px Manrope, sans-serif; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+    .form-note { margin: 0; color: rgba(23,21,19,.56); font-size: 12px; line-height: 1.6; }
+    .success { display: none; margin-top: 18px; padding: 14px; border-left: 2px solid var(--accent); color: rgba(23,21,19,.72); font-size: 13px; }
+    .success.is-visible { display: block; }
+    @media (max-width: 760px) { main { display: block; } .intro { min-height: 390px; padding: 44px 7%; } .form-wrap { padding: 44px 7%; } }
+    @media (max-width: 500px) { .topbar { padding-inline: 16px; } .form-grid { grid-template-columns: 1fr; } .field-full { grid-column: auto; } .submit-row { display: block; } .form-note { margin-top: 14px; } }
+  </style>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="index.html">CERAVO</a><a class="back" href="index.html">Back to home</a></header>
+  <main>
+    <section class="intro"><span class="eyebrow">Begin a considered project</span><h1>Let us help shape your space.</h1><p>Tell us what you are looking for and a CERAVO specialist can help with surfaces, bathware, fittings, samples, or a showroom visit.</p></section>
+    <section class="form-wrap">
+      <form id="contact-form" action="mailto:info@ceravo.online" method="post" enctype="text/plain">
+        <h2 class="form-heading">Request a consultation.</h2>
+        <div class="form-grid">
+          <label>Name<input name="name" type="text" autocomplete="name" required /></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+          <label>City<input name="city" type="text" autocomplete="address-level2" /></label>
+          <label>Product interest<select name="interest"><option>Tiles</option><option>Bathware</option><option>Fittings</option><option>Showroom visit</option><option>Project consultation</option></select></label>
+          <label>Preferred contact<select name="preferred_contact"><option>Phone call</option><option>Email</option><option>WhatsApp</option></select></label>
+          <label class="field-full">Message<textarea name="message" placeholder="Tell us about your project, space, or collection interest."></textarea></label>
+        </div>
+        <div class="submit-row"><button type="submit">Send enquiry</button><p class="form-note">Your email app will open with the enquiry details ready to send.</p></div>
+        <p class="success" id="contact-success" role="status">Your enquiry is ready in your email app. Please review and send it to CERAVO.</p>
+      </form>
+    </section>
+  </main>
+  <script>
+    const contactForm = document.querySelector('#contact-form');
+    const contactSuccess = document.querySelector('#contact-success');
+    contactForm.addEventListener('submit', () => contactSuccess.classList.add('is-visible'));
+  </script>
+</body>
+</html>

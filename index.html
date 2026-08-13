@@ -348,13 +348,20 @@
 
       .collection-tabs {
         display: flex;
-        gap: 24px;
+        gap: 26px;
         margin: 0 16px 28px;
         border-bottom: 1px solid rgba(17,17,17,0.16);
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .collection-tabs::-webkit-scrollbar {
+        display: none;
       }
 
       .collection-tab {
         position: relative;
+        flex: 0 0 auto;
         padding: 0 0 10px;
         border: 0;
         background: transparent;
@@ -858,17 +865,27 @@
         <section class="collection-showcase" aria-label="Explore CERAVO collections">
           <h2 class="collection-showcase-heading">Explore CERAVO Collections</h2>
           <div class="collection-tabs" role="tablist" aria-label="Collection categories">
-            <button class="collection-tab is-active" type="button" role="tab" aria-selected="true" data-collection-tab="locations">LOCATIONS</button>
+              <button class="collection-tab is-active" type="button" role="tab" aria-selected="true" data-collection-tab="locations">CATEGORIES</button>
+              <button class="collection-tab" type="button" role="tab" aria-selected="false" data-collection-tab="fittings">FITTINGS</button>
             <a class="collection-tab" href="brands.html">BRANDS</a>
           </div>
 
           <div class="collection-panel is-active" data-collection-panel="locations" role="tabpanel">
             <div class="collection-track">
               <a class="collection-card-home" href="bedroom.html"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80" alt="CERAVO bedroom surfaces" /><h3>Bedroom</h3></a>
-              <article class="collection-card-home"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="CERAVO kitchen surfaces" /><h3>Kitchen</h3></article>
-              <article class="collection-card-home"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="CERAVO living room surfaces" /><h3>Living Room</h3></article>
-              <article class="collection-card-home"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="CERAVO washroom surfaces" /><h3>Washroom</h3></article>
-              <article class="collection-card-home"><img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=900&q=80" alt="CERAVO parking surfaces" /><h3>Parking</h3></article>
+              <a class="collection-card-home" href="tiles.html"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="CERAVO kitchen surfaces" /><h3>Kitchen</h3></a>
+              <a class="collection-card-home" href="tiles.html"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="CERAVO living room surfaces" /><h3>Living Room</h3></a>
+              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="CERAVO washroom surfaces" /><h3>Washroom</h3></a>
+              <a class="collection-card-home" href="tiles.html"><img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=900&q=80" alt="CERAVO parking surfaces" /><h3>Parking</h3></a>
+            </div>
+          </div>
+
+          <div class="collection-panel" data-collection-panel="fittings" role="tabpanel" aria-label="CERAVO fittings">
+            <div class="collection-track">
+              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80" alt="CERAVO basin fittings" /><h3>Basins</h3></a>
+              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="CERAVO faucet fittings" /><h3>Faucets</h3></a>
+              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=900&q=80" alt="CERAVO shower fittings" /><h3>Showers</h3></a>
+              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80" alt="CERAVO bathroom accessories" /><h3>Accessories</h3></a>
             </div>
           </div>
 

@@ -50,7 +50,7 @@
           <label>Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
           <label>Email<input name="email" type="email" autocomplete="email" required /></label>
           <label>City<input name="city" type="text" autocomplete="address-level2" /></label>
-          <label>Product interest<select name="interest"><option>Tiles</option><option>Bathware</option><option>Fittings</option><option>Showroom visit</option><option>Project consultation</option></select></label>
+          <label>Product interest<select name="interest"><option>Tiles</option><option>Bathware</option><option>Fittings</option><option>Product details</option><option>Showroom visit</option><option>Project consultation</option></select></label>
           <label>Preferred contact<select name="preferred_contact"><option>Phone call with owner</option><option>Email</option><option>WhatsApp</option></select></label>
           <label class="field-full">Message<textarea name="message" placeholder="Tell us about your project, space, or collection interest."></textarea></label>
         </div>
@@ -62,6 +62,11 @@
   <script>
     const contactForm = document.querySelector('#contact-form');
     const contactSuccess = document.querySelector('#contact-success');
+    const requestedInterest = new URLSearchParams(window.location.search).get('interest');
+    if (requestedInterest) {
+      contactForm.elements.interest.value = 'Product details';
+      contactForm.elements.message.value = `I would like details about ${requestedInterest}.`;
+    }
     contactForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const formData = new FormData(contactForm);

@@ -10,6 +10,7 @@
   <meta property="og:description" content="Explore CERAVO collection details, specifications, samples, and enquiries." />
   <meta property="og:url" content="https://www.ceravo.online/product-detail.html" />
   <meta property="og:type" content="product" />
+  <link rel="preconnect" href="https://images.unsplash.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -66,7 +67,7 @@
       document.title = `${product.name} | CERAVO`;
       const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${product.name}.`);
       const galleryImages = [product.image, 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80'];
-      const galleryMarkup = galleryImages.map((image, index) => `<img src="${image}" alt="${product.name} detail view ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}" />`).join('');
+      const galleryMarkup = galleryImages.map((image, index) => `<img src="${image}" alt="${product.name} detail view ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async" />`).join('');
       page.innerHTML = `<div class="visual" role="region" aria-label="${product.name} image gallery"><div class="gallery-grid">${galleryMarkup}</div></div><section class="content"><span class="eyebrow">${product.eyebrow}</span><h1>${product.name}</h1><p class="description">${product.description}</p><dl class="specs"><div class="spec"><dt>Category</dt><dd>${product.category}</dd></div><div class="spec"><dt>Finish</dt><dd>${product.finish}</dd></div><div class="spec"><dt>Size</dt><dd>${product.size}</dd></div><div class="spec"><dt>Application</dt><dd>${product.application}</dd></div></dl><div class="actions"><a class="action" href="contact.html?interest=${encodeURIComponent(product.name)}">Request details</a><a class="action sample" href="contact.html?interest=${encodeURIComponent(product.name)}&request=sample">Request a sample</a><a class="action whatsapp" href="https://wa.me/8801979614216?text=${whatsappMessage}" target="_blank" rel="noopener noreferrer">WhatsApp enquiry</a><a class="action secondary" href="tel:+8801979614216">Call Now</a></div></section>`;
     }
   </script>

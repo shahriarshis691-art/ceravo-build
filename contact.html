@@ -43,7 +43,10 @@
   <main>
     <section class="intro"><span class="eyebrow">Owner contact request</span><h1>Request a call from the owner.</h1><p>Share your details and project interest. The CERAVO owner or a designated specialist will contact you personally to discuss the next step.</p></section>
     <section class="form-wrap">
-      <form id="contact-form">
+      <form id="contact-form" action="https://formsubmit.co/ajax/info@ceravo.online" method="POST">
+        <input type="hidden" name="_subject" value="New CERAVO owner contact request" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
         <h2 class="form-heading">Request a call.</h2>
         <div class="form-grid">
           <label>Name<input name="name" type="text" autocomplete="name" required /></label>
@@ -54,7 +57,7 @@
           <label>Preferred contact<select name="preferred_contact"><option>Phone call with owner</option><option>Email</option><option>WhatsApp</option></select></label>
           <label class="field-full">Message<textarea name="message" placeholder="Tell us about your project, space, or collection interest."></textarea></label>
         </div>
-        <div class="submit-row"><button type="submit">Request owner contact</button><p class="form-note">Your email app will open with the request details ready to send.</p></div>
+        <div class="submit-row"><button type="submit">Request owner contact</button><p class="form-note">Your request will be sent securely to the CERAVO contact inbox.</p></div>
         <p class="success" id="contact-success" role="status">Your enquiry is ready in your email app. Please review and send it to CERAVO.</p>
       </form>
     </section>
@@ -73,13 +76,25 @@
       if (requestedCity) contactForm.elements.city.value = requestedCity;
       contactForm.elements.message.value = isSampleRequest ? `I would like to request a sample of ${requestedInterest}.` : (isShowroomVisit ? `I would like to book a showroom visit at ${requestedCity || 'a CERAVO showroom'}.` : `I would like details about ${requestedInterest}.`);
     }
-    contactForm.addEventListener('submit', (event) => {
+    contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       const formData = new FormData(contactForm);
-      const subject = `CERAVO enquiry: ${formData.get('interest')}`;
-      const body = [...formData.entries()].map(([key, value]) => `${key}: ${value}`).join('\n');
-      window.location.href = `mailto:info@ceravo.online?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      contactSuccess.classList.add('is-visible');
+      const submitButton = contactForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+      try {
+        const response = await fetch(contactForm.action, { method: 'POST', body: formData, headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error('Submission failed');
+        contactSuccess.textContent = 'Thank you. Your request has been sent to CERAVO. Our owner or specialist will contact you soon.';
+        contactSuccess.classList.add('is-visible');
+        contactForm.reset();
+      } catch (error) {
+        contactSuccess.textContent = 'We could not send the request right now. Please use the Call Now or WhatsApp buttons below.';
+        contactSuccess.classList.add('is-visible');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Request owner contact';
+      }
     });
   </script>
   <div class="contact-float" style="position:fixed;right:18px;bottom:18px;z-index:30;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><a href="tel:+8801979614216" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#171513;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">Call Now</a><a href="https://wa.me/8801979614216?text=Hello%20CERAVO%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#1d8b55;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">WhatsApp</a></div>

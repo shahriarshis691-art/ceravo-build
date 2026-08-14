@@ -255,9 +255,8 @@
         line-height: 1.2;
       }
 
-      .hero-copy::after {
-        content: 'DISCOVER MORE';
-        display: block;
+      .hero-discover {
+        display: inline-block;
         width: fit-content;
         margin: 28px auto 0;
         padding: 16px 24px;
@@ -266,6 +265,14 @@
         font-size: 14px;
         font-weight: 500;
         letter-spacing: 0.08em;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+
+      .hero-discover:hover,
+      .hero-discover:focus-visible {
+        background: #2f2a26;
+        transform: translateY(-2px);
       }
 
       .hero-controls {
@@ -912,11 +919,13 @@
           <div class="hero-slide hero-slide-one is-active" data-slide="0">
             <div class="hero-copy">
               <span>Crafted for Elevated Interiors</span>
+              <a class="hero-discover" href="tiles.html">DISCOVER MORE</a>
             </div>
           </div>
           <div class="hero-slide hero-slide-two" data-slide="1">
             <div class="hero-copy">
               <span>Surfaces with Presence</span>
+              <a class="hero-discover" href="tiles.html">DISCOVER MORE</a>
             </div>
           </div>
           <div class="hero-controls">

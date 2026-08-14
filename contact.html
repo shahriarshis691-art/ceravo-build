@@ -65,10 +65,13 @@
     const contactParams = new URLSearchParams(window.location.search);
     const requestedInterest = contactParams.get('interest');
     const requestedType = contactParams.get('request');
+    const requestedCity = contactParams.get('city');
     if (requestedInterest) {
       const isSampleRequest = requestedType === 'sample';
-      contactForm.elements.interest.value = isSampleRequest ? 'Sample request' : 'Product details';
-      contactForm.elements.message.value = isSampleRequest ? `I would like to request a sample of ${requestedInterest}.` : `I would like details about ${requestedInterest}.`;
+      const isShowroomVisit = requestedInterest === 'Showroom visit';
+      contactForm.elements.interest.value = isSampleRequest ? 'Sample request' : (isShowroomVisit ? 'Showroom visit' : 'Product details');
+      if (requestedCity) contactForm.elements.city.value = requestedCity;
+      contactForm.elements.message.value = isSampleRequest ? `I would like to request a sample of ${requestedInterest}.` : (isShowroomVisit ? `I would like to book a showroom visit at ${requestedCity || 'a CERAVO showroom'}.` : `I would like details about ${requestedInterest}.`);
     }
     contactForm.addEventListener('submit', (event) => {
       event.preventDefault();

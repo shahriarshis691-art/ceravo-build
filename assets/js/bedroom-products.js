@@ -25,7 +25,7 @@ window.CERAVO_BEDROOM_PRODUCTS = [
     category: 'new-arrival',
     tileImage: 'assets/images/products/kcl-p-1123.png',
     roomImage: 'assets/images/products/diseno-royal-crema-room.png',
-    heroPosition: 'center 78%',
+    roomFit: 'contain',
     description: 'A warm contemporary bedroom with fluid onyx and gold-veined porcelain floor tiles that reflect soft interior light.'
   },
   {

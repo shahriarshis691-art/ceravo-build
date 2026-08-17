@@ -41,9 +41,10 @@
     .action.secondary { color: var(--ink); background: transparent; }
     .empty { padding: 10vw; text-align: center; }
     main.showcase { grid-template-columns: 1.28fr .72fr; }
-    .showcase .visual { display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #1a1816; overflow: hidden; }
-    .hero-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 74%; background: #111; }
-    .hero-image.is-tile { aspect-ratio: 4 / 3; object-position: center 42%; }
+    .showcase .visual { display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #1a1816; overflow: auto; }
+    .hero-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center center; background: #111; }
+    .hero-image.is-tile { aspect-ratio: 4 / 3; object-fit: cover; object-position: center 42%; }
+    .hero-image.is-room-full { aspect-ratio: 3 / 4; max-height: min(78vh, 920px); object-fit: contain; object-position: center center; }
     .view-toggles { display: flex; gap: 10px; }
     .view-toggle { display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 6px 12px 6px 6px; border: 1px solid rgba(255,255,255,.18); color: #fff; background: transparent; cursor: pointer; text-align: left; }
     .view-toggle img { width: 52px; height: 52px; object-fit: cover; }
@@ -87,9 +88,10 @@
       backLink.textContent = 'Back to bedroom';
       const badgeClass = bedroomProduct.category === 'popular' ? ' popular' : bedroomProduct.category === 'premium' ? ' premium' : '';
       const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${bedroomProduct.title} (${bedroomProduct.code}).`);
+      const roomHeroClass = bedroomProduct.roomFit === 'contain' ? ' is-room-full' : '';
       page.classList.add('showcase');
       page.innerHTML = `<div class="visual" role="region" aria-label="${bedroomProduct.title} bedroom showcase">
-        <img class="hero-image" id="hero-image" src="${bedroomProduct.roomImage}" alt="Luxury bedroom with ${bedroomProduct.title} floor tiles" style="${bedroomProduct.heroPosition ? `object-position:${bedroomProduct.heroPosition}` : ''}" />
+        <img class="hero-image${roomHeroClass}" id="hero-image" src="${bedroomProduct.roomImage}" alt="Luxury bedroom with ${bedroomProduct.title} floor tiles" />
         <div class="view-toggles" role="tablist" aria-label="Image views">
           <button class="view-toggle is-active" type="button" data-view="room" aria-pressed="true"><img src="${bedroomProduct.roomImage}" alt="" /><span>Room</span></button>
           <button class="view-toggle" type="button" data-view="tile" aria-pressed="false"><img src="${bedroomProduct.tileImage}" alt="" /><span>Tile</span></button>
@@ -124,7 +126,7 @@
             ? `${bedroomProduct.title} tile swatch ${bedroomProduct.code}`
             : `Luxury bedroom with ${bedroomProduct.title} floor tiles`;
           heroImage.classList.toggle('is-tile', view === 'tile');
-          heroImage.style.objectPosition = view === 'tile' ? '' : (bedroomProduct.heroPosition || '');
+          heroImage.classList.toggle('is-room-full', view === 'room' && bedroomProduct.roomFit === 'contain');
         });
       });
     } else {

@@ -77,7 +77,9 @@
       'brushed-faucets': { eyebrow: 'CERAVO bathware', name: 'Brushed Faucets', description: 'Balanced fittings with a tactile brushed finish and a quiet presence at the basin.', image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1400&q=80', category: 'Faucets', finish: 'Brushed metal', size: 'Multiple formats', application: 'Bathroom interiors' },
       'rain-showers': { eyebrow: 'CERAVO bathware', name: 'Rain Showers', description: 'Immersive forms designed around restorative daily rituals and an effortless sense of calm.', image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1400&q=80', category: 'Showers', finish: 'Brushed metal', size: 'Multiple formats', application: 'Bathroom interiors' }
     };
-    const productId = new URLSearchParams(window.location.search).get('product');
+    const searchParams = new URLSearchParams(window.location.search);
+    const productId = searchParams.get('product');
+    const collectionParam = searchParams.get('collection');
     const bedroomProduct = (window.CERAVO_BEDROOM_PRODUCTS || []).find((item) => item.id === productId);
     const wallProduct = (window.CERAVO_WALL_TILE_PRODUCTS || []).find((item) => item.id === productId);
     const showcaseProduct = bedroomProduct || wallProduct;
@@ -88,16 +90,19 @@
       page.innerHTML = '<section class="empty"><span class="eyebrow">CERAVO collections</span><h1>Collection not found.</h1><p>Please return to the catalogue and choose a collection to explore.</p><a class="action" href="tiles.html">Back to collections</a></section>';
     } else if (showcaseProduct) {
       const isWall = Boolean(wallProduct);
+      const isFloor = collectionParam === 'floor';
       document.title = `${showcaseProduct.title} | CERAVO`;
-      backLink.href = isWall ? 'wall-tiles.html' : 'bedroom.html';
-      backLink.textContent = isWall ? 'Back to wall tiles' : 'Back to bedroom';
+      backLink.href = isWall ? 'wall-tiles.html' : isFloor ? 'floor-tiles.html' : 'bedroom.html';
+      backLink.textContent = isWall ? 'Back to wall tiles' : isFloor ? 'Back to floor tiles' : 'Back to bedroom';
       const badgeClass = showcaseProduct.category === 'popular' ? ' popular' : showcaseProduct.category === 'premium' ? ' premium' : showcaseProduct.category === 'all-collections' ? ' all-collections' : '';
       const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${showcaseProduct.title} (${showcaseProduct.code}).`);
       const roomHeroClass = showcaseProduct.roomFit === 'contain' ? ' is-room-full' : '';
-      const roomAlt = showcaseProduct.roomAlt || `Luxury bedroom with ${showcaseProduct.title} floor tiles installed across the floor`;
+      const roomAlt = showcaseProduct.roomAlt || (isFloor
+        ? `Luxury interior with ${showcaseProduct.title} floor tiles installed across the floor`
+        : `Luxury bedroom with ${showcaseProduct.title} floor tiles installed across the floor`);
       const displayName = showcaseProduct.title.replace('Diseño Series - ', '');
       page.classList.add('showcase');
-      page.innerHTML = `<div class="visual" role="region" aria-label="${showcaseProduct.title} ${isWall ? 'wall' : 'bedroom'} showcase">
+      page.innerHTML = `<div class="visual" role="region" aria-label="${showcaseProduct.title} ${isWall ? 'wall' : isFloor ? 'floor' : 'bedroom'} showcase">
         <img class="hero-image${roomHeroClass}" id="hero-image" src="${showcaseProduct.roomImage}" alt="${roomAlt}" />
         <div class="view-toggles" role="tablist" aria-label="Image views">
           <button class="view-toggle is-active" type="button" data-view="room" aria-pressed="true"><img src="${showcaseProduct.roomImage}" alt="" loading="lazy" decoding="async" /><span>Room</span></button>

@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wall Tiles Collection | CERAVO TILES &amp; SURFACES</title>
-    <meta name="description" content="Explore premium ceramic, porcelain, and mosaic wall tiles designed for elegant feature walls, kitchens, living rooms, and bathrooms." />
-    <link rel="canonical" href="https://www.ceravo.online/wall-tiles.html" />
-    <meta property="og:title" content="Wall Tiles Collection | CERAVO" />
-    <meta property="og:description" content="Explore premium ceramic, porcelain, and mosaic wall tiles designed for elegant feature walls, kitchens, living rooms, and bathrooms." />
-    <meta property="og:url" content="https://www.ceravo.online/wall-tiles.html" />
+    <title>Floor Tiles Collection | CERAVO TILES &amp; SURFACES</title>
+    <meta name="description" content="Explore premium PGVT, GVT, and glazed porcelain floor tiles crafted for enduring luxury, durability, and high aesthetic appeal." />
+    <link rel="canonical" href="https://www.ceravo.online/floor-tiles.html" />
+    <meta property="og:title" content="Floor Tiles Collection | CERAVO" />
+    <meta property="og:description" content="Explore premium PGVT, GVT, and glazed porcelain floor tiles crafted for enduring luxury, durability, and high aesthetic appeal." />
+    <meta property="og:url" content="https://www.ceravo.online/floor-tiles.html" />
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -82,10 +82,10 @@
   <body>
     <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
     <main>
-      <section class="hero"><div><h1>Wall tiles for considered interiors.</h1><p>Ceramic, porcelain, and mosaic surfaces for feature walls, kitchens, living rooms, and bathrooms.</p></div></section>
-      <section class="listing-header"><div><p class="eyebrow">CERAVO wall tiles</p><h2>Wall Tiles Collection</h2></div><p>Explore premium ceramic, porcelain, and mosaic wall tiles designed for elegant feature walls, kitchens, living rooms, and bathrooms.</p></section>
-      <div class="filters" role="group" aria-label="Filter wall tile collections"><button class="filter is-active" type="button" data-filter="all">All collections</button><button class="filter" type="button" data-filter="new-arrival">New Arrival</button><button class="filter" type="button" data-filter="popular">Popular</button><button class="filter" type="button" data-filter="premium">Premium</button></div>
-      <section class="product-grid" id="wall-tile-product-grid" aria-label="Wall tile collections"></section>
+      <section class="hero"><div><h1>Floor tiles with enduring polish.</h1><p>PGVT, GVT, and glazed porcelain surfaces for rooms that stay luminous underfoot.</p></div></section>
+      <section class="listing-header"><div><p class="eyebrow">CERAVO floor tiles</p><h2>Floor Tiles Collection</h2></div><p>Explore premium PGVT, GVT, and glazed porcelain floor tiles crafted for enduring luxury, durability, and high aesthetic appeal.</p></section>
+      <div class="filters" role="group" aria-label="Filter floor tile collections"><button class="filter is-active" type="button" data-filter="all">All collections</button><button class="filter" type="button" data-filter="new-arrival">New Arrival</button><button class="filter" type="button" data-filter="popular">Popular</button><button class="filter" type="button" data-filter="premium">Premium</button></div>
+      <section class="product-grid" id="floor-tile-product-grid" aria-label="Floor tile collections"></section>
     </main>
     <div class="bottom-actions"><a class="bottom-action" href="showroom.html">Showroom Locator</a><a class="bottom-action" href="contact.html">Request Owner Contact</a></div>
     <section class="founder-message" aria-labelledby="founder-message-name">
@@ -100,7 +100,7 @@
     </section>
     <footer class="site-footer"><div><div class="footer-brand">CERAVO</div><p class="footer-copy">Tiles &amp; Surfaces for considered spaces.</p><p class="footer-copy">Founder &amp; CEO: SM SHAHRIAR WALID</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="tiles.html">Tiles</a><a href="wall-tiles.html">Wall Tiles</a><a href="floor-tiles.html">Floor Tiles</a><a href="bathware.html">Bathware</a></nav></footer>
     <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="wall-tiles.html">Wall Tiles</a><a class="site-menu-link" href="floor-tiles.html">Floor Tiles</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="contact.html">Contact Us</a></nav></div>
-    <script src="assets/js/wall-tiles-products.js"></script>
+    <script src="assets/js/bedroom-products.js"></script>
     <script>
       const menu = document.querySelector('#site-menu');
       const menuButton = document.querySelector('[aria-controls="site-menu"]');
@@ -116,14 +116,14 @@
         if (category === 'all-collections') return ' all-collections';
         return '';
       };
-      const productGrid = document.querySelector('#wall-tile-product-grid');
-      const wallTileProducts = window.CERAVO_WALL_TILE_PRODUCTS || [];
-      productGrid.innerHTML = wallTileProducts.map((product, index) => {
+      const productGrid = document.querySelector('#floor-tile-product-grid');
+      const floorTileProducts = window.CERAVO_BEDROOM_PRODUCTS || [];
+      productGrid.innerHTML = floorTileProducts.map((product, index) => {
         const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${product.title} (${product.code}).`);
         return `
         <article class="product-card" data-category="${product.category}">
-          <a class="product-card-link" href="product-detail.html?product=${product.id}">
-            <span class="product-media"><img class="${product.swatch ? 'is-swatch' : ''}" src="${product.tileImage}" alt="${product.title} ${product.type.toLowerCase()} wall tile ${product.code}" width="600" height="600" loading="${index < 4 ? 'eager' : 'lazy'}" decoding="async" /></span>
+          <a class="product-card-link" href="product-detail.html?product=${product.id}&amp;collection=floor">
+            <span class="product-media"><img class="${product.swatch ? 'is-swatch' : ''}" src="${product.tileImage}" alt="${product.title} ${product.type} floor tile ${product.code}" width="600" height="600" loading="${index < 4 ? 'eager' : 'lazy'}" decoding="async" /></span>
             <div class="product-body">
               <div class="product-title-row"><h3>${product.title}</h3><span class="product-badge${badgeClassFor(product.category)}">${product.badge}</span></div>
               <dl class="product-specs"><div><dt>Size</dt><dd>${product.size}</dd></div><div><dt>Type</dt><dd>${product.type}</dd></div><div><dt>Code</dt><dd>${product.code}</dd></div></dl>

@@ -63,6 +63,7 @@
   <header class="topbar"><a class="brand" href="index.html">CERAVO</a><a class="back" id="back-link" href="javascript:history.back()">Back</a></header>
   <main id="detail-page"></main>
   <script src="assets/js/bedroom-products.js"></script>
+  <script src="assets/js/wall-tiles-products.js"></script>
   <script>
     const products = {
       'terra-stone': { eyebrow: 'CERAVO tiles', name: 'Terra Stone', description: 'Warm mineral tones with a quiet architectural finish for interiors that feel grounded and enduring.', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80', category: 'Stone tiles', finish: 'Natural', size: '600 x 600 mm', application: 'Floor & wall' },
@@ -78,36 +79,41 @@
     };
     const productId = new URLSearchParams(window.location.search).get('product');
     const bedroomProduct = (window.CERAVO_BEDROOM_PRODUCTS || []).find((item) => item.id === productId);
-    const product = bedroomProduct || products[productId];
+    const wallProduct = (window.CERAVO_WALL_TILE_PRODUCTS || []).find((item) => item.id === productId);
+    const showcaseProduct = bedroomProduct || wallProduct;
+    const product = showcaseProduct || products[productId];
     const page = document.querySelector('#detail-page');
     const backLink = document.querySelector('#back-link');
     if (!product) {
       page.innerHTML = '<section class="empty"><span class="eyebrow">CERAVO collections</span><h1>Collection not found.</h1><p>Please return to the catalogue and choose a collection to explore.</p><a class="action" href="tiles.html">Back to collections</a></section>';
-    } else if (bedroomProduct) {
-      document.title = `${bedroomProduct.title} | CERAVO`;
-      backLink.href = 'bedroom.html';
-      backLink.textContent = 'Back to bedroom';
-      const badgeClass = bedroomProduct.category === 'popular' ? ' popular' : bedroomProduct.category === 'premium' ? ' premium' : bedroomProduct.category === 'all-collections' ? ' all-collections' : '';
-      const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${bedroomProduct.title} (${bedroomProduct.code}).`);
-      const roomHeroClass = bedroomProduct.roomFit === 'contain' ? ' is-room-full' : '';
+    } else if (showcaseProduct) {
+      const isWall = Boolean(wallProduct);
+      document.title = `${showcaseProduct.title} | CERAVO`;
+      backLink.href = isWall ? 'wall-tiles.html' : 'bedroom.html';
+      backLink.textContent = isWall ? 'Back to wall tiles' : 'Back to bedroom';
+      const badgeClass = showcaseProduct.category === 'popular' ? ' popular' : showcaseProduct.category === 'premium' ? ' premium' : showcaseProduct.category === 'all-collections' ? ' all-collections' : '';
+      const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${showcaseProduct.title} (${showcaseProduct.code}).`);
+      const roomHeroClass = showcaseProduct.roomFit === 'contain' ? ' is-room-full' : '';
+      const roomAlt = showcaseProduct.roomAlt || `Luxury bedroom with ${showcaseProduct.title} floor tiles installed across the floor`;
+      const displayName = showcaseProduct.title.replace('Diseño Series - ', '');
       page.classList.add('showcase');
-      page.innerHTML = `<div class="visual" role="region" aria-label="${bedroomProduct.title} bedroom showcase">
-        <img class="hero-image${roomHeroClass}" id="hero-image" src="${bedroomProduct.roomImage}" alt="Luxury bedroom with ${bedroomProduct.title} floor tiles installed across the floor" />
+      page.innerHTML = `<div class="visual" role="region" aria-label="${showcaseProduct.title} ${isWall ? 'wall' : 'bedroom'} showcase">
+        <img class="hero-image${roomHeroClass}" id="hero-image" src="${showcaseProduct.roomImage}" alt="${roomAlt}" />
         <div class="view-toggles" role="tablist" aria-label="Image views">
-          <button class="view-toggle is-active" type="button" data-view="room" aria-pressed="true"><img src="${bedroomProduct.roomImage}" alt="" loading="lazy" decoding="async" /><span>Room</span></button>
-          <button class="view-toggle" type="button" data-view="tile" aria-pressed="false"><img src="${bedroomProduct.tileImage}" alt="" loading="lazy" decoding="async" /><span>Tile</span></button>
+          <button class="view-toggle is-active" type="button" data-view="room" aria-pressed="true"><img src="${showcaseProduct.roomImage}" alt="" loading="lazy" decoding="async" /><span>Room</span></button>
+          <button class="view-toggle" type="button" data-view="tile" aria-pressed="false"><img src="${showcaseProduct.tileImage}" alt="" loading="lazy" decoding="async" /><span>Tile</span></button>
         </div>
       </div>
       <section class="content">
-        <span class="product-badge${badgeClass}">${bedroomProduct.badge}</span>
-        <p class="eyebrow" style="margin-top:16px">${bedroomProduct.series}</p>
-        <h1>${bedroomProduct.title.replace('Diseño Series - ', '')}</h1>
-        <p class="brand-line">${bedroomProduct.brand}</p>
-        <p class="description">${bedroomProduct.description}</p>
+        <span class="product-badge${badgeClass}">${showcaseProduct.badge}</span>
+        <p class="eyebrow" style="margin-top:16px">${showcaseProduct.series}</p>
+        <h1>${displayName}</h1>
+        <p class="brand-line">${showcaseProduct.brand}</p>
+        <p class="description">${showcaseProduct.description}</p>
         <dl class="specs">
-          <div class="spec"><dt>Size</dt><dd>${bedroomProduct.size}</dd></div>
-          <div class="spec"><dt>Type</dt><dd>${bedroomProduct.type}</dd></div>
-          <div class="spec"><dt>Code</dt><dd>${bedroomProduct.code}</dd></div>
+          <div class="spec"><dt>Size</dt><dd>${showcaseProduct.size}</dd></div>
+          <div class="spec"><dt>Type</dt><dd>${showcaseProduct.type}</dd></div>
+          <div class="spec"><dt>Code</dt><dd>${showcaseProduct.code}</dd></div>
         </dl>
         <div class="actions">
           <a class="action secondary" href="tel:+8801979614216">Call Now</a>
@@ -122,12 +128,12 @@
             item.classList.toggle('is-active', item === button);
             item.setAttribute('aria-pressed', String(item === button));
           });
-          heroImage.src = view === 'tile' ? bedroomProduct.tileImage : bedroomProduct.roomImage;
+          heroImage.src = view === 'tile' ? showcaseProduct.tileImage : showcaseProduct.roomImage;
           heroImage.alt = view === 'tile'
-            ? `${bedroomProduct.title} tile swatch ${bedroomProduct.code}`
-            : `Luxury bedroom with ${bedroomProduct.title} floor tiles`;
+            ? `${showcaseProduct.title} tile swatch ${showcaseProduct.code}`
+            : roomAlt;
           heroImage.classList.toggle('is-tile', view === 'tile');
-          heroImage.classList.toggle('is-room-full', view === 'room' && bedroomProduct.roomFit === 'contain');
+          heroImage.classList.toggle('is-room-full', view === 'room' && showcaseProduct.roomFit === 'contain');
         });
       });
     } else {

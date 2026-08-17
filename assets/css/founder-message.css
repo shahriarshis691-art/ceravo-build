@@ -22,7 +22,7 @@
   flex-shrink: 0;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 54% 14%;
+  object-position: center 18%;
   background: #e7ded2;
   box-shadow: 0 10px 22px rgba(31, 28, 26, 0.16);
   outline: 2px solid #e5e5e5;

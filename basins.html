@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basins | ROSA BD | CERAVO TILES &amp; SURFACES</title>
-    <meta name="description" content="Explore ROSA BD basins at CERAVO — countertop, vanity, pedestal, undermount, and wall-hung ceramic basins with pricing in BDT." />
+    <title>Basins | ROSA BD, TANVIR &amp; HAIBALI | CERAVO TILES &amp; SURFACES</title>
+    <meta name="description" content="Explore basins at CERAVO from ROSA BD, TANVIR, and HAIBALI — countertop, vanity, pedestal, undermount, and designer ceramic basins with pricing in BDT." />
     <link rel="canonical" href="https://www.ceravo.online/basins.html" />
-    <meta property="og:title" content="ROSA BD Basins | CERAVO" />
-    <meta property="og:description" content="Authentic ROSA BD basin collection with specifications, SKUs, and prices in BDT." />
+    <meta property="og:title" content="ROSA BD, TANVIR &amp; HAIBALI Basins | CERAVO" />
+    <meta property="og:description" content="Multi-brand basin collection from ROSA BD, TANVIR, and HAIBALI with specifications, SKUs, and prices in BDT." />
     <meta property="og:url" content="https://www.ceravo.online/basins.html" />
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,7 +28,10 @@
       .eyebrow { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
       .listing-header h2 { margin: 0; font: 600 clamp(36px, 5vw, 60px)/.9 'Cormorant Garamond', serif; }
       .listing-header > p { max-width: 420px; margin: 0; color: rgba(17,17,17,.68); font-size: 13px; line-height: 1.7; }
-      .filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 3.3% 22px; }
+      .brand-filters { position: sticky; top: 0; z-index: 4; display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 3.3%; background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .brand-filter { padding: 11px 18px; border: 1px solid var(--ink); background: transparent; font: 800 11px 'Manrope', sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+      .brand-filter.is-active, .brand-filter:hover { background: var(--ink); color: #fff; }
+      .filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 3.3% 22px; }
       .filter { padding: 10px 16px; border: 1px solid var(--ink); background: transparent; font: 700 11px 'Manrope', sans-serif; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
       .filter.is-active, .filter:hover { background: var(--ink); color: #fff; }
       .product-grid { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 0 3.3% 42px; background: #f7f7f7; }
@@ -41,7 +44,7 @@
       .product-card:hover .product-media img { transform: scale(1.04); }
       .product-body { padding: 16px 16px 18px; }
       .product-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
-      .product-brand-tag { font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: rgba(17,17,17,.62); }
+      .product-brand-tag { display: inline-flex; align-items: center; padding: 4px 8px; border: 1px solid var(--ink); font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
       .product-badge { flex: 0 0 auto; padding: 5px 8px; color: #fff; background: #c32126; font-size: 8px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
       .product-badge.popular { background: #171513; }
       .product-badge.premium { color: #171513; background: #c8a86e; }
@@ -71,8 +74,8 @@
       .site-menu-link { display: block; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 600; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
       @media (min-width: 640px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
       @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
-      @media (max-width: 760px) { .listing-header { display: block; } .listing-header h2 { margin-bottom: 18px; } .filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 18px; scrollbar-width: none; } .filters::-webkit-scrollbar { display: none; } .filter { flex: 0 0 auto; min-height: 44px; } .product-grid { gap: 16px; } .product-body { padding: 14px 14px 16px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
-      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .listing-header, .filters, .product-grid { padding-left: 16px; padding-right: 16px; } }
+      @media (max-width: 760px) { .listing-header { display: block; } .listing-header h2 { margin-bottom: 18px; } .brand-filters, .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .brand-filters::-webkit-scrollbar, .filters::-webkit-scrollbar { display: none; } .filters { padding-bottom: 18px; } .brand-filter, .filter { flex: 0 0 auto; min-height: 44px; } .product-grid { gap: 16px; } .product-body { padding: 14px 14px 16px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
+      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .listing-header, .brand-filters, .filters, .product-grid { padding-left: 16px; padding-right: 16px; } }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } .product-card:hover .product-media img { transform: none; } }
     </style>
     <link rel="stylesheet" href="assets/css/founder-message.css" />
@@ -80,16 +83,22 @@
   <body>
     <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
     <main>
-      <section class="listing-header"><div><p class="eyebrow">CERAVO bathware · ROSA BD</p><h2>Basins Collection</h2></div><p>Authentic ROSA BD ceramic basins for countertop, vanity, pedestal, undermount, and wall-hung installations — specified, priced, and ready to enquire.</p></section>
+      <section class="listing-header"><div><p class="eyebrow">CERAVO bathware · ROSA BD · TANVIR · HAIBALI</p><h2>Basins Collection</h2></div><p>Ceramic basins from Bangladesh’s top sanitary brands — ROSA BD, TANVIR, and HAIBALI — specified, priced in BDT, and ready to enquire.</p></section>
+      <div class="brand-filters" role="group" aria-label="Filter basins by brand">
+        <button class="brand-filter is-active" type="button" data-brand-filter="all">All Brands</button>
+        <button class="brand-filter" type="button" data-brand-filter="rosa-bd">ROSA BD</button>
+        <button class="brand-filter" type="button" data-brand-filter="tanvir">TANVIR</button>
+        <button class="brand-filter" type="button" data-brand-filter="haibali">HAIBALI</button>
+      </div>
       <div class="filters" role="group" aria-label="Filter basin collections">
-        <button class="filter is-active" type="button" data-filter="all">All collections</button>
+        <button class="filter is-active" type="button" data-filter="all">All</button>
         <button class="filter" type="button" data-filter="new-arrival">New Arrival</button>
         <button class="filter" type="button" data-filter="popular">Popular</button>
         <button class="filter" type="button" data-filter="premium">Premium</button>
         <button class="filter" type="button" data-filter="countertop">Countertop</button>
         <button class="filter" type="button" data-filter="wall-hung">Wall Hung</button>
       </div>
-      <section class="product-grid" id="basin-product-grid" aria-label="ROSA BD basin collections"></section>
+      <section class="product-grid" id="basin-product-grid" aria-label="Basin collections from ROSA BD, TANVIR, and HAIBALI"></section>
     </main>
     <div class="bottom-actions"><a class="bottom-action" href="showroom.html">Showroom Locator</a><a class="bottom-action" href="contact.html">Request Owner Contact</a></div>
     <section class="founder-message" aria-labelledby="founder-message-name">
@@ -125,7 +134,7 @@
       productGrid.innerHTML = basinProducts.map((product, index) => {
         const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${product.title} (${product.code}).`);
         return `
-        <article class="product-card" data-filters="${product.filters.join(' ')}">
+        <article class="product-card" data-brand="${product.brandSlug}" data-filters="${product.filters.join(' ')}">
           <a class="product-card-link" href="product-detail.html?product=${product.id}">
             <span class="product-media"><img src="${product.image}" alt="${product.title} ${product.code}" width="600" height="600" loading="${index < 3 ? 'eager' : 'lazy'}" decoding="async" /></span>
             <div class="product-body">
@@ -143,13 +152,25 @@
       `;
       }).join('');
 
-      document.querySelectorAll('[data-filter]').forEach((filterButton) => filterButton.addEventListener('click', () => {
-        const filter = filterButton.dataset.filter;
-        document.querySelectorAll('[data-filter]').forEach((button) => button.classList.toggle('is-active', button === filterButton));
+      let activeBrand = 'all';
+      let activeCollection = 'all';
+      const applyListingFilters = () => {
         document.querySelectorAll('.product-card').forEach((card) => {
           const tags = (card.dataset.filters || '').split(' ');
-          card.hidden = filter !== 'all' && !tags.includes(filter);
+          const brandMatch = activeBrand === 'all' || card.dataset.brand === activeBrand;
+          const collectionMatch = activeCollection === 'all' || tags.includes(activeCollection);
+          card.hidden = !(brandMatch && collectionMatch);
         });
+      };
+      document.querySelectorAll('[data-brand-filter]').forEach((brandButton) => brandButton.addEventListener('click', () => {
+        activeBrand = brandButton.dataset.brandFilter;
+        document.querySelectorAll('[data-brand-filter]').forEach((button) => button.classList.toggle('is-active', button === brandButton));
+        applyListingFilters();
+      }));
+      document.querySelectorAll('[data-filter]').forEach((filterButton) => filterButton.addEventListener('click', () => {
+        activeCollection = filterButton.dataset.filter;
+        document.querySelectorAll('[data-filter]').forEach((button) => button.classList.toggle('is-active', button === filterButton));
+        applyListingFilters();
       }));
     </script>
     <div class="contact-float" style="position:fixed;right:18px;bottom:18px;z-index:30;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><a href="tel:+8801979614216" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#171513;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">Call Now</a><a href="https://wa.me/8801979614216?text=Hello%20CERAVO%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#1d8b55;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">WhatsApp</a></div>

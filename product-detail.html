@@ -115,7 +115,7 @@
       <section class="content">
         <span class="product-badge${badgeClass}">${cutoutProduct.badge}</span>
         <p class="eyebrow" style="margin-top:16px">${cutoutProduct.brand}</p>
-        <h1>${cutoutProduct.title.replace('ROSA ', '')}</h1>
+        <h1>${cutoutProduct.title.replace(/^(ROSA|Tanvir|Haibali)\s+/, '')}</h1>
         <p class="brand-line">${cutoutProduct.brand}</p>
         <p class="description">${cutoutProduct.description}</p>
         <p class="price-line">${cutoutProduct.price}</p>

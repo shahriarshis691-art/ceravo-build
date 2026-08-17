@@ -68,6 +68,7 @@
   <script src="assets/js/wall-tiles-products.js"></script>
   <script src="assets/js/basins-products.js"></script>
   <script src="assets/js/faucets-products.js"></script>
+  <script src="assets/js/showers-products.js"></script>
   <script>
     const products = {
       'terra-stone': { eyebrow: 'CERAVO tiles', name: 'Terra Stone', description: 'Warm mineral tones with a quiet architectural finish for interiors that feel grounded and enduring.', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80', category: 'Stone tiles', finish: 'Natural', size: '600 x 600 mm', application: 'Floor & wall' },
@@ -86,7 +87,8 @@
     const wallProduct = (window.CERAVO_WALL_TILE_PRODUCTS || []).find((item) => item.id === productId);
     const basinProduct = (window.CERAVO_BASIN_PRODUCTS || []).find((item) => item.id === productId);
     const faucetProduct = (window.CERAVO_FAUCET_PRODUCTS || []).find((item) => item.id === productId);
-    const cutoutProduct = basinProduct || faucetProduct;
+    const showerProduct = (window.CERAVO_SHOWER_PRODUCTS || []).find((item) => item.id === productId);
+    const cutoutProduct = basinProduct || faucetProduct || showerProduct;
     const showcaseProduct = bedroomProduct || wallProduct;
     const product = showcaseProduct || cutoutProduct || products[productId];
     const page = document.querySelector('#detail-page');
@@ -94,10 +96,9 @@
     if (!product) {
       page.innerHTML = '<section class="empty"><span class="eyebrow">CERAVO collections</span><h1>Collection not found.</h1><p>Please return to the catalogue and choose a collection to explore.</p><a class="action" href="tiles.html">Back to collections</a></section>';
     } else if (cutoutProduct) {
-      const isBasin = Boolean(basinProduct);
       document.title = `${cutoutProduct.title} | CERAVO`;
-      backLink.href = isBasin ? 'basins.html' : 'faucets.html';
-      backLink.textContent = isBasin ? 'Back to basins' : 'Back to faucets';
+      backLink.href = basinProduct ? 'basins.html' : faucetProduct ? 'faucets.html' : 'showers.html';
+      backLink.textContent = basinProduct ? 'Back to basins' : faucetProduct ? 'Back to faucets' : 'Back to showers';
       const badgeClass = cutoutProduct.category === 'popular' ? ' popular' : cutoutProduct.category === 'premium' ? ' premium' : cutoutProduct.category === 'all-collections' ? ' all-collections' : '';
       const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${cutoutProduct.title} (${cutoutProduct.code}).`);
       const extraSpec = cutoutProduct.cartridge

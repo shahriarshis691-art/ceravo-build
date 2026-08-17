@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bedroom Tiles | CERAVO TILES &amp; SURFACES</title>
-    <meta name="description" content="Explore CERAVO bedroom tile collections with refined marble, stone, wood, and matte finishes." />
+    <meta name="description" content="Explore CERAVO bedroom floor tiles from the Khadim Ceramics Diseño Series in 60 x 60 cm PGVT." />
     <link rel="canonical" href="https://www.ceravo.online/bedroom.html" />
     <meta property="og:title" content="Bedroom Tiles | CERAVO" />
     <meta property="og:description" content="Explore bedroom tile collections in marble, stone, wood, and matte finishes." />
@@ -34,18 +34,28 @@
       .filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 3.3% 22px; }
       .filter { padding: 10px 16px; border: 1px solid var(--ink); background: transparent; font: 700 11px 'Manrope', sans-serif; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
       .filter.is-active, .filter:hover { background: var(--ink); color: #fff; }
-      .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding: 0 3.3% 22px; background: #f7f7f7; }
-      .product-card { min-width: 0; background: transparent; }
+      .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; padding: 0 3.3% 28px; background: #f7f7f7; }
+      .product-card { min-width: 0; overflow: hidden; background: #fff; transition: box-shadow .35s ease; }
       .product-card[hidden] { display: none; }
-      .product-card img { display: block; width: 100%; aspect-ratio: 1.47; object-fit: cover; }
-      .product-body { padding: 12px 0 14px; }
-      .product-body h3 { margin: 0; color: rgba(17,17,17,.58); font-size: 19px; font-weight: 400; letter-spacing: 0; text-transform: none; }
-      .product-meta { margin: 10px 0 0; color: rgba(17,17,17,.48); font-size: 18px; line-height: 1.55; }
-      .product-actions { display: none; }
+      .product-card:hover { box-shadow: 0 18px 40px rgba(17,17,17,.12); }
+      .product-media { display: block; overflow: hidden; background: #2b2b2b; }
+      .product-media img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; object-position: center 42%; transition: transform .6s ease; }
+      .product-card:hover .product-media img { transform: scale(1.04); }
+      .product-body { padding: 16px 16px 18px; }
+      .product-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+      .product-body h3 { margin: 0; color: var(--ink); font: 600 clamp(16px, 1.4vw, 20px)/1.2 'Cormorant Garamond', serif; letter-spacing: 0; text-transform: none; }
+      .product-badge { flex: 0 0 auto; padding: 5px 8px; color: #fff; background: #c32126; font-size: 8px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+      .product-badge.popular { background: #171513; }
+      .product-badge.premium { color: #171513; background: #c8a86e; }
+      .product-specs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 14px 0 0; padding: 10px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .product-specs > div { min-width: 0; padding: 0 8px; text-align: center; }
+      .product-specs > div + div { border-left: 1px solid var(--line); }
+      .product-specs dt { margin: 0; color: rgba(17,17,17,.48); font-size: 8px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+      .product-specs dd { margin: 5px 0 0; overflow: hidden; text-overflow: ellipsis; font-size: 11px; font-weight: 600; letter-spacing: .02em; white-space: nowrap; }
+      .product-brand { margin: 12px 0 0; color: rgba(17,17,17,.72); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
       .listing-dots { display: flex; justify-content: center; gap: 12px; padding: 22px 0 42px; background: #f7f7f7; }
       .listing-dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: #c7c7c7; }
       .listing-dot.is-active { background: #333; }
-      .product-actions a { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
       .bottom-actions { display: grid; grid-template-columns: 1fr 1fr; min-height: 64px; background: #000; color: #fff; }
       .bottom-action { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
       .bottom-action + .bottom-action { border-left: 1px solid rgba(255,255,255,.5); }
@@ -59,9 +69,10 @@
       .site-menu-panel { width: min(420px, 88vw); height: 100%; padding: 110px 32px 32px; background: #fff; transform: translateX(100%); transition: transform .3s ease; }
       .site-menu.is-open .site-menu-panel { transform: translateX(0); }
       .site-menu-link { display: block; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 600; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
-      @media (max-width: 760px) { .listing-header { display: block; } .listing-header h2 { margin-bottom: 18px; } .filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 18px; scrollbar-width: none; } .filters::-webkit-scrollbar { display: none; } .filter { flex: 0 0 auto; min-height: 44px; } .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .product-body { padding: 10px 0 12px; } .product-body h3 { font-size: 14px; } .product-meta { font-size: 13px; } .product-actions a { display: inline-flex; min-height: 32px; align-items: center; margin-right: 8px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
-      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .listing-header, .filters { padding-left: 16px; padding-right: 16px; } .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 8px; overflow: visible; padding: 0 16px 14px; } .product-card { min-width: 0; } .product-card img { aspect-ratio: .76; } .product-body { padding-top: 8px; } .product-body h3 { font-size: 10px; line-height: 1.25; } .product-meta { margin-top: 5px; font-size: 9px; line-height: 1.35; } .listing-dots { padding-top: 16px; } }
-      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+      @media (max-width: 1100px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 760px) { .listing-header { display: block; } .listing-header h2 { margin-bottom: 18px; } .filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 18px; scrollbar-width: none; } .filters::-webkit-scrollbar { display: none; } .filter { flex: 0 0 auto; min-height: 44px; } .product-grid { grid-template-columns: 1fr; gap: 16px; } .product-body { padding: 14px 14px 16px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
+      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .listing-header, .filters, .product-grid { padding-left: 16px; padding-right: 16px; } .listing-dots { padding-top: 16px; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } .product-card:hover .product-media img { transform: none; } }
     </style>
   </head>
   <body>
@@ -69,12 +80,40 @@
     <main>
       <section class="hero"><div><h1>Bedroom tiles with a softer point of view.</h1><p>Warm surfaces, quiet texture, and considered finishes for restful spaces.</p></div></section>
       <section class="listing-header"><div><p class="eyebrow">CERAVO bedroom collection</p><h2>Choose your atmosphere.</h2></div><p>Explore materials selected to bring warmth, depth, and balance to the bedroom.</p></section>
-      <div class="filters" role="group" aria-label="Filter bedroom tile collections"><button class="filter is-active" type="button" data-filter="all">All collections</button><button class="filter" type="button" data-filter="marble">Marble Effect</button><button class="filter" type="button" data-filter="stone">Stone Effect</button><button class="filter" type="button" data-filter="wood">Wood Effect</button><button class="filter" type="button" data-filter="matte">Matte</button></div>
-      <section class="product-grid" aria-label="Bedroom tile collections">
-        <article class="product-card" data-category="marble"><img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=900&q=80" alt="Marmora beige bedroom tile collection" /><div class="product-body"><h3>Marmora Beige</h3><p class="product-meta">Marble Effect · Matte<br />1200 × 600 mm · Ivory</p><div class="product-actions"><a href="product-detail.html?product=marmora-beige">View Details</a><a href="contact.html?interest=Marmora%20Beige">Enquire Now</a></div></div></article>
-        <article class="product-card" data-category="stone"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="Terra stone bedroom tile collection" /><div class="product-body"><h3>Terra Stone</h3><p class="product-meta">Stone Effect · Natural<br />600 × 600 mm · Taupe</p><div class="product-actions"><a href="product-detail.html?product=terra-bedroom">View Details</a><a href="contact.html?interest=Terra%20Stone">Enquire Now</a></div></div></article>
-        <article class="product-card" data-category="wood"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80" alt="Oakline wood bedroom tile collection" /><div class="product-body"><h3>Oakline Warm</h3><p class="product-meta">Wood Effect · Satin<br />1200 × 200 mm · Honey</p><div class="product-actions"><a href="product-detail.html?product=oakline-warm">View Details</a><a href="contact.html?interest=Oakline%20Warm">Enquire Now</a></div></div></article>
-        <article class="product-card" data-category="matte"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80" alt="Calm matte bedroom tile collection" /><div class="product-body"><h3>Calm Matte</h3><p class="product-meta">Matt Finish · Soft Touch<br />600 × 1200 mm · Sand</p><div class="product-actions"><a href="product-detail.html?product=calm-matte">View Details</a><a href="contact.html?interest=Calm%20Matte">Enquire Now</a></div></div></article>
+      <div class="filters" role="group" aria-label="Filter bedroom tile collections"><button class="filter is-active" type="button" data-filter="all">All collections</button><button class="filter" type="button" data-filter="new-arrival">New Arrival</button><button class="filter" type="button" data-filter="popular">Popular</button><button class="filter" type="button" data-filter="premium">Premium</button></div>
+      <section class="product-grid" aria-label="Bedroom floor tile collections">
+        <article class="product-card" data-category="new-arrival">
+          <a class="product-media" href="product-detail.html?product=kcl-p-1122"><img src="assets/images/products/kcl-p-1122.png" alt="Diseño Series Grey Marble PGVT floor tile KCL_P_1122" /></a>
+          <div class="product-body">
+            <div class="product-title-row"><h3>Diseño Series - Grey Marble</h3><span class="product-badge">NEW ARRIVAL</span></div>
+            <dl class="product-specs"><div><dt>Size</dt><dd>60 x 60 cm</dd></div><div><dt>Type</dt><dd>PGVT</dd></div><div><dt>Code</dt><dd>KCL_P_1122</dd></div></dl>
+            <p class="product-brand">Khadim Ceramics</p>
+          </div>
+        </article>
+        <article class="product-card" data-category="new-arrival">
+          <a class="product-media" href="product-detail.html?product=kcl-p-1123"><img src="assets/images/products/kcl-p-1123.png" alt="Diseño Series Royal Crema PGVT floor tile KCL_P_1123" /></a>
+          <div class="product-body">
+            <div class="product-title-row"><h3>Diseño Series - Royal Crema</h3><span class="product-badge">NEW ARRIVAL</span></div>
+            <dl class="product-specs"><div><dt>Size</dt><dd>60 x 60 cm</dd></div><div><dt>Type</dt><dd>PGVT</dd></div><div><dt>Code</dt><dd>KCL_P_1123</dd></div></dl>
+            <p class="product-brand">Khadim Ceramics</p>
+          </div>
+        </article>
+        <article class="product-card" data-category="popular">
+          <a class="product-media" href="product-detail.html?product=kcl-p-1124"><img src="assets/images/products/kcl-p-1124.png" alt="Diseño Series Onyx Pearl PGVT floor tile KCL_P_1124" /></a>
+          <div class="product-body">
+            <div class="product-title-row"><h3>Diseño Series - Onyx Pearl</h3><span class="product-badge popular">POPULAR</span></div>
+            <dl class="product-specs"><div><dt>Size</dt><dd>60 x 60 cm</dd></div><div><dt>Type</dt><dd>PGVT</dd></div><div><dt>Code</dt><dd>KCL_P_1124</dd></div></dl>
+            <p class="product-brand">Khadim Ceramics</p>
+          </div>
+        </article>
+        <article class="product-card" data-category="premium">
+          <a class="product-media" href="product-detail.html?product=kcl-p-1125"><img src="assets/images/products/kcl-p-1125.png" alt="Diseño Series Statuario White PGVT floor tile KCL_P_1125" /></a>
+          <div class="product-body">
+            <div class="product-title-row"><h3>Diseño Series - Statuario White</h3><span class="product-badge premium">PREMIUM</span></div>
+            <dl class="product-specs"><div><dt>Size</dt><dd>60 x 60 cm</dd></div><div><dt>Type</dt><dd>PGVT</dd></div><div><dt>Code</dt><dd>KCL_P_1125</dd></div></dl>
+            <p class="product-brand">Khadim Ceramics</p>
+          </div>
+        </article>
       </section>
       <div class="listing-dots" aria-label="Bedroom listing pages"><button class="listing-dot is-active" type="button" aria-label="Listing page 1"></button><button class="listing-dot" type="button" aria-label="Listing page 2"></button></div>
     </main>

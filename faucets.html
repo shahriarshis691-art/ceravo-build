@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basins | ROSA BD | CERAVO TILES &amp; SURFACES</title>
-    <meta name="description" content="Explore ROSA BD basins at CERAVO — countertop, vanity, pedestal, undermount, and wall-hung ceramic basins with pricing in BDT." />
-    <link rel="canonical" href="https://www.ceravo.online/basins.html" />
-    <meta property="og:title" content="ROSA BD Basins | CERAVO" />
-    <meta property="og:description" content="Authentic ROSA BD basin collection with specifications, SKUs, and prices in BDT." />
-    <meta property="og:url" content="https://www.ceravo.online/basins.html" />
+    <title>Faucets | ROSA BD | CERAVO TILES &amp; SURFACES</title>
+    <meta name="description" content="Explore ROSA BD faucets at CERAVO — basin mixers, kitchen taps, wall-mounted and sensor fittings with pricing in BDT." />
+    <link rel="canonical" href="https://www.ceravo.online/faucets.html" />
+    <meta property="og:title" content="ROSA BD Faucets | CERAVO" />
+    <meta property="og:description" content="Authentic ROSA BD faucet collection with specifications, SKUs, and prices in BDT." />
+    <meta property="og:url" content="https://www.ceravo.online/faucets.html" />
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -80,16 +80,17 @@
   <body>
     <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
     <main>
-      <section class="listing-header"><div><p class="eyebrow">CERAVO bathware · ROSA BD</p><h2>Basins Collection</h2></div><p>Authentic ROSA BD ceramic basins for countertop, vanity, pedestal, undermount, and wall-hung installations — specified, priced, and ready to enquire.</p></section>
-      <div class="filters" role="group" aria-label="Filter basin collections">
+      <section class="listing-header"><div><p class="eyebrow">CERAVO bathware · ROSA BD</p><h2>Faucets Collection</h2></div><p>Authentic ROSA BD mixers and taps for basins, kitchens, and wall-mounted installations — specified, priced, and ready to enquire.</p></section>
+      <div class="filters" role="group" aria-label="Filter faucet collections">
         <button class="filter is-active" type="button" data-filter="all">All collections</button>
         <button class="filter" type="button" data-filter="new-arrival">New Arrival</button>
         <button class="filter" type="button" data-filter="popular">Popular</button>
         <button class="filter" type="button" data-filter="premium">Premium</button>
-        <button class="filter" type="button" data-filter="countertop">Countertop</button>
-        <button class="filter" type="button" data-filter="wall-hung">Wall Hung</button>
+        <button class="filter" type="button" data-filter="basin-mixer">Basin Mixer</button>
+        <button class="filter" type="button" data-filter="kitchen">Kitchen</button>
+        <button class="filter" type="button" data-filter="wall-mount">Wall Mount</button>
       </div>
-      <section class="product-grid" id="basin-product-grid" aria-label="ROSA BD basin collections"></section>
+      <section class="product-grid" id="faucet-product-grid" aria-label="ROSA BD faucet collections"></section>
     </main>
     <div class="bottom-actions"><a class="bottom-action" href="showroom.html">Showroom Locator</a><a class="bottom-action" href="contact.html">Request Owner Contact</a></div>
     <section class="founder-message" aria-labelledby="founder-message-name">
@@ -104,7 +105,7 @@
     </section>
     <footer class="site-footer"><div><div class="footer-brand">CERAVO</div><p class="footer-copy">Tiles &amp; Surfaces for considered spaces.</p><p class="footer-copy">Founder &amp; CEO: SM SHAHRIAR WALID</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="bathware.html">Bathware</a><a href="basins.html">Basins</a><a href="faucets.html">Faucets</a></nav></footer>
     <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="basins.html">Basins</a><a class="site-menu-link" href="faucets.html">Faucets</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="contact.html">Contact Us</a></nav></div>
-    <script src="assets/js/basins-products.js"></script>
+    <script src="assets/js/faucets-products.js"></script>
     <script>
       const menu = document.querySelector('#site-menu');
       const menuButton = document.querySelector('[aria-controls="site-menu"]');
@@ -120,9 +121,9 @@
         if (category === 'all-collections') return ' all-collections';
         return '';
       };
-      const productGrid = document.querySelector('#basin-product-grid');
-      const basinProducts = window.CERAVO_BASIN_PRODUCTS || [];
-      productGrid.innerHTML = basinProducts.map((product, index) => {
+      const productGrid = document.querySelector('#faucet-product-grid');
+      const faucetProducts = window.CERAVO_FAUCET_PRODUCTS || [];
+      productGrid.innerHTML = faucetProducts.map((product, index) => {
         const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${product.title} (${product.code}).`);
         return `
         <article class="product-card" data-filters="${product.filters.join(' ')}">
@@ -131,7 +132,7 @@
             <div class="product-body">
               <div class="product-meta"><span class="product-brand-tag">${product.brand}</span><span class="product-badge${badgeClassFor(product.category)}">${product.badge}</span></div>
               <h3>${product.title}</h3>
-              <dl class="product-specs"><div><dt>Size</dt><dd>${product.size}</dd></div><div><dt>Type</dt><dd>${product.type}</dd></div><div><dt>Code</dt><dd>${product.code}</dd></div></dl>
+              <dl class="product-specs"><div><dt>Material</dt><dd>${product.material}</dd></div><div><dt>Type</dt><dd>${product.type}</dd></div><div><dt>Code</dt><dd>${product.code}</dd></div></dl>
               <p class="product-price">${product.price}</p>
             </div>
           </a>

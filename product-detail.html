@@ -67,6 +67,7 @@
   <script src="assets/js/bedroom-products.js"></script>
   <script src="assets/js/wall-tiles-products.js"></script>
   <script src="assets/js/basins-products.js"></script>
+  <script src="assets/js/faucets-products.js"></script>
   <script>
     const products = {
       'terra-stone': { eyebrow: 'CERAVO tiles', name: 'Terra Stone', description: 'Warm mineral tones with a quiet architectural finish for interiors that feel grounded and enduring.', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80', category: 'Stone tiles', finish: 'Natural', size: '600 x 600 mm', application: 'Floor & wall' },
@@ -76,7 +77,6 @@
       'terra-bedroom': { eyebrow: 'CERAVO bedroom collection', name: 'Terra Stone', description: 'Natural taupe stone character for bedrooms shaped around calm, balance, and tactile depth.', image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=80', category: 'Stone effect', finish: 'Natural', size: '600 x 600 mm', application: 'Bedroom interiors' },
       'oakline-warm': { eyebrow: 'CERAVO bedroom collection', name: 'Oakline Warm', description: 'A warm wood effect that adds softness and an understated rhythm to considered interiors.', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=80', category: 'Wood effect', finish: 'Satin', size: '1200 x 200 mm', application: 'Bedroom interiors' },
       'calm-matte': { eyebrow: 'CERAVO bedroom collection', name: 'Calm Matte', description: 'A softly tactile matte finish for rooms that call for subtle tone and quiet continuity.', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80', category: 'Matt finish', finish: 'Soft touch', size: '600 x 1200 mm', application: 'Bedroom interiors' },
-      'brushed-faucets': { eyebrow: 'CERAVO bathware', name: 'Brushed Faucets', description: 'Balanced fittings with a tactile brushed finish and a quiet presence at the basin.', image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1400&q=80', category: 'Faucets', finish: 'Brushed metal', size: 'Multiple formats', application: 'Bathroom interiors' },
       'rain-showers': { eyebrow: 'CERAVO bathware', name: 'Rain Showers', description: 'Immersive forms designed around restorative daily rituals and an effortless sense of calm.', image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1400&q=80', category: 'Showers', finish: 'Brushed metal', size: 'Multiple formats', application: 'Bathroom interiors' }
     };
     const searchParams = new URLSearchParams(window.location.search);
@@ -85,36 +85,47 @@
     const bedroomProduct = (window.CERAVO_BEDROOM_PRODUCTS || []).find((item) => item.id === productId);
     const wallProduct = (window.CERAVO_WALL_TILE_PRODUCTS || []).find((item) => item.id === productId);
     const basinProduct = (window.CERAVO_BASIN_PRODUCTS || []).find((item) => item.id === productId);
+    const faucetProduct = (window.CERAVO_FAUCET_PRODUCTS || []).find((item) => item.id === productId);
+    const cutoutProduct = basinProduct || faucetProduct;
     const showcaseProduct = bedroomProduct || wallProduct;
-    const product = showcaseProduct || basinProduct || products[productId];
+    const product = showcaseProduct || cutoutProduct || products[productId];
     const page = document.querySelector('#detail-page');
     const backLink = document.querySelector('#back-link');
     if (!product) {
       page.innerHTML = '<section class="empty"><span class="eyebrow">CERAVO collections</span><h1>Collection not found.</h1><p>Please return to the catalogue and choose a collection to explore.</p><a class="action" href="tiles.html">Back to collections</a></section>';
-    } else if (basinProduct) {
-      document.title = `${basinProduct.title} | CERAVO`;
-      backLink.href = 'basins.html';
-      backLink.textContent = 'Back to basins';
-      const badgeClass = basinProduct.category === 'popular' ? ' popular' : basinProduct.category === 'premium' ? ' premium' : basinProduct.category === 'all-collections' ? ' all-collections' : '';
-      const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${basinProduct.title} (${basinProduct.code}).`);
+    } else if (cutoutProduct) {
+      const isBasin = Boolean(basinProduct);
+      document.title = `${cutoutProduct.title} | CERAVO`;
+      backLink.href = isBasin ? 'basins.html' : 'faucets.html';
+      backLink.textContent = isBasin ? 'Back to basins' : 'Back to faucets';
+      const badgeClass = cutoutProduct.category === 'popular' ? ' popular' : cutoutProduct.category === 'premium' ? ' premium' : cutoutProduct.category === 'all-collections' ? ' all-collections' : '';
+      const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${cutoutProduct.title} (${cutoutProduct.code}).`);
+      const extraSpec = cutoutProduct.cartridge
+        ? `<div class="spec"><dt>Cartridge</dt><dd>${cutoutProduct.cartridge}</dd></div>`
+        : cutoutProduct.power
+          ? `<div class="spec"><dt>Power</dt><dd>${cutoutProduct.power}</dd></div>`
+          : cutoutProduct.size
+            ? `<div class="spec"><dt>Size</dt><dd>${cutoutProduct.size}</dd></div>`
+            : '';
+      const finishSpec = cutoutProduct.finish ? `<div class="spec"><dt>Finish</dt><dd>${cutoutProduct.finish}</dd></div>` : '';
       page.classList.add('showcase');
-      page.innerHTML = `<div class="visual" role="region" aria-label="${basinProduct.title} product view">
-        <img class="hero-image is-cutout" src="${basinProduct.image}" alt="${basinProduct.title} ${basinProduct.code}" />
+      page.innerHTML = `<div class="visual" role="region" aria-label="${cutoutProduct.title} product view">
+        <img class="hero-image is-cutout" src="${cutoutProduct.image}" alt="${cutoutProduct.title} ${cutoutProduct.code}" />
       </div>
       <section class="content">
-        <span class="product-badge${badgeClass}">${basinProduct.badge}</span>
-        <p class="eyebrow" style="margin-top:16px">${basinProduct.brand}</p>
-        <h1>${basinProduct.title.replace('ROSA ', '')}</h1>
-        <p class="brand-line">${basinProduct.brand}</p>
-        <p class="description">${basinProduct.description}</p>
-        <p class="price-line">${basinProduct.price}</p>
+        <span class="product-badge${badgeClass}">${cutoutProduct.badge}</span>
+        <p class="eyebrow" style="margin-top:16px">${cutoutProduct.brand}</p>
+        <h1>${cutoutProduct.title.replace('ROSA ', '')}</h1>
+        <p class="brand-line">${cutoutProduct.brand}</p>
+        <p class="description">${cutoutProduct.description}</p>
+        <p class="price-line">${cutoutProduct.price}</p>
         <dl class="specs">
-          <div class="spec"><dt>Size</dt><dd>${basinProduct.size}</dd></div>
-          <div class="spec"><dt>Type</dt><dd>${basinProduct.type}</dd></div>
-          <div class="spec"><dt>Code</dt><dd>${basinProduct.code}</dd></div>
-          <div class="spec"><dt>Material</dt><dd>${basinProduct.material}</dd></div>
-          <div class="spec"><dt>Finish</dt><dd>${basinProduct.finish}</dd></div>
-          <div class="spec"><dt>Price</dt><dd>${basinProduct.price}</dd></div>
+          <div class="spec"><dt>Material</dt><dd>${cutoutProduct.material}</dd></div>
+          <div class="spec"><dt>Type</dt><dd>${cutoutProduct.type}</dd></div>
+          <div class="spec"><dt>Code</dt><dd>${cutoutProduct.code}</dd></div>
+          ${extraSpec}
+          ${finishSpec}
+          <div class="spec"><dt>Price</dt><dd>${cutoutProduct.price}</dd></div>
         </dl>
         <div class="actions">
           <a class="action secondary" href="tel:+8801979614216">Call Now</a>

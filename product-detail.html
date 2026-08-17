@@ -51,8 +51,9 @@
     .view-toggle span { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
     .view-toggle.is-active { border-color: #c8a86e; background: rgba(200,168,110,.12); }
     .product-badge { display: inline-flex; align-items: center; padding: 5px 8px; color: #fff; background: #c32126; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-    .product-badge.popular { background: #171513; }
-    .product-badge.premium { color: #171513; background: #c8a86e; }
+      .product-badge.popular { background: #171513; }
+      .product-badge.premium { color: #171513; background: #c8a86e; }
+      .product-badge.all-collections { color: #fff; background: #5c524a; }
     .brand-line { margin: 10px 0 0; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
     .showcase .specs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     @media (max-width: 760px) { main { display: block; } .visual { min-height: 43vh; max-height: none; padding: 6px; } .gallery-grid { gap: 6px; } .content { padding: 44px 7%; } .actions { gap: 8px; } .action { min-height: 46px; padding-inline: 13px; } .hero-image { aspect-ratio: 4 / 3; } }
@@ -86,15 +87,15 @@
       document.title = `${bedroomProduct.title} | CERAVO`;
       backLink.href = 'bedroom.html';
       backLink.textContent = 'Back to bedroom';
-      const badgeClass = bedroomProduct.category === 'popular' ? ' popular' : bedroomProduct.category === 'premium' ? ' premium' : '';
+      const badgeClass = bedroomProduct.category === 'popular' ? ' popular' : bedroomProduct.category === 'premium' ? ' premium' : bedroomProduct.category === 'all-collections' ? ' all-collections' : '';
       const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${bedroomProduct.title} (${bedroomProduct.code}).`);
       const roomHeroClass = bedroomProduct.roomFit === 'contain' ? ' is-room-full' : '';
       page.classList.add('showcase');
       page.innerHTML = `<div class="visual" role="region" aria-label="${bedroomProduct.title} bedroom showcase">
-        <img class="hero-image${roomHeroClass}" id="hero-image" src="${bedroomProduct.roomImage}" alt="Luxury bedroom with ${bedroomProduct.title} floor tiles" />
+        <img class="hero-image${roomHeroClass}" id="hero-image" src="${bedroomProduct.roomImage}" alt="Luxury bedroom with ${bedroomProduct.title} floor tiles installed across the floor" />
         <div class="view-toggles" role="tablist" aria-label="Image views">
-          <button class="view-toggle is-active" type="button" data-view="room" aria-pressed="true"><img src="${bedroomProduct.roomImage}" alt="" /><span>Room</span></button>
-          <button class="view-toggle" type="button" data-view="tile" aria-pressed="false"><img src="${bedroomProduct.tileImage}" alt="" /><span>Tile</span></button>
+          <button class="view-toggle is-active" type="button" data-view="room" aria-pressed="true"><img src="${bedroomProduct.roomImage}" alt="" loading="lazy" decoding="async" /><span>Room</span></button>
+          <button class="view-toggle" type="button" data-view="tile" aria-pressed="false"><img src="${bedroomProduct.tileImage}" alt="" loading="lazy" decoding="async" /><span>Tile</span></button>
         </div>
       </div>
       <section class="content">

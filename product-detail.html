@@ -40,12 +40,27 @@
     .action.whatsapp { border-color: #1d8b55; background: #1d8b55; }
     .action.secondary { color: var(--ink); background: transparent; }
     .empty { padding: 10vw; text-align: center; }
-    @media (max-width: 760px) { main { display: block; } .visual { min-height: 43vh; max-height: none; padding: 6px; } .gallery-grid { gap: 6px; } .content { padding: 44px 7%; } .actions { gap: 8px; } .action { min-height: 46px; padding-inline: 13px; } }
+    main.showcase { grid-template-columns: 1.28fr .72fr; }
+    .showcase .visual { display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #1a1816; overflow: hidden; }
+    .hero-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 74%; background: #111; }
+    .hero-image.is-tile { aspect-ratio: 4 / 3; object-position: center 42%; }
+    .view-toggles { display: flex; gap: 10px; }
+    .view-toggle { display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 6px 12px 6px 6px; border: 1px solid rgba(255,255,255,.18); color: #fff; background: transparent; cursor: pointer; text-align: left; }
+    .view-toggle img { width: 52px; height: 52px; object-fit: cover; }
+    .view-toggle span { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .view-toggle.is-active { border-color: #c8a86e; background: rgba(200,168,110,.12); }
+    .product-badge { display: inline-flex; align-items: center; padding: 5px 8px; color: #fff; background: #c32126; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .product-badge.popular { background: #171513; }
+    .product-badge.premium { color: #171513; background: #c8a86e; }
+    .brand-line { margin: 10px 0 0; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .showcase .specs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 760px) { main { display: block; } .visual { min-height: 43vh; max-height: none; padding: 6px; } .gallery-grid { gap: 6px; } .content { padding: 44px 7%; } .actions { gap: 8px; } .action { min-height: 46px; padding-inline: 13px; } .hero-image { aspect-ratio: 4 / 3; } }
   </style>
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="index.html">CERAVO</a><a class="back" href="javascript:history.back()">Back</a></header>
+  <header class="topbar"><a class="brand" href="index.html">CERAVO</a><a class="back" id="back-link" href="javascript:history.back()">Back</a></header>
   <main id="detail-page"></main>
+  <script src="assets/js/bedroom-products.js"></script>
   <script>
     const products = {
       'terra-stone': { eyebrow: 'CERAVO tiles', name: 'Terra Stone', description: 'Warm mineral tones with a quiet architectural finish for interiors that feel grounded and enduring.', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80', category: 'Stone tiles', finish: 'Natural', size: '600 x 600 mm', application: 'Floor & wall' },
@@ -55,18 +70,63 @@
       'terra-bedroom': { eyebrow: 'CERAVO bedroom collection', name: 'Terra Stone', description: 'Natural taupe stone character for bedrooms shaped around calm, balance, and tactile depth.', image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=80', category: 'Stone effect', finish: 'Natural', size: '600 x 600 mm', application: 'Bedroom interiors' },
       'oakline-warm': { eyebrow: 'CERAVO bedroom collection', name: 'Oakline Warm', description: 'A warm wood effect that adds softness and an understated rhythm to considered interiors.', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=80', category: 'Wood effect', finish: 'Satin', size: '1200 x 200 mm', application: 'Bedroom interiors' },
       'calm-matte': { eyebrow: 'CERAVO bedroom collection', name: 'Calm Matte', description: 'A softly tactile matte finish for rooms that call for subtle tone and quiet continuity.', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80', category: 'Matt finish', finish: 'Soft touch', size: '600 x 1200 mm', application: 'Bedroom interiors' },
-      'kcl-p-1122': { eyebrow: 'Khadim Ceramics · Diseño Series', name: 'Grey Marble', description: 'A polished grey marble PGVT surface with refined veining for bright, considered bedroom floors.', image: 'assets/images/products/kcl-p-1122.png', category: 'PGVT floor tile', finish: 'Polished', size: '60 x 60 cm', application: 'Bedroom interiors' },
-      'kcl-p-1123': { eyebrow: 'Khadim Ceramics · Diseño Series', name: 'Royal Crema', description: 'Warm cream and gold movement in a polished 60 x 60 cm PGVT tile for luxury bedroom floors.', image: 'assets/images/products/kcl-p-1123.png', category: 'PGVT floor tile', finish: 'Polished', size: '60 x 60 cm', application: 'Bedroom interiors' },
-      'kcl-p-1124': { eyebrow: 'Khadim Ceramics · Diseño Series', name: 'Onyx Pearl', description: 'A luminous white marble-effect PGVT tile with delicate veining for calm, light-filled bedrooms.', image: 'assets/images/products/kcl-p-1124.png', category: 'PGVT floor tile', finish: 'Polished', size: '60 x 60 cm', application: 'Bedroom interiors' },
-      'kcl-p-1125': { eyebrow: 'Khadim Ceramics · Diseño Series', name: 'Statuario White', description: 'A premium Statuario-inspired PGVT tile with soft cream veining for elevated bedroom flooring.', image: 'assets/images/products/kcl-p-1125.png', category: 'PGVT floor tile', finish: 'Polished', size: '60 x 60 cm', application: 'Bedroom interiors' },
       'form-basins': { eyebrow: 'CERAVO bathware', name: 'Form Basins', description: 'Clean silhouettes shaped for considered bathroom spaces and daily rituals with a quieter rhythm.', image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1400&q=80', category: 'Basins', finish: 'Ceramic white', size: 'Multiple formats', application: 'Bathroom interiors' },
       'brushed-faucets': { eyebrow: 'CERAVO bathware', name: 'Brushed Faucets', description: 'Balanced fittings with a tactile brushed finish and a quiet presence at the basin.', image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1400&q=80', category: 'Faucets', finish: 'Brushed metal', size: 'Multiple formats', application: 'Bathroom interiors' },
       'rain-showers': { eyebrow: 'CERAVO bathware', name: 'Rain Showers', description: 'Immersive forms designed around restorative daily rituals and an effortless sense of calm.', image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1400&q=80', category: 'Showers', finish: 'Brushed metal', size: 'Multiple formats', application: 'Bathroom interiors' }
     };
-    const product = products[new URLSearchParams(window.location.search).get('product')];
+    const productId = new URLSearchParams(window.location.search).get('product');
+    const bedroomProduct = (window.CERAVO_BEDROOM_PRODUCTS || []).find((item) => item.id === productId);
+    const product = bedroomProduct || products[productId];
     const page = document.querySelector('#detail-page');
+    const backLink = document.querySelector('#back-link');
     if (!product) {
       page.innerHTML = '<section class="empty"><span class="eyebrow">CERAVO collections</span><h1>Collection not found.</h1><p>Please return to the catalogue and choose a collection to explore.</p><a class="action" href="tiles.html">Back to collections</a></section>';
+    } else if (bedroomProduct) {
+      document.title = `${bedroomProduct.title} | CERAVO`;
+      backLink.href = 'bedroom.html';
+      backLink.textContent = 'Back to bedroom';
+      const badgeClass = bedroomProduct.category === 'popular' ? ' popular' : bedroomProduct.category === 'premium' ? ' premium' : '';
+      const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${bedroomProduct.title} (${bedroomProduct.code}).`);
+      page.classList.add('showcase');
+      page.innerHTML = `<div class="visual" role="region" aria-label="${bedroomProduct.title} bedroom showcase">
+        <img class="hero-image" id="hero-image" src="${bedroomProduct.roomImage}" alt="Luxury bedroom with ${bedroomProduct.title} floor tiles" style="${bedroomProduct.heroPosition ? `object-position:${bedroomProduct.heroPosition}` : ''}" />
+        <div class="view-toggles" role="tablist" aria-label="Image views">
+          <button class="view-toggle is-active" type="button" data-view="room" aria-pressed="true"><img src="${bedroomProduct.roomImage}" alt="" /><span>Room</span></button>
+          <button class="view-toggle" type="button" data-view="tile" aria-pressed="false"><img src="${bedroomProduct.tileImage}" alt="" /><span>Tile</span></button>
+        </div>
+      </div>
+      <section class="content">
+        <span class="product-badge${badgeClass}">${bedroomProduct.badge}</span>
+        <p class="eyebrow" style="margin-top:16px">${bedroomProduct.series}</p>
+        <h1>${bedroomProduct.title.replace('Diseño Series - ', '')}</h1>
+        <p class="brand-line">${bedroomProduct.brand}</p>
+        <p class="description">${bedroomProduct.description}</p>
+        <dl class="specs">
+          <div class="spec"><dt>Size</dt><dd>${bedroomProduct.size}</dd></div>
+          <div class="spec"><dt>Type</dt><dd>${bedroomProduct.type}</dd></div>
+          <div class="spec"><dt>Code</dt><dd>${bedroomProduct.code}</dd></div>
+        </dl>
+        <div class="actions">
+          <a class="action secondary" href="tel:+8801979614216">Call Now</a>
+          <a class="action whatsapp" href="https://wa.me/8801979614216?text=${whatsappMessage}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+      </section>`;
+      const heroImage = document.querySelector('#hero-image');
+      document.querySelectorAll('.view-toggle').forEach((button) => {
+        button.addEventListener('click', () => {
+          const view = button.dataset.view;
+          document.querySelectorAll('.view-toggle').forEach((item) => {
+            item.classList.toggle('is-active', item === button);
+            item.setAttribute('aria-pressed', String(item === button));
+          });
+          heroImage.src = view === 'tile' ? bedroomProduct.tileImage : bedroomProduct.roomImage;
+          heroImage.alt = view === 'tile'
+            ? `${bedroomProduct.title} tile swatch ${bedroomProduct.code}`
+            : `Luxury bedroom with ${bedroomProduct.title} floor tiles`;
+          heroImage.classList.toggle('is-tile', view === 'tile');
+          heroImage.style.objectPosition = view === 'tile' ? '' : (bedroomProduct.heroPosition || '');
+        });
+      });
     } else {
       document.title = `${product.name} | CERAVO`;
       const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${product.name}.`);

@@ -360,6 +360,22 @@
         letter-spacing: -0.02em;
       }
 
+      .collection-film {
+        position: relative;
+        width: 100%;
+        margin: 0 0 28px;
+        overflow: hidden;
+        background: #111;
+      }
+
+      .collection-film-video {
+        display: block;
+        width: 100%;
+        height: min(72vh, 640px);
+        object-fit: cover;
+        object-position: center;
+      }
+
       .collection-tabs {
         display: flex;
         gap: 26px;
@@ -822,6 +838,10 @@
           height: 550px;
         }
 
+        .collection-film-video {
+          height: min(52vh, 420px);
+        }
+
         .showcase-followup {
           padding: 32px 16px;
         }
@@ -983,6 +1003,19 @@
 
         <section class="collection-showcase" aria-label="Explore CERAVO categories">
           <h2 class="collection-showcase-heading">Explore CERAVO Collections</h2>
+          <div class="collection-film">
+            <video
+              class="collection-film-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-label="CERAVO collection film"
+            >
+              <source src="assets/videos/ceravo-collection-4k.mp4" type="video/mp4" />
+            </video>
+          </div>
           <div class="collection-tabs" role="tablist" aria-label="Collection categories">
             <button class="collection-tab is-active" type="button" role="tab" aria-selected="true" data-collection-tab="locations">CATEGORIES</button>
             <a class="collection-tab" href="brands.html">BRANDS</a>
@@ -1185,6 +1218,24 @@
 
       showHeroSlide(0);
       startHeroTimer();
+
+      const collectionFilm = document.querySelector('.collection-film-video');
+      if (collectionFilm) {
+        if (reducedMotion) {
+          collectionFilm.pause();
+        } else if ('IntersectionObserver' in window) {
+          const filmObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                collectionFilm.play().catch(() => {});
+              } else {
+                collectionFilm.pause();
+              }
+            });
+          }, { threshold: 0.25 });
+          filmObserver.observe(collectionFilm);
+        }
+      }
 
       const collectionTabs = [...document.querySelectorAll('[data-collection-tab]')];
       const collectionPanels = [...document.querySelectorAll('[data-collection-panel]')];

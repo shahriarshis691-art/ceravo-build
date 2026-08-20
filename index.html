@@ -213,19 +213,21 @@
         content: "";
         position: absolute;
         inset: 0;
-        z-index: 1;
         background: linear-gradient(180deg, rgba(42, 34, 28, 0.08), rgba(0,0,0,0.12));
       }
 
-      .hero-media {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        pointer-events: none;
+      .hero-slide-one {
+        background-image: url('assets/images/download.jpg');
+      }
+
+      .hero-slide-two {
+        background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=72');
+      }
+
+      @media (min-width: 768px) {
+        .hero-slide-two {
+          background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80');
+        }
       }
 
       .hero-copy {
@@ -236,7 +238,7 @@
         transform: translate3d(-50%, -50%, 0);
         text-align: center;
         color: rgba(255,255,255,0.95);
-        z-index: 2;
+        z-index: 1;
         width: min(92%, 620px);
         letter-spacing: 0;
         text-transform: none;
@@ -1075,7 +1077,7 @@
 
           <div class="brand-group">
             <div class="brand-mark" aria-label="CERAVO logo">
-              <img src="assets/ceravo-original-logo.svg" alt="CERAVO original logo" width="74" height="74" decoding="async" />
+              <img src="assets/ceravo-original-logo.svg" alt="CERAVO original logo" decoding="async" />
             </div>
             <div class="text-center leading-none" style="display:none;">
               <div class="ceravo-wordmark" style="font-size: clamp(20px, 4vw, 42px); line-height: 0.9;">CERAVO</div>
@@ -1118,33 +1120,13 @@
 
       <main>
         <section class="hero" aria-label="Luxury interior banner">
-          <div class="hero-slide is-active" data-slide="0">
-            <img
-              class="hero-media"
-              src="assets/images/download.jpg"
-              alt=""
-              width="1600"
-              height="900"
-              fetchpriority="high"
-              decoding="async"
-            />
+          <div class="hero-slide hero-slide-one is-active" data-slide="0">
             <div class="hero-copy">
               <span>Crafted for Elevated Interiors</span>
               <a class="hero-discover" href="tiles.html">DISCOVER MORE</a>
             </div>
           </div>
-          <div class="hero-slide" data-slide="1">
-            <img
-              class="hero-media"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-              data-src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=72"
-              data-srcset="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=72 900w, https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80 1600w"
-              sizes="100vw"
-              alt=""
-              width="1600"
-              height="900"
-              decoding="async"
-            />
+          <div class="hero-slide hero-slide-two" data-slide="1">
             <div class="hero-copy">
               <span>Surfaces with Presence</span>
               <a class="hero-discover" href="tiles.html">DISCOVER MORE</a>
@@ -1200,11 +1182,11 @@
 
           <div class="collection-panel is-active" data-collection-panel="locations" role="tabpanel">
             <div class="collection-track">
-              <a class="collection-card-home bedroom-tiles" href="bedroom.html"><img src="assets/images/categories/bedroom-luxury-tiles.jpg" alt="Luxury polished floor tiles in modern bright bedroom setting" width="800" height="625" loading="lazy" decoding="async" /><h3>Luxury Tiles: Bedroom Collection</h3></a>
-              <a class="collection-card-home kitchen-tiles" href="tiles.html"><img src="assets/images/categories/kitchen-luxury-tiles.jpg" alt="Modern luxury kitchen featuring elegant wall backsplash tiles and glossy floor tiles" width="800" height="625" loading="lazy" decoding="async" /><h3>Kitchen</h3></a>
-              <a class="collection-card-home living-room-tiles" href="tiles.html"><img src="assets/images/categories/living-room-luxury-tiles.jpg" alt="Spacious contemporary living room with luxury marble floor tiles and textured accent wall tiles" width="800" height="625" loading="lazy" decoding="async" /><h3>Living Room</h3></a>
-              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="CERAVO washroom surfaces" width="800" height="625" loading="lazy" decoding="async" /><h3>Washroom</h3></a>
-              <a class="collection-card-home parking-tiles" href="tiles.html"><img src="assets/images/categories/parking-luxury-tiles.jpg" alt="Modern garage and driveway featuring durable, heavy-duty exterior parking floor tiles" width="800" height="625" loading="lazy" decoding="async" /><h3>Parking</h3></a>
+              <a class="collection-card-home bedroom-tiles" href="bedroom.html"><img src="assets/images/categories/bedroom-luxury-tiles.jpg" alt="Luxury polished floor tiles in modern bright bedroom setting" loading="lazy" decoding="async" /><h3>Luxury Tiles: Bedroom Collection</h3></a>
+              <a class="collection-card-home kitchen-tiles" href="tiles.html"><img src="assets/images/categories/kitchen-luxury-tiles.jpg" alt="Modern luxury kitchen featuring elegant wall backsplash tiles and glossy floor tiles" loading="lazy" decoding="async" /><h3>Kitchen</h3></a>
+              <a class="collection-card-home living-room-tiles" href="tiles.html"><img src="assets/images/categories/living-room-luxury-tiles.jpg" alt="Spacious contemporary living room with luxury marble floor tiles and textured accent wall tiles" loading="lazy" decoding="async" /><h3>Living Room</h3></a>
+              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="CERAVO washroom surfaces" loading="lazy" decoding="async" /><h3>Washroom</h3></a>
+              <a class="collection-card-home parking-tiles" href="tiles.html"><img src="assets/images/categories/parking-luxury-tiles.jpg" alt="Modern garage and driveway featuring durable, heavy-duty exterior parking floor tiles" loading="lazy" decoding="async" /><h3>Parking</h3></a>
             </div>
           </div>
 
@@ -1230,10 +1212,10 @@
             <p>Refined forms and tactile finishes for the details that complete a space.</p>
           </div>
           <div class="collection-track">
-            <a class="collection-card-home" href="basins.html"><img src="assets/images/categories/basins-luxury.jpg" alt="Luxury glossy white ceramic wash basin on a modern vanity" width="800" height="625" loading="lazy" decoding="async" /><h3>Basins</h3></a>
-            <a class="collection-card-home" href="faucets.html"><img src="assets/images/categories/faucets-luxury.jpg" alt="Luxury modern bathroom basin mixer faucet" width="800" height="625" loading="lazy" decoding="async" /><h3>Faucets</h3></a>
-            <a class="collection-card-home" href="showers.html"><img src="assets/images/categories/showers-luxury.jpg" alt="Luxury modern rain shower head with clear water flow" width="800" height="625" loading="lazy" decoding="async" /><h3>Showers</h3></a>
-            <a class="collection-card-home" href="accessories.html"><img src="assets/images/categories/accessories-luxury.jpg" alt="Luxury matte black towel bar and brushed gold bathroom accessories" width="800" height="625" loading="lazy" decoding="async" /><h3>Accessories</h3></a>
+            <a class="collection-card-home" href="basins.html"><img src="assets/images/categories/basins-luxury.jpg" alt="Luxury glossy white ceramic wash basin on a modern vanity" loading="lazy" decoding="async" /><h3>Basins</h3></a>
+            <a class="collection-card-home" href="faucets.html"><img src="assets/images/categories/faucets-luxury.jpg" alt="Luxury modern bathroom basin mixer faucet" loading="lazy" decoding="async" /><h3>Faucets</h3></a>
+            <a class="collection-card-home" href="showers.html"><img src="assets/images/categories/showers-luxury.jpg" alt="Luxury modern rain shower head with clear water flow" loading="lazy" decoding="async" /><h3>Showers</h3></a>
+            <a class="collection-card-home" href="accessories.html"><img src="assets/images/categories/accessories-luxury.jpg" alt="Luxury matte black towel bar and brushed gold bathroom accessories" loading="lazy" decoding="async" /><h3>Accessories</h3></a>
           </div>
         </section>
 
@@ -1244,8 +1226,8 @@
             <p>Choose the right foundation for every considered space, from walls and floors to high-performance parking areas.</p>
           </div>
           <div class="collection-track">
-            <a class="collection-card-home wall-tiles" href="wall-tiles.html"><img src="assets/images/categories/wall-luxury-tiles.jpg" alt="Luxury ceramic and porcelain wall tiles in a refined interior" width="800" height="625" loading="lazy" decoding="async" /><h3>Wall Tiles</h3></a>
-            <a class="collection-card-home floor-tiles" href="floor-tiles.html"><img src="assets/images/categories/floor-luxury-tiles.jpg" alt="Luxury polished marble floor tiles in modern living interior" width="800" height="625" loading="lazy" decoding="async" /><h3>Floor Tiles</h3></a>
+            <a class="collection-card-home wall-tiles" href="wall-tiles.html"><img src="assets/images/categories/wall-luxury-tiles.jpg" alt="Luxury ceramic and porcelain wall tiles in a refined interior" loading="lazy" decoding="async" /><h3>Wall Tiles</h3></a>
+            <a class="collection-card-home floor-tiles" href="floor-tiles.html"><img src="assets/images/categories/floor-luxury-tiles.jpg" alt="Luxury polished marble floor tiles in modern living interior" loading="lazy" decoding="async" /><h3>Floor Tiles</h3></a>
           </div>
         </section>
 
@@ -1254,8 +1236,6 @@
             class="showcase-followup-image"
             src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80"
             alt="Modern CERAVO interior space"
-            width="1600"
-            height="900"
             loading="lazy"
             decoding="async"
           />
@@ -1330,19 +1310,7 @@
 
       const showHeroSlide = (slideIndex) => {
         activeHeroSlide = (slideIndex + heroSlides.length) % heroSlides.length;
-        heroSlides.forEach((slide, index) => {
-          const isActive = index === activeHeroSlide;
-          slide.classList.toggle('is-active', isActive);
-          if (isActive) {
-            const media = slide.querySelector('.hero-media[data-src]');
-            if (media) {
-              media.src = media.dataset.src;
-              if (media.dataset.srcset) media.srcset = media.dataset.srcset;
-              media.removeAttribute('data-src');
-              media.removeAttribute('data-srcset');
-            }
-          }
-        });
+        heroSlides.forEach((slide, index) => slide.classList.toggle('is-active', index === activeHeroSlide));
         heroDots.forEach((dot, index) => {
           dot.classList.toggle('is-active', index === activeHeroSlide);
           dot.setAttribute('aria-current', index === activeHeroSlide ? 'true' : 'false');

@@ -1,0 +1,67 @@
+/* Shared 2-up image presentation for listing and details pages. */
+
+@media (max-width: 639px) {
+  section.product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .product-card,
+  .product-media {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .product-media img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  section.collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .collection-card,
+  .collection-card img {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .collection-card img {
+    width: 100%;
+  }
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  align-content: start;
+}
+
+.gallery-grid img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gallery-grid img.is-contain {
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (min-width: 761px) {
+  .gallery-grid {
+    gap: 8px;
+  }
+}

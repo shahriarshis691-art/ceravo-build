@@ -58,6 +58,8 @@
     .brand-line { margin: 10px 0 0; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
     .hero-image.is-cutout { aspect-ratio: 1; max-height: min(78vh, 720px); object-fit: contain; object-position: center; background: #fff; padding: 28px; }
     .price-line { margin: 18px 0 0; font: 600 clamp(28px, 4vw, 42px)/1 'Cormorant Garamond', serif; }
+    .price-was { display: block; margin: 0 0 8px; font-size: 16px; font-weight: 600; color: rgba(17,17,17,.45); text-decoration: line-through; }
+    .price-line .product-discount { display: inline-block; margin-left: 12px; padding: 5px 8px; color: #fff; background: #c32126; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; vertical-align: middle; }
     .showcase .specs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .gallery-placeholder { aspect-ratio: 1; display: grid; place-items: center; background: #f4f1ec; color: rgba(23,21,19,.48); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
     @media (max-width: 760px) { main { display: block; } .visual { min-height: 43vh; max-height: none; padding: 6px; } .gallery-grid { gap: 6px; } .content { padding: 44px 7%; } .actions { gap: 8px; } .action { min-height: 46px; padding-inline: 13px; } .hero-image { aspect-ratio: 4 / 3; } .hero-image.is-cutout { aspect-ratio: 1; } }
@@ -79,7 +81,7 @@
       if (id.includes('-acc-')) return 'assets/js/accessories-products.js';
       if (id.includes('-fc-') || id.includes('-km-') || id.includes('-wf-') || id.includes('-dt-')) return 'assets/js/faucets-products.js';
       if (id.includes('-sh-') || id.includes('-sp-') || id.includes('-ds-') || id.includes('-cs-')) return 'assets/js/showers-products.js';
-      if (id.includes('-wc-') || id.includes('-ab-') || id.includes('-mb-') || id.includes('-cb-') || id.includes('-pb-') || id.includes('-uc-') || id.includes('-vb-') || id.includes('-ub-') || id.includes('-hp-')) return 'assets/js/basins-products.js?v=rosa-wc-1';
+      if (id.includes('-wc-') || id.includes('-ab-') || id.includes('-mb-') || id.includes('-cb-') || id.includes('-pb-') || id.includes('-uc-') || id.includes('-vb-') || id.includes('-ub-') || id.includes('-hp-')) return 'assets/js/basins-products.js?v=basins-wc-2';
       return null;
     };
 
@@ -183,6 +185,13 @@
             ? `<div class="spec"><dt>Size</dt><dd>${cutoutProduct.size}</dd></div>`
             : '';
       const finishSpec = cutoutProduct.finish ? `<div class="spec"><dt>Finish</dt><dd>${cutoutProduct.finish}</dd></div>` : '';
+      const modelSpec = cutoutProduct.model ? `<div class="spec"><dt>Model</dt><dd>${cutoutProduct.model}</dd></div>` : '';
+      const dealerDiscount = Math.min(40, Math.max(0, Number(cutoutProduct.discountPercent) || 0));
+      const hasDealerPrice = basinProduct && !cutoutProduct.needsManualPrice && cutoutProduct.originalPrice != null;
+      const priceHtml = hasDealerPrice
+        ? `<p class="price-line">${dealerDiscount > 0 ? `<span class="price-was">${cutoutProduct.originalPriceLabel}</span>` : ''}${cutoutProduct.salePriceLabel}${dealerDiscount > 0 ? `<span class="product-discount">${dealerDiscount}% OFF</span>` : ''}</p>`
+        : `<p class="price-line">${cutoutProduct.price}</p>`;
+      const priceSpec = hasDealerPrice ? cutoutProduct.salePriceLabel : cutoutProduct.price;
       page.classList.add('showcase');
       page.innerHTML = `<div class="visual" role="region" aria-label="${cutoutProduct.title} product view">
         <img class="hero-image is-cutout" src="${cutoutProduct.image}" alt="${cutoutProduct.title} ${cutoutProduct.code}" decoding="async" fetchpriority="high" />
@@ -193,14 +202,15 @@
         <h1>${cutoutProduct.title.replace(/^(ROSA|Tanvir|Haibali)\s+/, '')}</h1>
         <p class="brand-line">${cutoutProduct.brand}</p>
         <p class="description">${cutoutProduct.description}</p>
-        <p class="price-line">${cutoutProduct.price}</p>
+        ${priceHtml}
         <dl class="specs">
           <div class="spec"><dt>Material</dt><dd>${cutoutProduct.material}</dd></div>
           <div class="spec"><dt>Type</dt><dd>${cutoutProduct.type}</dd></div>
+          ${modelSpec}
           <div class="spec"><dt>Code</dt><dd>${cutoutProduct.code}</dd></div>
           ${extraSpec}
           ${finishSpec}
-          <div class="spec"><dt>Price</dt><dd>${cutoutProduct.price}</dd></div>
+          <div class="spec"><dt>Price</dt><dd>${priceSpec}</dd></div>
         </dl>
         <div class="actions">
           <a class="action secondary" href="tel:+8801979614216">Call Now</a>

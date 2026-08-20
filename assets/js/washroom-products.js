@@ -2,16 +2,10 @@
   const unspecified = 'Not specified';
   const BRAND_NAMES = {
     mir: 'MIR Ceramic',
-    khadim: 'Khadim Ceramic',
-    dbl: 'DBL Ceramics',
-    fresh: 'Fresh Ceramics'
+    khadim: 'Khadim Ceramic'
   };
 
-  const mirTile = (code) => `https://mirceramic.com/public/upload/multi_${String(code).toLowerCase()}.jpg`;
-  const khadimImg = (path) => `https://i0.wp.com/khadimceramic.com/wp-content/uploads/${path}?w=900&ssl=1`;
-  const isManufacturerImage = (src) => typeof src === 'string' && /^https?:\/\//i.test(src) && !src.startsWith('data:');
   const tileTypeSlugFor = (tileType) => {
-    if (!tileType || tileType === unspecified) return 'not-specified';
     if (tileType === 'Wall') return 'wall';
     if (tileType === 'Floor') return 'floor';
     if (tileType === 'Wall & Floor') return 'wall-floor';
@@ -31,7 +25,7 @@
     const effect = item.effect || unspecified;
     const suitableSpace = item.suitableSpace || unspecified;
     const availability = item.availability || unspecified;
-    const images = (item.images || []).filter(isManufacturerImage);
+    const images = [];
     const sizeSearch = String(size).toLowerCase().replace(/×/g, 'x').replace(/\s+/g, ' ');
     return {
       id: item.id,
@@ -56,671 +50,124 @@
       sourceUrl: item.sourceUrl || '',
       sourceLabel: item.sourceLabel || unspecified,
       images,
-      image: images[0] || '',
-      hasManufacturerImage: images.length > 0,
+      image: '',
+      hasManufacturerImage: false,
       searchText: [brand, productName, sku, collection, size, sizeSearch, sizeSearch.replace(/\s+/g, '')].join(' ').toLowerCase()
     };
   };
 
-  window.CERAVO_WASHROOM_PRODUCTS = [
-    product({
-      id: 'mir-wh-36215',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'WH-36215',
-      code: 'WH-36215',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: 'Glossy',
-      color: 'Ivory',
-      effect: 'Pattern',
-      shortDescription: 'Ivory pattern glossy white-body wall tile in 30 × 60 cm, published by MIR Ceramic.',
-      description: 'WH-36215 is a 30 × 60 cm rectangular white-body wall tile. MIR Ceramic lists the look as Pattern, the surface as Glossy, and the colour as Ivory. Packing on the manufacturer page is 8 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/908',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('wh-36215')]
-    }),
-    product({
-      id: 'mir-wh-36205',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'WH-36205',
-      code: 'WH-36205',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: 'Glossy',
-      color: 'Brown',
-      effect: 'Stone',
-      shortDescription: 'Brown stone-look glossy white-body wall tile in 30 × 60 cm, published by MIR Ceramic.',
-      description: 'WH-36205 is a 30 × 60 cm rectangular white-body wall tile. MIR Ceramic lists the look as Stone, the surface as Glossy, and the colour as Brown. Packing on the manufacturer page is 8 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/773',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('wh-36205')]
-    }),
-    product({
-      id: 'mir-wh-36212',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'WH-36212',
-      code: 'WH-36212',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Punch Glossy',
-      surface: 'Punch Glossy',
-      color: 'Blue',
-      effect: 'Marble',
-      shortDescription: 'Blue marble-look punch glossy white-body wall tile in 30 × 60 cm, published by MIR Ceramic.',
-      description: 'WH-36212 is a 30 × 60 cm rectangular white-body wall tile. MIR Ceramic lists the look as Marble, the colour as Blue, and the surface as Punch Glossy on the product page. Packing is 8 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/577',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('wh-36212')]
-    }),
-    product({
-      id: 'mir-wh-36218',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'WH-36218',
-      code: 'WH-36218',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: 'Glossy',
-      color: 'Pink',
-      effect: 'Pattern',
-      shortDescription: 'Pink pattern glossy white-body wall tile in 30 × 60 cm, published by MIR Ceramic.',
-      description: 'WH-36218 is a 30 × 60 cm rectangular white-body wall tile. MIR Ceramic lists the look as Pattern, the surface as Glossy, and the colour as Pink. Packing on the manufacturer page is 8 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/794',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('wh-36218')]
-    }),
-    product({
-      id: 'mir-wh-36219',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'WH-36219',
-      code: 'WH-36219',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: 'Glossy',
-      color: 'Beige',
-      effect: 'Pattern',
-      shortDescription: 'Beige pattern glossy white-body wall tile in 30 × 60 cm, published by MIR Ceramic.',
-      description: 'WH-36219 is a 30 × 60 cm rectangular white-body wall tile. MIR Ceramic lists the look as Pattern, the surface as Glossy, and the colour as Beige. Packing on the manufacturer page is 8 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/1117',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('wh-36219')]
-    }),
-    product({
-      id: 'mir-wh-36206',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'WH-36206',
-      code: 'WH-36206',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: 'Glossy',
-      color: 'Brown',
-      effect: 'Wooden',
-      shortDescription: 'Brown wooden-look glossy white-body wall tile in 30 × 60 cm, published by MIR Ceramic.',
-      description: 'WH-36206 is a 30 × 60 cm rectangular white-body wall tile. MIR Ceramic lists the look as Wooden, the surface as Glossy, and the colour as Brown. Packing on the manufacturer page is 8 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/775',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('wh-36206')]
-    }),
-    product({
-      id: 'mir-wdg-3632',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'WDG-3632',
-      code: 'WDG-3632',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: 'Glossy',
-      color: 'Blue',
-      effect: 'Marble',
-      shortDescription: 'Blue marble-look glossy red-body wall tile in 30 × 60 cm, published by MIR Ceramic.',
-      description: 'WDG-3632 is a 30 × 60 cm rectangular red-body wall tile. MIR Ceramic lists the look as Marble, the surface as Glossy, and the colour as Blue. Packing on the manufacturer page is 8 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/766',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('wdg-3632')]
-    }),
-    product({
-      id: 'mir-rcm-6607',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'RCM-6607',
-      code: 'RCM-6607',
-      tileType: 'Floor',
-      tileTypeSlug: 'floor',
-      size: '60 × 60 cm',
-      sizeSlug: '60x60',
-      finish: 'Curving Matt',
-      surface: 'Curving Matt',
-      color: 'Grey',
-      effect: 'Pattern',
-      shortDescription: 'Grey pattern curving-matt porcelain floor tile in 60 × 60 cm, published by MIR Ceramic.',
-      description: 'RCM-6607 is a 60 × 60 cm square porcelain floor tile. MIR Ceramic lists the look as Pattern, the surface as Curving Matt, and the colour as Grey. Packing on the manufacturer page is 4 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/1017',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('rcm-6607')]
-    }),
-    product({
-      id: 'mir-gmp-6634',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'GMP-6634',
-      code: 'GMP-6634',
-      tileType: 'Floor',
-      tileTypeSlug: 'floor',
-      size: '60 × 60 cm',
-      sizeSlug: '60x60',
-      finish: 'Glazed Mirror Polish',
-      surface: 'Glazed Mirror Polish',
-      color: 'Ivory',
-      effect: 'Geometric',
-      shortDescription: 'Ivory geometric glazed mirror-polish porcelain floor tile in 60 × 60 cm, published by MIR Ceramic.',
-      description: 'GMP-6634 is a 60 × 60 cm square porcelain floor tile. MIR Ceramic lists the look as Geometric, the surface as Glazed Mirror Polish, and the colour as Ivory. Packing on the manufacturer page is 4 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/998',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('gmp-6634')]
-    }),
-    product({
-      id: 'mir-g-6600',
-      brandSlug: 'mir',
-      brand: 'MIR Ceramic',
-      title: 'G-6600',
-      code: 'G-6600',
-      tileType: 'Floor',
-      tileTypeSlug: 'floor',
-      size: '60 × 60 cm',
-      sizeSlug: '60x60',
-      finish: 'Dosing',
-      surface: 'Dosing',
-      color: 'Cream',
-      effect: 'Stone',
-      shortDescription: 'Cream stone-look dosing homogeneous floor tile in 60 × 60 cm, published by MIR Ceramic.',
-      description: 'G-6600 is a 60 × 60 cm square homogeneous floor tile. MIR Ceramic lists the look as Stone, the surface as Dosing, and the colour as Cream. Packing on the manufacturer page is 4 pieces per box (1.44 sqm / box).',
-      sourceUrl: 'https://mirceramic.com/details/1019',
-      sourceLabel: 'MIR Ceramic product page',
-      images: [mirTile('g-6600')]
-    }),
+  const seenKeys = new Set();
+  const catalog = [];
+  const addProduct = (item) => {
+    const sku = String(item.sku || item.code || '').trim().toUpperCase();
+    const key = `${item.brandSlug}:${sku}`;
+    if (!sku || seenKeys.has(key)) return;
+    seenKeys.add(key);
+    catalog.push(product(item));
+  };
 
-    product({
-      id: 'kcl-s-4001',
-      brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'KCL-S-4001',
-      code: 'KCL-S-4001',
-      collection: 'Odyssey',
-      tileType: 'Wall & Floor',
-      tileTypeSlug: 'wall-floor',
+  const mirWall = ({ sku, detailsId, look, surface, colour, body }) => {
+    addProduct({
+      id: `mir-${sku.toLowerCase()}`,
+      brandSlug: 'mir',
+      productName: sku,
+      sku,
+      tileType: 'Wall',
       size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Matt',
-      surface: unspecified,
-      shortDescription: 'Odyssey series 30 × 60 cm matt tile for wall and floor, published by Khadim Ceramic.',
-      description: 'KCL-S-4001 is listed by Khadim Ceramic Limited in the Odyssey collection. The manufacturer states size 30 cm × 60 cm, finish type Matt, and “To Be Used In: Wall & Floor”. Colour, surface, and effect are not specified on the product page.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-s-4001/',
-      sourceLabel: 'Khadim Ceramic product page',
-      images: [khadimImg('2023/04/KCL_S_4001-scaled-1.jpg')]
-    }),
-    product({
-      id: 'kcl-s-4002',
+      finish: unspecified,
+      surface,
+      color: colour,
+      effect: look,
+      description: `${sku} is a 30 × 60 cm rectangular ${body} wall tile listed by MIR Ceramic. Look: ${look}. Surface: ${surface}. Colour: ${colour}. Packing listed on the manufacturer page: 8 pieces per box (1.44 sqm / box). The technical specification table is labelled Wall Tiles.`,
+      sourceUrl: `https://mirceramic.com/details/${detailsId}`,
+      sourceLabel: 'MIR Ceramic product page'
+    });
+  };
+
+  const mirFloor = ({ sku, detailsId, look, surface, colour, body, specLabel }) => {
+    addProduct({
+      id: `mir-${sku.toLowerCase()}`,
+      brandSlug: 'mir',
+      productName: sku,
+      sku,
+      tileType: 'Floor',
+      size: '60 × 60 cm',
+      finish: unspecified,
+      surface,
+      color: colour,
+      effect: look,
+      description: `${sku} is a 60 × 60 cm square ${body} floor tile listed by MIR Ceramic. Look: ${look}. Surface: ${surface}. Colour: ${colour}. Packing listed on the manufacturer page: 4 pieces per box (1.44 sqm / box). The technical specification table is labelled ${specLabel}.`,
+      sourceUrl: `https://mirceramic.com/details/${detailsId}`,
+      sourceLabel: 'MIR Ceramic product page'
+    });
+  };
+
+  const khadimProduct = ({ id, sku, collection, tileType, finish, sourcePath }) => {
+    const collectionText = collection
+      ? ` in the ${collection} collection`
+      : '. Collection is not specified on the product page';
+    addProduct({
+      id,
       brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'KCL-S-4002',
-      code: 'KCL-S-4002',
-      collection: 'Odyssey',
-      tileType: 'Wall & Floor',
-      tileTypeSlug: 'wall-floor',
+      productName: sku,
+      sku,
+      collection: collection || unspecified,
+      tileType,
       size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Matt',
+      finish,
       surface: unspecified,
-      shortDescription: 'Odyssey series 30 × 60 cm matt tile for wall and floor, published by Khadim Ceramic.',
-      description: 'KCL-S-4002 is listed by Khadim Ceramic Limited in the Odyssey collection. The manufacturer states size 30 cm × 60 cm, finish type Matt, and “To Be Used In: Wall & Floor”. Colour, surface, and effect are not specified on the product page.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-s-4002/',
-      sourceLabel: 'Khadim Ceramic product page',
-      images: [khadimImg('2024/03/KCL_S_4002-scaled-1.jpg')]
-    }),
-    product({
-      id: 'kcl-s-4003',
-      brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'KCL-S-4003',
-      code: 'KCL-S-4003',
-      collection: 'Odyssey',
-      tileType: 'Wall & Floor',
-      tileTypeSlug: 'wall-floor',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Matt',
-      surface: unspecified,
-      shortDescription: 'Odyssey series 30 × 60 cm matt tile for wall and floor, published by Khadim Ceramic.',
-      description: 'KCL-S-4003 is listed by Khadim Ceramic Limited in the Odyssey collection. The manufacturer states size 30 cm × 60 cm, finish type Matt, and “To Be Used In: Wall & Floor”. Colour, surface, and effect are not specified on the product page.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-s-4003/',
-      sourceLabel: 'Khadim Ceramic product page',
-      images: [khadimImg('2024/03/KCL_S_4003-scaled-1.jpg')]
-    }),
-    product({
-      id: 'kcl-s-4004',
-      brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'KCL-S-4004',
-      code: 'KCL-S-4004',
-      collection: 'Odyssey',
-      tileType: 'Wall & Floor',
-      tileTypeSlug: 'wall-floor',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Matt',
-      surface: unspecified,
-      shortDescription: 'Odyssey series 30 × 60 cm matt tile for wall and floor, published by Khadim Ceramic.',
-      description: 'KCL-S-4004 is listed by Khadim Ceramic Limited in the Odyssey collection. The manufacturer states size 30 cm × 60 cm, finish type Matt, and “To Be Used In: Wall & Floor”. Colour, surface, and effect are not specified on the product page.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-s-4004/',
-      sourceLabel: 'Khadim Ceramic product page',
-      images: ['https://i0.wp.com/khadimceramics.com/wp-content/uploads/2024/03/KCL_S_4004-scaled-1.jpg?w=900&ssl=1']
-    }),
-    product({
-      id: 'kcl-m-482-g',
-      brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'KCL-M-482 G',
-      code: 'KCL-M-482 G',
-      collection: 'Diseno',
-      tileType: 'Wall & Floor',
-      tileTypeSlug: 'wall-floor',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Matt',
-      surface: unspecified,
-      shortDescription: 'Diseno series 30 × 60 cm matt tile for wall and floor, published by Khadim Ceramic.',
-      description: 'KCL-M-482 G is listed by Khadim Ceramic Limited in the Diseno collection. The manufacturer states size 30 cm × 60 cm, finish type Matt, and “To Be Used In: Wall & Floor”. Colour and effect are not specified on the product page.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-m-482-g/',
-      sourceLabel: 'Khadim Ceramic product page',
-      images: [
-        'https://i0.wp.com/khadimceramics.com/wp-content/uploads/2024/03/KCL_M_482G-scaled-1.webp?w=900&ssl=1',
-        'https://i0.wp.com/khadimceramics.com/wp-content/uploads/2024/03/KCL_M_482G_HL1-scaled-1.webp?w=900&ssl=1'
-      ]
-    }),
-    product({
-      id: 'kcl-m-484',
-      brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'KCL-M-484',
-      code: 'KCL-M-484',
-      tileType: 'Wall & Floor',
-      tileTypeSlug: 'wall-floor',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Matt',
-      surface: unspecified,
-      shortDescription: '30 × 60 cm matt tile for wall and floor, published by Khadim Ceramic.',
-      description: 'KCL-M-484 is listed by Khadim Ceramic Limited with size 30 cm × 60 cm, finish type Matt, and “To Be Used In: Wall & Floor”. Collection, colour, surface, and effect are not specified on the product page.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-m-484/',
+      description: `${sku} is listed by Khadim Ceramic Limited${collectionText}. The manufacturer states size 30 cm × 60 cm, finish type ${finish}, and “To Be Used In: ${tileType}”. Colour, surface, and effect are not specified on the product page.`,
+      sourceUrl: `https://khadimceramics.com/product/${sourcePath}/`,
       sourceLabel: 'Khadim Ceramic product page'
-    }),
-    product({
-      id: 'kcl-g-455-cr',
-      brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'KCL-G-455 CR',
-      code: 'KCL-G-455 CR',
-      collection: 'Diseno',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: unspecified,
-      shortDescription: 'Diseno series 30 × 60 cm glossy wall tile, published by Khadim Ceramic.',
-      description: 'KCL-G-455 CR is listed by Khadim Ceramic Limited in the Diseno collection. The manufacturer states size 30 cm × 60 cm, finish type Glossy, and “To Be Used In: Wall”. Colour, surface, and effect are not specified on the product page.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-g-455-cr/',
-      sourceLabel: 'Khadim Ceramic product page',
-      images: ['https://i0.wp.com/khadimceramics.com/wp-content/uploads/2024/03/KCL-G-455CR-HL1-scaled.jpg?w=900&ssl=1']
-    }),
-    product({
-      id: 'kcl-g-456-g',
-      brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'KCL-G-456 G',
-      code: 'KCL-G-456 G',
-      collection: 'Diseno',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: unspecified,
-      shortDescription: 'Diseno series 30 × 60 cm glossy wall tile, published by Khadim Ceramic.',
-      description: 'KCL-G-456 G is listed by Khadim Ceramic Limited in the Diseno collection. The manufacturer states size 30 cm × 60 cm, finish type Glossy, and “To Be Used In: Wall”. Colour, surface, and effect are not specified on the product page.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-g-456-g/',
-      sourceLabel: 'Khadim Ceramic product page',
-      images: [
-        khadimImg('2024/03/KCL-G-456G-scaled-1.jpg'),
-        khadimImg('2024/03/KCL-G-456G_HL-scaled-1.jpg')
-      ]
-    }),
-    product({
-      id: 'kcl-g-457-g',
-      brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'KCL-G-457 G',
-      code: 'KCL-G-457 G',
-      collection: 'Diseno',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: unspecified,
-      shortDescription: 'Diseno series 30 × 60 cm glossy wall tile, published by Khadim Ceramic.',
-      description: 'KCL-G-457 G is listed by Khadim Ceramic Limited in the Diseno collection. The manufacturer states size 30 cm × 60 cm, finish type Glossy, and “To Be Used In: Wall”. Colour, surface, and effect are not specified on the product page.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-g-457-g/',
-      sourceLabel: 'Khadim Ceramic product page',
-      images: [
-        khadimImg('2024/03/KCL_G_457G-scaled-1.jpg'),
-        khadimImg('2024/03/KCL_G_457G_HL1-scaled-1.jpg')
-      ]
-    }),
-    product({
-      id: 'kcl-m-4030',
-      brandSlug: 'khadim',
-      brand: 'Khadim Ceramic',
-      title: 'CALACATTA (KCL-M-4030)',
-      code: 'KCL-M-4030',
-      collection: 'Eternal',
-      tileType: unspecified,
-      tileTypeSlug: 'not-specified',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Matt',
-      surface: unspecified,
-      shortDescription: 'Eternal collection Calacatta 30 × 60 cm matt tile. Wall or floor use is not specified on the manufacturer page.',
-      description: 'CALACATTA (KCL-M-4030) is listed by Khadim Ceramic Limited in the Eternal collection. The manufacturer states size 30 cm × 60 cm and finish type Matt. “To Be Used In” is not published on the product page, so wall/floor type is marked as not specified.',
-      sourceUrl: 'https://khadimceramics.com/product/kcl-m-4030/',
-      sourceLabel: 'Khadim Ceramic product page'
-    }),
+    });
+  };
 
-    product({
-      id: 'dbl-gw3060-003gnl',
-      brandSlug: 'dbl',
-      brand: 'DBL Ceramics',
-      title: 'GW3060-003GNL',
-      code: 'GW3060-003GNL',
-      collection: 'Glossy Wall',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: unspecified,
-      color: unspecified,
-      effect: 'Marble',
-      suitableSpace: 'Bathroom',
-      shortDescription: 'Marble-effect glossy wall tile in 30 × 60 cm, published by DBL Ceramics for bathroom.',
-      description: 'GW3060-003GNL is published by DBL Ceramics as a 30 cm × 60 cm glossy wall tile with a marble effect. The official product title is “Pure White Marble Effect Glossy Wall Tiles for Bathroom”. The colour field on the product page is not specified.',
-      sourceUrl: 'https://dblceramics.com/en/products/gw3060-003gl',
-      sourceLabel: 'DBL Ceramics product page',
-      images: ['https://api.dblceramics.com/storage/4400/GW3060-003.jpg']
-    }),
-    product({
-      id: 'dbl-gw3060-002grd',
-      brandSlug: 'dbl',
-      brand: 'DBL Ceramics',
-      title: 'GW3060-002GRD',
-      code: 'GW3060-002GRD',
-      collection: 'Glossy Wall',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: unspecified,
-      color: unspecified,
-      effect: 'Geometric',
-      suitableSpace: 'Bathroom',
-      shortDescription: 'Geometric-effect glossy wall tile in 30 × 60 cm, published by DBL Ceramics for bathroom.',
-      description: 'GW3060-002GRD is published by DBL Ceramics as a 30 cm × 60 cm glossy wall tile with a geometric effect. The official product title is “Grey Coloured Geometric Effect Glossy Wall Tiles for Bathroom”. The colour field on the product page is not specified.',
-      sourceUrl: 'https://dblceramics.com/en/products/gw3060-002grd',
-      sourceLabel: 'DBL Ceramics product page',
-      images: ['https://api.dblceramics.com/storage/4391/GW3060-002.jpeg']
-    }),
-    product({
-      id: 'dbl-gw3060-006grd',
-      brandSlug: 'dbl',
-      brand: 'DBL Ceramics',
-      title: 'GW3060-006GRD',
-      code: 'GW3060-006GRD',
-      collection: 'Glossy Wall',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: unspecified,
-      color: unspecified,
-      effect: 'Cement',
-      suitableSpace: 'Bathroom',
-      shortDescription: 'Cement-effect glossy wall tile in 30 × 60 cm, published by DBL Ceramics for bathroom.',
-      description: 'GW3060-006GRD is published by DBL Ceramics as a 30 cm × 60 cm glossy wall tile with a cement effect. The official product title is “Muted Bluish Stone Effect Glossy Wall Tiles for Bathroom”. The colour field on the product page is not specified.',
-      sourceUrl: 'https://dblceramics.com/en/products/gw3060-006grd',
-      sourceLabel: 'DBL Ceramics product page',
-      images: ['https://api.dblceramics.com/storage/4493/GW3060-006GRD.jpg']
-    }),
-    product({
-      id: 'dbl-gw3060-004brd',
-      brandSlug: 'dbl',
-      brand: 'DBL Ceramics',
-      title: 'GW3060-004BRD',
-      code: 'GW3060-004BRD',
-      collection: 'Glossy Wall',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: unspecified,
-      color: unspecified,
-      effect: 'Wood',
-      suitableSpace: 'Bathroom',
-      shortDescription: 'Wood-effect glossy wall tile in 30 × 60 cm, published by DBL Ceramics for bathroom.',
-      description: 'GW3060-004BRD is published by DBL Ceramics as a 30 cm × 60 cm glossy wall tile with a wood effect. The official product title is “Subtle Yellowish Wood Effect Glossy Wall Tiles For Bathroom”. The colour field on the product page is not specified.',
-      sourceUrl: 'https://dblceramics.com/en/products/gw3060-004brd',
-      sourceLabel: 'DBL Ceramics product page'
-    }),
-    product({
-      id: 'dbl-gw3060-003gnd',
-      brandSlug: 'dbl',
-      brand: 'DBL Ceramics',
-      title: 'GW3060-003GND',
-      code: 'GW3060-003GND',
-      collection: 'Glossy Wall',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: unspecified,
-      color: unspecified,
-      effect: 'Marble',
-      suitableSpace: 'Bathroom',
-      shortDescription: 'Marble-effect glossy wall tile in 30 × 60 cm, published by DBL Ceramics for bathroom.',
-      description: 'GW3060-003GND is published by DBL Ceramics as a 30 cm × 60 cm glossy wall tile with a marble effect. The official product title is “Wavy Printed Marble Effect Glossy Wall Tiles for Bathroom”. The colour field on the product page is not specified.',
-      sourceUrl: 'https://dblceramics.com/en/products/gw3060-003gnd',
-      sourceLabel: 'DBL Ceramics product page'
-    }),
-    product({
-      id: 'dbl-gw3060-003b',
-      brandSlug: 'dbl',
-      brand: 'DBL Ceramics',
-      title: 'GW3060-003B',
-      code: 'GW3060-003B',
-      collection: 'Glossy Wall',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: 'Glossy',
-      surface: unspecified,
-      color: unspecified,
-      effect: 'Marble',
-      suitableSpace: 'Bathroom',
-      shortDescription: 'Marble-effect glossy wall tile in 30 × 60 cm, published by DBL Ceramics for bathroom.',
-      description: 'GW3060-003B is published by DBL Ceramics as a 30 cm × 60 cm glossy wall tile with a marble effect. The official product title is “Marble Effect Green Coloured Glossy Wall Tiles for Bathroom”. The colour field on the product page is not specified.',
-      sourceUrl: 'https://dblceramics.com/en/products/gw3060-003b',
-      sourceLabel: 'DBL Ceramics product page'
-    }),
-    product({
-      id: 'dbl-sg6060-006gr',
-      brandSlug: 'dbl',
-      brand: 'DBL Ceramics',
-      title: 'SG6060-006GR',
-      code: 'SG6060-006GR',
-      collection: 'Sugar Effect',
-      tileType: 'Floor',
-      tileTypeSlug: 'floor',
-      size: '60 × 60 cm',
-      sizeSlug: '60x60',
-      finish: unspecified,
-      surface: 'Sugar',
-      color: unspecified,
-      effect: 'Marble',
-      suitableSpace: 'Bathroom',
-      shortDescription: 'Sugar-effect 60 × 60 cm floor tile described by DBL Ceramics as suitable for bathrooms and wet regions.',
-      description: 'SG6060-006GR is published by DBL Ceramics as a 60 cm × 60 cm sugar-effect tile with a marble effect. The manufacturer states that sugar-effect tiles provide an anti-slip mechanism and are suitable for slippery regions such as bathrooms or wet regions. Finish colour is not specified on the product page.',
-      sourceUrl: 'https://dblceramics.com/en/products/SG6060-006GR',
-      sourceLabel: 'DBL Ceramics product page'
-    }),
+  /* MIR Ceramic wall tiles — manufacturer spec column: Wall Tiles */
+  mirWall({ sku: 'WH-36215', detailsId: '908', look: 'Pattern', surface: 'Glossy', colour: 'Ivory', body: 'White Body' });
+  mirWall({ sku: 'WH-36205', detailsId: '773', look: 'Stone', surface: 'Glossy', colour: 'Brown', body: 'White Body' });
+  mirWall({ sku: 'WH-36212', detailsId: '787', look: 'Marble', surface: 'Punch', colour: 'Blue', body: 'White Body' });
+  mirWall({ sku: 'WH-36218', detailsId: '794', look: 'Pattern', surface: 'Glossy', colour: 'Pink', body: 'White Body' });
+  mirWall({ sku: 'WH-36219', detailsId: '1117', look: 'Pattern', surface: 'Glossy', colour: 'Beige', body: 'White Body' });
+  mirWall({ sku: 'WH-36206', detailsId: '775', look: 'Wooden', surface: 'Glossy', colour: 'Brown', body: 'White Body' });
+  mirWall({ sku: 'WH-36200', detailsId: '771', look: 'Pattern', surface: 'Punch', colour: 'White', body: 'White Body' });
+  mirWall({ sku: 'WH-36213', detailsId: '789', look: 'Pattern', surface: 'Punch', colour: 'White', body: 'White Body' });
+  mirWall({ sku: 'WDG-3632', detailsId: '766', look: 'Marble', surface: 'Glossy', colour: 'Blue', body: 'Red Body' });
+  mirWall({ sku: 'WDG-3618', detailsId: '868', look: 'Marble', surface: 'Glossy', colour: 'Ivory', body: 'Red Body' });
 
-    product({
-      id: 'fresh-mattestic',
-      brandSlug: 'fresh',
-      brand: 'Fresh Ceramics',
-      title: 'Mattestic Series',
-      code: unspecified,
-      collection: 'Mattestic',
-      tileType: 'Wall & Floor',
-      tileTypeSlug: 'wall-floor',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: unspecified,
-      surface: unspecified,
-      shortDescription: 'Mattestic Series 30 × 60 cm tiles for walls and floors, as published by Fresh Ceramics.',
-      description: 'The Mattestic Series is published by Fresh Ceramics as 30 × 60 cm tiles with application for walls and floors. Individual model/SKU numbers, finish, colour, and surface are not specified in the available official source. Meghna Group states that the Fresh Ceramics range covers wall and floor areas including bathroom.',
-      sourceUrl: 'https://www.tbsnews.net/supplement/fresh-ceramics-sets-new-standards-design-and-export-excellence-1195766',
-      sourceLabel: 'Fresh Ceramics (manufacturer statement)'
-    }),
-    product({
-      id: 'fresh-dewdrop',
-      brandSlug: 'fresh',
-      brand: 'Fresh Ceramics',
-      title: 'DewDrop Series',
-      code: unspecified,
-      collection: 'DewDrop',
-      tileType: unspecified,
-      tileTypeSlug: 'not-specified',
-      size: '30 × 60 cm',
-      sizeSlug: '30x60',
-      finish: unspecified,
-      surface: unspecified,
-      shortDescription: 'DewDrop Series 30 × 60 cm tiles, as published by Fresh Ceramics.',
-      description: 'The DewDrop Series is published by Fresh Ceramics as 30 × 60 cm tiles. Wall or floor type, SKU, finish, colour, and surface are not specified in the available official source. Meghna Group states that the Fresh Ceramics range covers wall and floor areas including bathroom.',
-      sourceUrl: 'https://www.tbsnews.net/supplement/fresh-ceramics-sets-new-standards-design-and-export-excellence-1195766',
-      sourceLabel: 'Fresh Ceramics (manufacturer statement)'
-    }),
-    product({
-      id: 'fresh-candy',
-      brandSlug: 'fresh',
-      brand: 'Fresh Ceramics',
-      title: 'Candy Series',
-      code: unspecified,
-      collection: 'Candy',
-      tileType: unspecified,
-      tileTypeSlug: 'not-specified',
-      size: '30 × 50 cm',
-      sizeSlug: '30x50',
-      finish: unspecified,
-      surface: unspecified,
-      shortDescription: 'Candy Series 30 × 50 cm tiles, as published by Fresh Ceramics.',
-      description: 'The Candy Series is published by Fresh Ceramics as 30 × 50 cm tiles. Wall or floor type, SKU, finish, colour, and surface are not specified in the available official source.',
-      sourceUrl: 'https://www.tbsnews.net/supplement/fresh-ceramics-sets-new-standards-design-and-export-excellence-1195766',
-      sourceLabel: 'Fresh Ceramics (manufacturer statement)'
-    }),
-    product({
-      id: 'fresh-wooden-matt-carving',
-      brandSlug: 'fresh',
-      brand: 'Fresh Ceramics',
-      title: 'Wooden Matt Carving Planks',
-      code: unspecified,
-      collection: 'Wooden Matt Carving Planks',
-      tileType: unspecified,
-      tileTypeSlug: 'not-specified',
-      size: '20 × 120 cm',
-      sizeSlug: '20x120',
-      finish: 'Matt',
-      surface: unspecified,
-      effect: 'Wooden',
-      shortDescription: 'Wooden Matt Carving Planks in 20 × 120 cm, as published by Fresh Ceramics.',
-      description: 'Wooden Matt Carving Planks are published by Fresh Ceramics in 20 × 120 cm. Wall or floor type and SKU are not specified in the available official source. The published name states a matt carving finish with a wooden character.',
-      sourceUrl: 'https://www.tbsnews.net/supplement/fresh-ceramics-sets-new-standards-design-and-export-excellence-1195766',
-      sourceLabel: 'Fresh Ceramics (manufacturer statement)'
-    }),
-    product({
-      id: 'fresh-fair-face',
-      brandSlug: 'fresh',
-      brand: 'Fresh Ceramics',
-      title: 'Fair Face-finished Rustic Matt Tiles',
-      code: unspecified,
-      collection: 'Fair Face',
-      tileType: unspecified,
-      tileTypeSlug: 'not-specified',
-      size: '60 × 60 cm',
-      sizeSlug: '60x60',
-      finish: 'Matt',
-      surface: unspecified,
-      effect: unspecified,
-      shortDescription: 'Fair Face-finished rustic matt tiles in 60 × 60 cm, as published by Fresh Ceramics.',
-      description: 'Fair Face-finished rustic matt tiles are published by Fresh Ceramics in 60 × 60 cm. Wall or floor type and SKU are not specified in the available official source.',
-      sourceUrl: 'https://www.tbsnews.net/supplement/fresh-ceramics-sets-new-standards-design-and-export-excellence-1195766',
-      sourceLabel: 'Fresh Ceramics (manufacturer statement)'
-    }),
-    product({
-      id: 'fresh-wp-6031',
-      brandSlug: 'fresh',
-      brand: 'Fresh Ceramics',
-      title: 'WP 6031 Glossy Punch',
-      code: 'WP 6031',
-      collection: 'Glossy Punch',
-      tileType: 'Wall',
-      tileTypeSlug: 'wall',
-      size: unspecified,
-      sizeSlug: 'not-specified',
-      finish: 'Glossy',
-      surface: 'Punch',
-      shortDescription: 'WP 6031 Glossy Punch wall tiles, published by Fresh Ceramics / Meghna Ceramic.',
-      description: 'WP 6031 is published by Meghna Ceramic Industries Limited as Fresh Ceramics Glossy Punch series wall tiles with a glossy finish. Size is not specified in the available official post.',
-      sourceUrl: 'https://www.linkedin.com/posts/meghna-ceramic_glossypunch-glossywalltiles-walltiles-activity-7486359803829723136-0H9V',
-      sourceLabel: 'Meghna Ceramic / Fresh Ceramics'
-    })
-  ];
+  /* MIR Ceramic floor tiles — manufacturer spec labelled porcelain / homogeneous / mirror polish floor */
+  mirFloor({ sku: 'RCM-6607', detailsId: '1017', look: 'Pattern', surface: 'Curving Matt', colour: 'Grey', body: 'Porcelain', specLabel: 'Typical Value of Mir Porcelain Floor' });
+  mirFloor({ sku: 'GMP-6634', detailsId: '998', look: 'Geometric', surface: 'Glazed Mirror Polish', colour: 'Ivory', body: 'Porcelain', specLabel: 'Typical Value of Mir Mirror Polish Floor' });
+  mirFloor({ sku: 'G-6600', detailsId: '1019', look: 'Stone', surface: 'Dosing', colour: 'Cream', body: 'Homogeneous', specLabel: 'Typical Value of Mir Homogeneous Floor' });
+
+  /* Khadim Ceramic — Wall */
+  khadimProduct({ id: 'kcl-g-402gr', sku: 'KCL-G-402GR', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-402gr' });
+  khadimProduct({ id: 'kcl-g-404', sku: 'KCL-G-404', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-404' });
+  khadimProduct({ id: 'kcl-g-410-bg', sku: 'KCL-G-410 BG', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-410-bg' });
+  khadimProduct({ id: 'kcl-g-451', sku: 'KCL-G-451', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-451' });
+  khadimProduct({ id: 'kcl-g-452', sku: 'KCL-G-452', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-452' });
+  khadimProduct({ id: 'kcl-g-453', sku: 'KCL-G-453', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-453' });
+  khadimProduct({ id: 'kcl-g-455-cr', sku: 'KCL-G-455 CR', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-455-cr' });
+  khadimProduct({ id: 'kcl-g-456-g', sku: 'KCL-G-456 G', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-456-g' });
+  khadimProduct({ id: 'kcl-g-457-g', sku: 'KCL-G-457 G', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-457-g' });
+  khadimProduct({ id: 'kcl-g-458-g', sku: 'KCL-G-458 G', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-458-g' });
+  khadimProduct({ id: 'kcl-g-459-g', sku: 'KCL-G-459 G', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-459-g' });
+  khadimProduct({ id: 'kcl-g-466-sg', sku: 'KCL-G-466 SG', collection: 'Diseno', tileType: 'Wall', finish: 'Glossy', sourcePath: 'kcl-g-466-sg' });
+  khadimProduct({ id: 'kcl-m-442-r1', sku: 'KCL-M-442 R1', collection: 'Diseno', tileType: 'Wall', finish: 'Matt', sourcePath: 'kcl-m-442-r1' });
+  khadimProduct({ id: 'kcl-m-492', sku: 'KCL-M-492', collection: 'Diseno', tileType: 'Wall', finish: 'Matt', sourcePath: 'kcl-m-492' });
+  khadimProduct({ id: 'kcl-m-493', sku: 'KCL-M-493', collection: 'Diseno', tileType: 'Wall', finish: 'Matt', sourcePath: 'kcl-m-493' });
+
+  /* Khadim Ceramic — Wall & Floor */
+  khadimProduct({ id: 'kcl-s-4001', sku: 'KCL-S-4001', collection: 'Odyssey', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-s-4001' });
+  khadimProduct({ id: 'kcl-s-4002', sku: 'KCL-S-4002', collection: 'Odyssey', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-s-4002' });
+  khadimProduct({ id: 'kcl-s-4003', sku: 'KCL-S-4003', collection: 'Odyssey', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-s-4003' });
+  khadimProduct({ id: 'kcl-s-4004', sku: 'KCL-S-4004', collection: 'Odyssey', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-s-4004' });
+  khadimProduct({ id: 'kcl-m-481', sku: 'KCL-M-481', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-481' });
+  khadimProduct({ id: 'kcl-m-482-g', sku: 'KCL-M-482 G', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-482-g' });
+  khadimProduct({ id: 'kcl-m-482-gr', sku: 'KCL-M-482 GR', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-482-gr' });
+  khadimProduct({ id: 'kcl-m-484', sku: 'KCL-M-484', collection: '', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-484' });
+  khadimProduct({ id: 'kcl-m-485', sku: 'KCL-M-485', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-485' });
+  khadimProduct({ id: 'kcl-m-487', sku: 'KCL-M-487', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-487' });
+  khadimProduct({ id: 'kcl-m-488', sku: 'KCL-M-488', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-488' });
+
+  window.CERAVO_WASHROOM_PRODUCTS = catalog;
 })();

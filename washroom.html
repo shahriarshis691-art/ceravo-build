@@ -3,18 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Washroom Tiles | MIR, Khadim, DBL &amp; Fresh | CERAVO TILES &amp; SURFACES</title>
-    <meta name="description" content="Explore CERAVO washroom wall and floor tiles from MIR Ceramic, Khadim Ceramic, DBL Ceramics, and Fresh Ceramics — manufacturer-published models, sizes, and finishes." />
+    <title>Washroom Tiles | MIR Ceramic &amp; Khadim Ceramic | CERAVO TILES &amp; SURFACES</title>
+    <meta name="description" content="Explore CERAVO washroom wall and floor tiles from MIR Ceramic and Khadim Ceramic — manufacturer-published models, sizes, and finishes." />
     <link rel="canonical" href="https://www.ceravo.online/washroom.html" />
     <meta property="og:title" content="Washroom Tiles | CERAVO" />
-    <meta property="og:description" content="Washroom wall, floor, and matching wall + floor tiles from MIR Ceramic, Khadim Ceramic, DBL Ceramics, and Fresh Ceramics." />
+    <meta property="og:description" content="Washroom wall, floor, and matching wall + floor tiles from MIR Ceramic and Khadim Ceramic." />
     <meta property="og:url" content="https://www.ceravo.online/washroom.html" />
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://mirceramic.com" />
-    <link rel="preconnect" href="https://i0.wp.com" />
-    <link rel="preconnect" href="https://api.dblceramics.com" />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" /></noscript>
     <style>
@@ -118,7 +115,7 @@
         </video>
         <div class="hero-scrim" aria-hidden="true"></div>
       </section>
-      <section class="listing-header"><div><p class="eyebrow">CERAVO washroom · MIR · KHADIM · DBL · FRESH</p><h2>Washroom Tiles</h2></div><p>Wall tiles, floor tiles, and matching wall + floor collections from Bangladesh ceramic manufacturers — published models only, ready to enquire.</p></section>
+      <section class="listing-header"><div><p class="eyebrow">CERAVO washroom · MIR · KHADIM</p><h2>Washroom Tiles</h2></div><p>Wall tiles, floor tiles, and matching wall + floor collections from MIR Ceramic and Khadim Ceramic — published models only, ready to enquire.</p></section>
       <div class="brand-filters" role="group" aria-label="Filter washroom tiles by brand" id="washroom-brand-filters"></div>
       <div class="filters" role="group" aria-label="Filter washroom tiles">
         <div id="washroom-type-filters"></div>
@@ -130,7 +127,7 @@
         <label class="filter-control">Search<input id="washroom-search" type="search" placeholder="MIR 30x60" aria-label="Search washroom tiles" autocomplete="off" /></label>
       </div>
       <p class="listing-empty" id="washroom-empty">No washroom tiles match these filters.</p>
-      <section class="product-grid" id="washroom-product-grid" aria-label="Washroom tiles from MIR Ceramic, Khadim Ceramic, DBL Ceramics, and Fresh Ceramics"></section>
+      <section class="product-grid" id="washroom-product-grid" aria-label="Washroom tiles from MIR Ceramic and Khadim Ceramic"></section>
     </main>
     <div class="bottom-actions"><a class="bottom-action" href="showroom.html">Showroom Locator</a><a class="bottom-action" href="contact.html">Request Owner Contact</a></div>
     <section class="founder-message" aria-labelledby="founder-message-name">
@@ -195,7 +192,7 @@
         if (tileType === 'Wall & Floor') return 'Matching Wall + Floor';
         return tileType;
       };
-      const brandsInData = ['mir', 'khadim', 'dbl', 'fresh']
+      const brandsInData = ['mir', 'khadim']
         .map((slug) => washroomProducts.find((item) => item.brandSlug === slug))
         .filter(Boolean)
         .map((item) => ({ slug: item.brandSlug, name: item.brand }));

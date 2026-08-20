@@ -698,7 +698,9 @@
       }
 
       .collection-card-home:hover .collection-card-cta,
-      .collection-card-home:focus-visible .collection-card-cta {
+      .collection-card-home:focus-visible .collection-card-cta,
+      .showcase-followup-link:hover .collection-card-cta,
+      .showcase-followup-link:focus-visible .collection-card-cta {
         border-color: #111;
         background: #fff;
       }
@@ -910,6 +912,17 @@
         height: 300px;
         object-fit: cover;
         object-position: center;
+      }
+
+      .showcase-followup-link .collection-card-cta {
+        display: flex;
+        width: fit-content;
+        margin: 14px auto 0;
+      }
+
+      .showcase-followup-link:focus-visible {
+        outline: 2px solid #111;
+        outline-offset: 4px;
       }
 
       .bottom-actions {
@@ -1483,6 +1496,7 @@
               loading="lazy"
               decoding="async"
             />
+            <span class="collection-card-cta" aria-hidden="true">View Gallery <span>→</span></span>
           </a>
         </section>
       </main>

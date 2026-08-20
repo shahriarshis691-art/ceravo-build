@@ -15,36 +15,13 @@
     <meta property="og:type" content="website" />
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"CERAVO TILES & SURFACES","url":"https://www.ceravo.online/","telephone":"+8801979614216","founder":{"@type":"Person","name":"SM SHAHRIAR WALID"}}</script>
     <link rel="preconnect" href="https://images.unsplash.com" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              ceravo: {
-                taupe: '#5C524A',
-                taupeDark: '#413a35',
-                stone: '#F3EFE9',
-                sand: '#E7DED2',
-                ivory: '#F7F4F1',
-                brass: '#C8A86E',
-                charcoal: '#1F1C1A',
-              },
-            },
-            fontFamily: {
-              sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-              serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-            },
-            boxShadow: {
-              luxe: '0 20px 50px rgba(28, 22, 17, 0.18)',
-            },
-          },
-        },
-      };
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    />
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
-
       :root {
         --ceravo-taupe: #5c524a;
         --ceravo-taupe-2: #59514d;
@@ -52,12 +29,24 @@
         --ceravo-bg: #f5f0eb;
       }
 
-      * {
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
         -webkit-tap-highlight-color: transparent;
       }
 
       html {
         scroll-behavior: smooth;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
       }
 
       body {
@@ -187,6 +176,9 @@
         height: 550px;
         overflow: hidden;
         background: #111;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
 
       .hero-slide {
@@ -199,6 +191,9 @@
         background-position: center;
         opacity: 0;
         transition: opacity 0.8s ease;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
 
       .hero-slide.is-active {
@@ -213,11 +208,21 @@
       }
 
       .hero-slide-one {
-        background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80');
+        background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=72');
       }
 
       .hero-slide-two {
-        background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80');
+        background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=72');
+      }
+
+      @media (min-width: 768px) {
+        .hero-slide-one {
+          background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        .hero-slide-two {
+          background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80');
+        }
       }
 
       .hero-copy {
@@ -225,7 +230,7 @@
         left: 50%;
         bottom: auto;
         top: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate3d(-50%, -50%, 0);
         text-align: center;
         color: rgba(255,255,255,0.95);
         z-index: 1;
@@ -337,6 +342,7 @@
         line-height: 1;
         text-align: center;
         white-space: nowrap;
+        color: #fff;
       }
 
       .brand-showcase-separator {
@@ -351,6 +357,9 @@
         background: #f7f7f7;
         color: #111;
         overflow: hidden;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
 
       .collection-showcase-heading {
@@ -370,10 +379,32 @@
         -webkit-user-select: none;
         user-select: none;
         -webkit-touch-callout: none;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+
+      .collection-film-poster {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background:
+          radial-gradient(80% 55% at 50% 38%, rgba(92, 82, 74, 0.28), rgba(17, 17, 17, 0.2) 46%, #111 74%);
+        filter: blur(22px);
+        transform: scale(1.12) translate3d(0, 0, 0);
+        opacity: 1;
+        transition: opacity 0.55s ease;
+      }
+
+      .collection-film.is-ready .collection-film-poster {
+        opacity: 0;
       }
 
       .collection-film-video {
         display: block;
+        position: relative;
+        z-index: 0;
         width: 100%;
         height: min(72vh, 640px);
         object-fit: cover;
@@ -389,7 +420,6 @@
         -webkit-transform: translate3d(0, 0, 0);
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
-        will-change: transform;
         image-rendering: -webkit-optimize-contrast;
         image-rendering: high-quality;
       }
@@ -409,7 +439,7 @@
         right: 0;
         bottom: 0;
         height: 40%;
-        z-index: 1;
+        z-index: 2;
         pointer-events: none;
         background: linear-gradient(
           to top,
@@ -483,6 +513,8 @@
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
         scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        transform: translate3d(0, 0, 0);
       }
 
       .collection-track::-webkit-scrollbar {
@@ -496,6 +528,9 @@
         text-decoration: none;
         cursor: pointer;
         transition: box-shadow 0.35s ease;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
 
       .collection-card-home img {
@@ -504,6 +539,9 @@
         aspect-ratio: 1.28;
         object-fit: cover;
         transition: transform 0.6s ease;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
 
       .collection-card-home.bedroom-tiles img,
@@ -521,7 +559,7 @@
       }
 
       .collection-card-home:hover img {
-        transform: scale(1.025);
+        transform: scale(1.025) translate3d(0, 0, 0);
       }
 
       .collection-card-home:focus-visible {
@@ -540,6 +578,11 @@
         padding: 42px 0 48px;
         background: #fff;
         color: #111;
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 520px;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
 
       .fittings-heading {
@@ -570,6 +613,11 @@
         padding: 42px 0 48px;
         background: #f7f7f7;
         color: #111;
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 480px;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
 
       .surface-heading {
@@ -647,12 +695,17 @@
       .topbar-actions {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         gap: 10px;
         width: auto;
       }
 
       .topbar .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         flex-wrap: nowrap;
+        padding: 12px 16px;
       }
 
       .top-text {
@@ -666,8 +719,11 @@
       }
 
       .topbar .brand-group {
+        display: flex;
+        align-items: center;
         justify-content: flex-start;
         flex: 1;
+        gap: 12px;
       }
 
       .topbar .ceravo-wordmark {
@@ -691,6 +747,8 @@
       }
 
       .topbar .action-icon svg {
+        width: 16px;
+        height: 16px;
         color: #fff !important;
       }
 
@@ -756,12 +814,14 @@
         height: 100%;
         padding: 110px 32px 32px;
         background: #fff;
-        transform: translateX(100%);
+        transform: translate3d(100%, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
         transition: transform 0.3s ease;
       }
 
       .site-menu.is-open .site-menu-panel {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
       }
 
       .site-menu-link {
@@ -960,13 +1020,33 @@
         }
       }
 
+      @media (min-width: 768px) {
+        .topbar .header-inner {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .collection-track {
+          scroll-behavior: auto;
+        }
+
         .collection-card-home,
         .collection-card-home img {
           transition: none;
         }
 
         .collection-card-home:hover img {
+          transform: none;
+        }
+
+        .collection-film-poster {
+          filter: none;
           transform: none;
         }
       }
@@ -976,14 +1056,14 @@
   <body>
     <div class="page-shell">
       <header class="topbar">
-        <div class="header-inner flex items-center justify-between px-4 py-3 md:px-6" style="min-height: 76px;">
-          <div class="header-left flex items-center justify-start" style="min-width: 120px;">
+        <div class="header-inner" style="min-height: 76px;">
+          <div class="header-left" style="min-width: 120px;">
             <a href="brands.html" class="top-text" style="font-size: 16px; letter-spacing: 0.02em;">Corporate</a>
           </div>
 
-          <div class="brand-group flex flex-1 items-center justify-center gap-3">
+          <div class="brand-group">
             <div class="brand-mark" aria-label="CERAVO logo">
-              <img src="assets/ceravo-original-logo.svg" alt="CERAVO original logo" />
+              <img src="assets/ceravo-original-logo.svg" alt="CERAVO original logo" decoding="async" />
             </div>
             <div class="text-center leading-none" style="display:none;">
               <div class="ceravo-wordmark" style="font-size: clamp(20px, 4vw, 42px); line-height: 0.9;">CERAVO</div>
@@ -993,7 +1073,7 @@
             </div>
           </div>
 
-          <div class="topbar-actions justify-end" style="min-width: 180px;">
+          <div class="topbar-actions" style="min-width: 180px;">
             <button type="button" class="top-text search-text" aria-label="Search" style="font-size: 15px; letter-spacing: 0.02em; background: transparent; border: none; color: rgba(255,255,255,0.94);">Search</button>
             <span class="top-text-sep divider" style="font-size: 18px; opacity: 0.75;">|</span>
             <a href="showroom.html" class="top-text" aria-label="Where to buy" style="font-size: 15px; letter-spacing: 0.02em; color: rgba(255,255,255,0.94); text-decoration: none;">Where to Buy</a>
@@ -1061,21 +1141,22 @@
         <section class="collection-showcase" aria-label="Explore CERAVO categories">
           <h2 class="collection-showcase-heading">Explore CERAVO Collections</h2>
           <div class="collection-film">
+            <div class="collection-film-poster" aria-hidden="true"></div>
             <video
               class="collection-film-video"
               width="2304"
               height="4096"
-              autoplay
               muted
               loop
               playsinline
-              preload="metadata"
+              preload="none"
+              poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 16'%3E%3Crect width='9' height='16' fill='%23111111'/%3E%3C/svg%3E"
               disablepictureinpicture
               disableremoteplayback
               controlslist="nodownload nofullscreen noremoteplayback"
               aria-label="CERAVO collection film"
             >
-              <source src="assets/videos/ceravo-collection-4k.mp4" type="video/mp4" />
+              <source data-src="assets/videos/ceravo-collection-4k.mp4" type="video/mp4" />
             </video>
             <div class="collection-film-scrim" aria-hidden="true"></div>
           </div>
@@ -1086,11 +1167,11 @@
 
           <div class="collection-panel is-active" data-collection-panel="locations" role="tabpanel">
             <div class="collection-track">
-              <a class="collection-card-home bedroom-tiles" href="bedroom.html"><img src="assets/images/categories/bedroom-luxury-tiles.jpg" alt="Luxury polished floor tiles in modern bright bedroom setting" /><h3>Luxury Tiles: Bedroom Collection</h3></a>
-              <a class="collection-card-home kitchen-tiles" href="tiles.html"><img src="assets/images/categories/kitchen-luxury-tiles.jpg" alt="Modern luxury kitchen featuring elegant wall backsplash tiles and glossy floor tiles" /><h3>Kitchen</h3></a>
-              <a class="collection-card-home living-room-tiles" href="tiles.html"><img src="assets/images/categories/living-room-luxury-tiles.jpg" alt="Spacious contemporary living room with luxury marble floor tiles and textured accent wall tiles" /><h3>Living Room</h3></a>
-              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="CERAVO washroom surfaces" /><h3>Washroom</h3></a>
-              <a class="collection-card-home parking-tiles" href="tiles.html"><img src="assets/images/categories/parking-luxury-tiles.jpg" alt="Modern garage and driveway featuring durable, heavy-duty exterior parking floor tiles" /><h3>Parking</h3></a>
+              <a class="collection-card-home bedroom-tiles" href="bedroom.html"><img src="assets/images/categories/bedroom-luxury-tiles.jpg" alt="Luxury polished floor tiles in modern bright bedroom setting" loading="lazy" decoding="async" /><h3>Luxury Tiles: Bedroom Collection</h3></a>
+              <a class="collection-card-home kitchen-tiles" href="tiles.html"><img src="assets/images/categories/kitchen-luxury-tiles.jpg" alt="Modern luxury kitchen featuring elegant wall backsplash tiles and glossy floor tiles" loading="lazy" decoding="async" /><h3>Kitchen</h3></a>
+              <a class="collection-card-home living-room-tiles" href="tiles.html"><img src="assets/images/categories/living-room-luxury-tiles.jpg" alt="Spacious contemporary living room with luxury marble floor tiles and textured accent wall tiles" loading="lazy" decoding="async" /><h3>Living Room</h3></a>
+              <a class="collection-card-home" href="bathware.html"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="CERAVO washroom surfaces" loading="lazy" decoding="async" /><h3>Washroom</h3></a>
+              <a class="collection-card-home parking-tiles" href="tiles.html"><img src="assets/images/categories/parking-luxury-tiles.jpg" alt="Modern garage and driveway featuring durable, heavy-duty exterior parking floor tiles" loading="lazy" decoding="async" /><h3>Parking</h3></a>
             </div>
           </div>
 
@@ -1116,10 +1197,10 @@
             <p>Refined forms and tactile finishes for the details that complete a space.</p>
           </div>
           <div class="collection-track">
-            <a class="collection-card-home" href="basins.html"><img src="assets/images/categories/basins-luxury.jpg" alt="Luxury glossy white ceramic wash basin on a modern vanity" /><h3>Basins</h3></a>
-            <a class="collection-card-home" href="faucets.html"><img src="assets/images/categories/faucets-luxury.jpg" alt="Luxury modern bathroom basin mixer faucet" /><h3>Faucets</h3></a>
-            <a class="collection-card-home" href="showers.html"><img src="assets/images/categories/showers-luxury.jpg" alt="Luxury modern rain shower head with clear water flow" /><h3>Showers</h3></a>
-            <a class="collection-card-home" href="accessories.html"><img src="assets/images/categories/accessories-luxury.jpg" alt="Luxury matte black towel bar and brushed gold bathroom accessories" /><h3>Accessories</h3></a>
+            <a class="collection-card-home" href="basins.html"><img src="assets/images/categories/basins-luxury.jpg" alt="Luxury glossy white ceramic wash basin on a modern vanity" loading="lazy" decoding="async" /><h3>Basins</h3></a>
+            <a class="collection-card-home" href="faucets.html"><img src="assets/images/categories/faucets-luxury.jpg" alt="Luxury modern bathroom basin mixer faucet" loading="lazy" decoding="async" /><h3>Faucets</h3></a>
+            <a class="collection-card-home" href="showers.html"><img src="assets/images/categories/showers-luxury.jpg" alt="Luxury modern rain shower head with clear water flow" loading="lazy" decoding="async" /><h3>Showers</h3></a>
+            <a class="collection-card-home" href="accessories.html"><img src="assets/images/categories/accessories-luxury.jpg" alt="Luxury matte black towel bar and brushed gold bathroom accessories" loading="lazy" decoding="async" /><h3>Accessories</h3></a>
           </div>
         </section>
 
@@ -1130,8 +1211,8 @@
             <p>Choose the right foundation for every considered space, from walls and floors to high-performance parking areas.</p>
           </div>
           <div class="collection-track">
-            <a class="collection-card-home wall-tiles" href="wall-tiles.html"><img src="assets/images/categories/wall-luxury-tiles.jpg" alt="Luxury ceramic and porcelain wall tiles in a refined interior" /><h3>Wall Tiles</h3></a>
-            <a class="collection-card-home floor-tiles" href="floor-tiles.html"><img src="assets/images/categories/floor-luxury-tiles.jpg" alt="Luxury polished marble floor tiles in modern living interior" /><h3>Floor Tiles</h3></a>
+            <a class="collection-card-home wall-tiles" href="wall-tiles.html"><img src="assets/images/categories/wall-luxury-tiles.jpg" alt="Luxury ceramic and porcelain wall tiles in a refined interior" loading="lazy" decoding="async" /><h3>Wall Tiles</h3></a>
+            <a class="collection-card-home floor-tiles" href="floor-tiles.html"><img src="assets/images/categories/floor-luxury-tiles.jpg" alt="Luxury polished marble floor tiles in modern living interior" loading="lazy" decoding="async" /><h3>Floor Tiles</h3></a>
           </div>
         </section>
 
@@ -1140,6 +1221,8 @@
             class="showcase-followup-image"
             src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80"
             alt="Modern CERAVO interior space"
+            loading="lazy"
+            decoding="async"
           />
         </section>
       </main>
@@ -1157,6 +1240,8 @@
             alt="SM Shahriar Walid, Founder and CEO of CERAVO"
             width="112"
             height="112"
+            loading="lazy"
+            decoding="async"
           />
           <div class="founder-message-copy">
             <p class="founder-message-label">Founder &amp; CEO</p>
@@ -1280,23 +1365,75 @@
       }, { passive: true });
 
       showHeroSlide(0);
-      startHeroTimer();
+      requestAnimationFrame(startHeroTimer);
 
       const collectionFilm = document.querySelector('.collection-film-video');
+      const collectionFilmWrap = document.querySelector('.collection-film');
+      const scheduleIdle = window.requestIdleCallback
+        ? (fn) => window.requestIdleCallback(fn, { timeout: 900 })
+        : (fn) => window.setTimeout(fn, 1);
+
+      const armCollectionFilm = () => {
+        if (!collectionFilm || collectionFilm.dataset.armed === 'true') return;
+        const source = collectionFilm.querySelector('source');
+        if (source && source.dataset.src) {
+          source.src = source.dataset.src;
+          source.removeAttribute('data-src');
+          collectionFilm.load();
+        }
+        collectionFilm.dataset.armed = 'true';
+      };
+
+      const markFilmReady = () => {
+        collectionFilmWrap?.classList.add('is-ready');
+      };
+
+      const playCollectionFilm = async () => {
+        if (!collectionFilm || reducedMotion || collectionFilm.dataset.starting === 'true') return;
+        collectionFilm.dataset.starting = 'true';
+        armCollectionFilm();
+        if (!collectionFilm.paused && !collectionFilm.ended) {
+          markFilmReady();
+          collectionFilm.dataset.starting = 'false';
+          return;
+        }
+        try {
+          if (collectionFilm.readyState < 2) {
+            await new Promise((resolve) => {
+              const done = () => resolve();
+              collectionFilm.addEventListener('loadeddata', done, { once: true });
+              window.setTimeout(done, 3500);
+            });
+          }
+          if (typeof collectionFilm.decode === 'function') {
+            await collectionFilm.decode().catch(() => {});
+          }
+          await collectionFilm.play();
+          markFilmReady();
+        } catch {
+          markFilmReady();
+        } finally {
+          collectionFilm.dataset.starting = 'false';
+        }
+      };
+
       if (collectionFilm) {
         if (reducedMotion) {
           collectionFilm.pause();
+          markFilmReady();
         } else if ('IntersectionObserver' in window) {
           const filmObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                collectionFilm.play().catch(() => {});
+                scheduleIdle(playCollectionFilm);
               } else {
                 collectionFilm.pause();
               }
             });
-          }, { threshold: 0.25 });
-          filmObserver.observe(collectionFilm);
+          }, { rootMargin: '220px 0px', threshold: 0.01 });
+          filmObserver.observe(collectionFilmWrap || collectionFilm);
+        } else {
+          scheduleIdle(playCollectionFilm);
         }
       }
 

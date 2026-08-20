@@ -1,6 +1,8 @@
 .founder-message {
   padding: 42px 5% 48px;
   background: #f3efe9;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 280px;
 }
 
 .founder-message-card {

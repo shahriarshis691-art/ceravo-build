@@ -96,6 +96,6 @@
     : (fn) => window.setTimeout(fn, 350);
 
   scheduleIdle(() => {
-    ['index.html', 'tiles.html', 'bathware.html', 'showroom.html', 'contact.html'].forEach(prefetchHref);
+    ['index.html', 'tiles.html', 'washroom.html', 'bathware.html', 'showroom.html', 'contact.html'].forEach(prefetchHref);
   });
 })();

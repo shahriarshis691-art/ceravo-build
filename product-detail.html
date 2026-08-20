@@ -70,6 +70,7 @@
   <script>
     const catalogSrcFor = (id) => {
       if (!id) return null;
+      if (id.startsWith('mir-') || id.startsWith('dbl-') || id.startsWith('fresh-') || id.startsWith('kcl-s-') || id.startsWith('kcl-m-') || id.startsWith('kcl-g-')) return 'assets/js/washroom-products.js';
       if (id.startsWith('kcl-p-')) return 'assets/js/bedroom-products.js';
       if (id.startsWith('kcl-w-')) return 'assets/js/wall-tiles-products.js';
       if (id.includes('-acc-')) return 'assets/js/accessories-products.js';
@@ -99,13 +100,48 @@
     const faucetProduct = (window.CERAVO_FAUCET_PRODUCTS || []).find((item) => item.id === productId);
     const showerProduct = (window.CERAVO_SHOWER_PRODUCTS || []).find((item) => item.id === productId);
     const accessoryProduct = (window.CERAVO_ACCESSORY_PRODUCTS || []).find((item) => item.id === productId);
+    const washroomProduct = (window.CERAVO_WASHROOM_PRODUCTS || []).find((item) => item.id === productId);
     const cutoutProduct = basinProduct || faucetProduct || showerProduct || accessoryProduct;
     const showcaseProduct = bedroomProduct || wallProduct;
-    const product = showcaseProduct || cutoutProduct || products[productId];
+    const product = washroomProduct || showcaseProduct || cutoutProduct || products[productId];
     const page = document.querySelector('#detail-page');
     const backLink = document.querySelector('#back-link');
     if (!product) {
       page.innerHTML = '<section class="empty"><span class="eyebrow">CERAVO collections</span><h1>Collection not found.</h1><p>Please return to the catalogue and choose a collection to explore.</p><a class="action" href="tiles.html">Back to collections</a></section>';
+    } else if (washroomProduct) {
+      document.title = `${washroomProduct.title} | CERAVO`;
+      backLink.href = 'washroom.html';
+      backLink.textContent = 'Back to washroom';
+      const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${washroomProduct.title} (${washroomProduct.code}).`);
+      const galleryImages = washroomProduct.images && washroomProduct.images.length ? washroomProduct.images : [washroomProduct.image];
+      const galleryMarkup = galleryImages.map((image, index) => `<img class="is-contain" src="${image}" alt="${washroomProduct.brand} ${washroomProduct.title} ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} />`).join('');
+      page.classList.add('showcase');
+      page.innerHTML = `<div class="visual" role="region" aria-label="${washroomProduct.title} product gallery"><div class="gallery-grid">${galleryMarkup}</div></div>
+      <section class="content">
+        <p class="eyebrow">${washroomProduct.brand}</p>
+        <h1>${washroomProduct.title}</h1>
+        <p class="brand-line">${washroomProduct.brand}</p>
+        <p class="description">${washroomProduct.description}</p>
+        <dl class="specs">
+          <div class="spec"><dt>Brand</dt><dd>${washroomProduct.brand}</dd></div>
+          <div class="spec"><dt>Model / SKU</dt><dd>${washroomProduct.code}</dd></div>
+          <div class="spec"><dt>Collection</dt><dd>${washroomProduct.collection}</dd></div>
+          <div class="spec"><dt>Tile type</dt><dd>${washroomProduct.tileType}</dd></div>
+          <div class="spec"><dt>Size</dt><dd>${washroomProduct.size}</dd></div>
+          <div class="spec"><dt>Finish</dt><dd>${washroomProduct.finish}</dd></div>
+          <div class="spec"><dt>Color</dt><dd>${washroomProduct.color}</dd></div>
+          <div class="spec"><dt>Effect</dt><dd>${washroomProduct.effect}</dd></div>
+          <div class="spec"><dt>Surface</dt><dd>${washroomProduct.surface}</dd></div>
+          <div class="spec"><dt>Suitable space</dt><dd>${washroomProduct.suitableSpace}</dd></div>
+          <div class="spec"><dt>Availability</dt><dd>${washroomProduct.availability}</dd></div>
+        </dl>
+        <div class="actions">
+          <a class="action" href="contact.html?interest=${encodeURIComponent(washroomProduct.title)}">Request details</a>
+          <a class="action whatsapp" href="https://wa.me/8801979614216?text=${whatsappMessage}" target="_blank" rel="noopener noreferrer">WhatsApp enquiry</a>
+          <a class="action secondary" href="tel:+8801979614216">Call Now</a>
+          <a class="action sample" href="${washroomProduct.sourceUrl}" target="_blank" rel="noopener noreferrer">${washroomProduct.sourceLabel}</a>
+        </div>
+      </section>`;
     } else if (cutoutProduct) {
       document.title = `${cutoutProduct.title} | CERAVO`;
       backLink.href = basinProduct ? 'basins.html' : faucetProduct ? 'faucets.html' : showerProduct ? 'showers.html' : 'accessories.html';

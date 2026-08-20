@@ -1,0 +1,39 @@
+.ceravo-logo-img {
+  display: block;
+  width: auto;
+  height: 36px;
+  max-width: min(58vw, 210px);
+  background: transparent !important;
+  object-fit: contain;
+  object-position: left center;
+}
+
+@media (min-width: 768px) {
+  .ceravo-logo-img {
+    height: 44px;
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 430px) {
+  .ceravo-logo-img {
+    height: 32px;
+    max-width: min(52vw, 168px);
+  }
+}
+
+header.topbar a.brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  background: transparent;
+}
+
+header.topbar a.brand .brand-mark {
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}

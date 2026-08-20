@@ -2,6 +2,39 @@
   if (window.__CERAVO_UI__) return;
   window.__CERAVO_UI__ = true;
 
+  if (!document.getElementById('ceravo-logo-css')) {
+    const logoCss = document.createElement('link');
+    logoCss.id = 'ceravo-logo-css';
+    logoCss.rel = 'stylesheet';
+    logoCss.href = 'assets/css/ceravo-logo.css';
+    document.head.appendChild(logoCss);
+  }
+
+  const CERAVO_LOGO_SRC = '/assets/ceravo-original-logo.svg';
+  const isCeravoBrandLink = (el) => {
+    if (!el || el.getAttribute('href') !== 'index.html') return false;
+    const label = `${el.getAttribute('aria-label') || ''} ${el.textContent || ''}`.toUpperCase();
+    return label.includes('CERAVO') && !label.includes('SHATHI');
+  };
+  document.querySelectorAll('header.topbar a.brand').forEach((brand) => {
+    if (!isCeravoBrandLink(brand)) return;
+    const existing = brand.querySelector('img.ceravo-logo-img');
+    if (existing) {
+      existing.src = CERAVO_LOGO_SRC;
+      existing.removeAttribute('srcset');
+      return;
+    }
+    brand.innerHTML = `<img class="ceravo-logo-img" src="${CERAVO_LOGO_SRC}" alt="CERAVO" width="1000" height="420" decoding="async" />`;
+    if (!brand.getAttribute('aria-label')) brand.setAttribute('aria-label', 'CERAVO home');
+  });
+  document.querySelectorAll('.topbar .brand-mark img').forEach((img) => {
+    img.classList.add('ceravo-logo-img');
+    img.src = CERAVO_LOGO_SRC;
+    img.alt = 'CERAVO';
+    img.setAttribute('width', '1000');
+    img.setAttribute('height', '420');
+  });
+
   if (!document.getElementById('ceravo-perf')) {
     const style = document.createElement('style');
     style.id = 'ceravo-perf';

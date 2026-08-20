@@ -63,10 +63,11 @@
     @media (max-width: 760px) { main { display: block; } .visual { min-height: 43vh; max-height: none; padding: 6px; } .gallery-grid { gap: 6px; } .content { padding: 44px 7%; } .actions { gap: 8px; } .action { min-height: 46px; padding-inline: 13px; } .hero-image { aspect-ratio: 4 / 3; } .hero-image.is-cutout { aspect-ratio: 1; } }
   </style>
     <link rel="stylesheet" href="assets/css/listing-image-grid.css" />
-    <script src="assets/js/ceravo-ui.js" defer></script>
+    <link rel="stylesheet" href="assets/css/ceravo-logo.css" />
+    <script src="assets/js/ceravo-ui.js?v=logo-1" defer></script>
   </head>
 <body>
-  <header class="topbar"><a class="brand" href="index.html">CERAVO</a><a class="back" id="back-link" href="javascript:history.back()">Back</a></header>
+  <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><img class="ceravo-logo-img" src="/assets/ceravo-original-logo.svg" alt="CERAVO" width="1000" height="420" decoding="async" /></a><a class="back" id="back-link" href="javascript:history.back()">Back</a></header>
   <main id="detail-page"></main>
   <script>
     const catalogSrcFor = (id) => {

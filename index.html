@@ -27,7 +27,8 @@
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" />
     </noscript>
-    <script src="assets/js/ceravo-ui.js" defer></script>
+    <link rel="stylesheet" href="assets/css/ceravo-logo.css" />
+    <script src="assets/js/ceravo-ui.js?v=logo-1" defer></script>
     <script src="assets/js/hero-slider.js" defer></script>
     <style>
       :root {
@@ -85,22 +86,25 @@
 
       .brand-mark {
         width: auto;
-        height: 56px;
-        max-width: min(42vw, 140px);
+        height: auto;
+        max-width: min(52vw, 240px);
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-shrink: 0;
+        background: transparent;
       }
 
-      .brand-mark img {
+      .brand-mark img,
+      .topbar .ceravo-logo-img {
         display: block;
         width: auto;
-        height: 56px;
+        height: 42px;
         max-width: 100%;
+        background: transparent;
         object-fit: contain;
         object-position: left center;
-        filter: drop-shadow(0 10px 14px rgba(21, 29, 34, 0.08));
+        filter: drop-shadow(0 8px 16px rgba(17, 17, 17, 0.18));
       }
 
       .ceravo-wordmark {
@@ -1085,12 +1089,12 @@
 
       @media (max-width: 420px) {
         .brand-mark {
-          height: 52px;
-          max-width: min(38vw, 120px);
+          max-width: min(48vw, 168px);
         }
 
-        .brand-mark img {
-          height: 52px;
+        .brand-mark img,
+        .topbar .ceravo-logo-img {
+          height: 32px;
         }
 
         .ceravo-wordmark {
@@ -1128,12 +1132,12 @@
         }
 
         .brand-mark {
-          height: 74px;
-          max-width: 160px;
+          max-width: 280px;
         }
 
-        .brand-mark img {
-          height: 74px;
+        .brand-mark img,
+        .topbar .ceravo-logo-img {
+          height: 52px;
         }
       }
 
@@ -1183,7 +1187,7 @@
 
           <div class="brand-group">
             <div class="brand-mark" aria-label="CERAVO logo">
-              <img src="/images/ceravo-main-logo.png" alt="CERAVO" width="2048" height="2048" decoding="async" />
+              <img class="ceravo-logo-img" src="/assets/ceravo-original-logo.svg" alt="CERAVO" width="1000" height="420" decoding="async" />
             </div>
             <div class="text-center leading-none" style="display:none;">
               <div class="ceravo-wordmark" style="font-size: clamp(20px, 4vw, 42px); line-height: 0.9;">CERAVO</div>

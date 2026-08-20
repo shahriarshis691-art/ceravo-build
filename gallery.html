@@ -34,10 +34,10 @@
       .filter.is-active, .filter:hover { background: var(--ink); color: #fff; }
       .listing-empty { display: none; margin: 0; padding: 0 3.3% 36px; color: rgba(17,17,17,.62); font-size: 14px; }
       .listing-empty.is-visible { display: block; }
-      .gallery-page-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 3.3% 42px; }
+      .gallery-page-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 3.3% 42px; align-items: start; }
       .gallery-item { position: relative; min-width: 0; overflow: hidden; background: #ece8e2; border: 0; padding: 0; cursor: pointer; }
       .gallery-item[hidden] { display: none; }
-      .gallery-item img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; }
+      .gallery-item img { display: block; width: 100%; height: auto; object-fit: contain; }
       .gallery-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
       .bottom-actions { display: grid; grid-template-columns: 1fr 1fr; min-height: 64px; background: #000; color: #fff; }
       .bottom-action { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
@@ -93,17 +93,7 @@
         </div>
         <p>Tile installations and considered spaces — bathrooms, kitchens, bedrooms, living rooms, walls, floors and outdoor areas.</p>
       </section>
-      <div class="filters" role="group" aria-label="Filter gallery">
-        <button class="filter is-active" type="button" data-filter="all">All</button>
-        <button class="filter" type="button" data-filter="bathroom">Bathroom</button>
-        <button class="filter" type="button" data-filter="kitchen">Kitchen</button>
-        <button class="filter" type="button" data-filter="bedroom">Bedroom</button>
-        <button class="filter" type="button" data-filter="living">Living</button>
-        <button class="filter" type="button" data-filter="floor">Floor</button>
-        <button class="filter" type="button" data-filter="wall">Wall</button>
-        <button class="filter" type="button" data-filter="outdoor">Outdoor</button>
-      </div>
-      <p class="listing-empty" id="gallery-empty">No gallery images match this category.</p>
+      <p class="listing-empty" id="gallery-empty">No gallery images are available.</p>
       <section class="gallery-page-grid" id="gallery-grid" aria-label="CERAVO gallery"></section>
     </main>
     <div class="lightbox" id="gallery-lightbox" aria-hidden="true">
@@ -130,26 +120,50 @@
     <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="gallery.html">Gallery</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="contact.html">Contact Us</a></nav></div>
     <script>
       const galleryItems = [
-        { src: 'assets/images/categories/basins-luxury.jpg', alt: 'Bathroom basin and tile setting', category: 'bathroom' },
-        { src: 'assets/images/categories/showers-luxury.jpg', alt: 'Bathroom shower tile setting', category: 'bathroom' },
-        { src: 'assets/images/categories/accessories-luxury.jpg', alt: 'Bathroom accessories and tile setting', category: 'bathroom' },
-        { src: 'assets/images/categories/kitchen-luxury-tiles.jpg', alt: 'Kitchen wall and floor tile interior', category: 'kitchen' },
-        { src: 'assets/images/categories/bedroom-luxury-tiles.jpg', alt: 'Bedroom tile interior', category: 'bedroom' },
-        { src: 'assets/images/products/room-kcl-p-1122.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
-        { src: 'assets/images/products/room-kcl-p-1125.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
-        { src: 'assets/images/products/room-kcl-p-1128.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
-        { src: 'assets/images/products/room-kcl-p-1131.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
-        { src: 'assets/images/products/room-kcl-p-1133.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
-        { src: 'assets/images/products/room-kcl-p-1135.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
-        { src: 'assets/images/categories/living-room-luxury-tiles.jpg', alt: 'Living room tile interior', category: 'living' },
-        { src: 'assets/images/categories/floor-luxury-tiles.jpg', alt: 'Floor tile interior', category: 'floor' },
-        { src: 'assets/images/categories/wall-luxury-tiles.jpg', alt: 'Wall tile interior', category: 'wall' },
-        { src: 'assets/images/products/room-kcl-w-2101.jpg', alt: 'Wall tile installation', category: 'wall' },
-        { src: 'assets/images/products/room-kcl-w-2103.jpg', alt: 'Wall tile installation', category: 'wall' },
-        { src: 'assets/images/products/room-kcl-w-2105.jpg', alt: 'Wall tile installation', category: 'wall' },
-        { src: 'assets/images/products/room-kcl-w-2107.jpg', alt: 'Wall tile installation', category: 'wall' },
-        { src: 'assets/images/products/room-kcl-w-2108.jpg', alt: 'Wall tile installation', category: 'wall' },
-        { src: 'assets/images/categories/parking-luxury-tiles.jpg', alt: 'Parking and outdoor floor tile setting', category: 'outdoor' }
+        { src: '/assets/images/gallery/%23neutraldecor%20%23cozyinterior%20%23budgethomemakeover%20%20_%23diyhomedecor%20%23homedecortips%20%23smallspacedecor%20%20_%23modernboho%20%23minimalroomstyle%20%23cozyvibesonly%20%20_%23homeaesthetic%20%23homedecorinspo.jpg', alt: '#neutraldecor #cozyinterior #budgethomemakeover #diyhomedecor #homedecortips #smallspacedecor #modernboho #minimalroomstyle #cozyvibesonly #homeaesthetic #homedecorinspo' },
+        { src: '/assets/images/gallery/22%20Grey%20and%20White%20Living%20Room%20Ideas%20for___.jpg', alt: '22 Grey and White Living Room Ideas for' },
+        { src: '/assets/images/gallery/24%20Media%20Room%20Ideas%20for%20Cozy%2C%20Cinematic%20Vibes%20At___.jpg', alt: '24 Media Room Ideas for Cozy, Cinematic Vibes At' },
+        { src: '/assets/images/gallery/27%20White%20Floor%20Kitchen%20Ideas%20That%20Look%20Bright%20%26%20Clean.jpg', alt: '27 White Floor Kitchen Ideas That Look Bright & Clean' },
+        { src: '/assets/images/gallery/29%20Aesthetic%20Home%20Decor%20Ideas%20That%20Feel%20Fun%20and%20Inspiring.jpg', alt: '29 Aesthetic Home Decor Ideas That Feel Fun and Inspiring' },
+        { src: '/assets/images/gallery/0512c2f0-fb0b-4dc3-b186-2eb554f01020.jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/600X600-Floor-Porcelain-Wall-Ceramic-Tiles-for-Wall-and-Floor-Standard-Porcelain-Tile-Tiles.avif', alt: '600X600-Floor-Porcelain-Wall-Ceramic-Tiles-for-Wall-and-Floor-Standard-Porcelain-Tile-Tiles' },
+        { src: '/assets/images/gallery/16255248650285668.jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/520165825741863811.jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/1017461740840272298.jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/1063131055807790231.jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/1088745278690948703.jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/1112178070509130281.jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/b844d2fe6975f81f0d59e049826b62d4.jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/Beautiful%20Love%20%F0%9F%92%96.jpg', alt: 'Beautiful Love 💖' },
+        { src: '/assets/images/gallery/Chic%20Compact%20Bath_%20Sink%2C%20Toilet%20%26%20Shower%20Zone.jpg', alt: 'Chic Compact Bath Sink, Toilet & Shower Zone' },
+        { src: '/assets/images/gallery/Dark%20pink.jpg', alt: 'Dark pink' },
+        { src: '/assets/images/gallery/download%20(1).jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/download%20(3).jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/download%20(4).jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/download.jpg', alt: 'CERAVO gallery' },
+        { src: '/assets/images/gallery/Entryway%20Styling%20Made%20Simple.jpg', alt: 'Entryway Styling Made Simple' },
+        { src: '/assets/images/gallery/green%20vibes.jpg', alt: 'green vibes' },
+        { src: '/assets/images/gallery/home%20decore%20ideas_bathroom%20design_interior%20design.jpg', alt: 'home decore ideas bathroom design interior design' },
+        { src: '/assets/images/gallery/Luxury%20Marble%20Bathroom%20with%20Geometric%20Statement%20Mirrors.jpg', alt: 'Luxury Marble Bathroom with Geometric Statement Mirrors' },
+        { src: '/assets/images/gallery/Luxury%20Modern%20Bathroom%20Ideas%20_%20Home%20Inspiration%20Bathroom%20with%20Walk-In%20Shower%20%26%20LED%20Lighting.jpg', alt: 'Luxury Modern Bathroom Ideas Home Inspiration Bathroom with Walk-In Shower & LED Lighting' },
+        { src: '/assets/images/gallery/Marble%20Effect%20Epoxy%20Floors.jpg', alt: 'Marble Effect Epoxy Floors' },
+        { src: '/assets/images/gallery/Modern%20Grey%20Bathroom%20Design_%20Smart%20Shower%20Display%2C%20Illuminated%20Mirror%20%26%20Walnut%20Vanity%20Ideas.jpg', alt: 'Modern Grey Bathroom Design Smart Shower Display, Illuminated Mirror & Walnut Vanity Ideas' },
+        { src: '/assets/images/gallery/Montalcino%20_%20Windham%20Ivory%20Satin%20Porcelain%20Tile%2C%2024%20x%2048%2C%209_5%20mm%20Thick%20-%20Floor%20%26%20Decor.jpg', alt: 'Montalcino Windham Ivory Satin Porcelain Tile, 24 x 48, 9 5 mm Thick - Floor & Decor' },
+        { src: '/assets/images/gallery/NocturnalAbstract_com.jpg', alt: 'NocturnalAbstract com' },
+        { src: '/assets/images/gallery/Rev%C3%AAtement%20sol%20%26%20mural_%20Des%20id%C3%A9es%20pour%20inspiration%20dans%20vos%20d%C3%A9corations_.jpg', alt: 'Revêtement sol & mural Des idées pour inspiration dans vos décorations' },
+        { src: '/assets/images/gallery/Sala%20de%20Estudio.jpg', alt: 'Sala de Estudio' },
+        { src: '/assets/images/gallery/Sala%20moderna%20con%20porcelanato%20_%2005907%20_%20CeramicCenter.jpg', alt: 'Sala moderna con porcelanato 05907 CeramicCenter' },
+        { src: '/assets/images/gallery/Sleek%20All-White%20Living%20Room_%20Modern%20Minimalist%20Decor%20Ideas.jpg', alt: 'Sleek All-White Living Room Modern Minimalist Decor Ideas' },
+        { src: '/assets/images/gallery/Small%20Bathroom%20Design%20Ideas%20for%20a%20Modern%20and%20Elegant%20Space%20%E2%9C%A8.jpg', alt: 'Small Bathroom Design Ideas for a Modern and Elegant Space ✨' },
+        { src: '/assets/images/gallery/Small%20Luxury%20Bathroom%20Design%20with%20Warm%20Stone%20and%20Floating%20Vanity.jpg', alt: 'Small Luxury Bathroom Design with Warm Stone and Floating Vanity' },
+        { src: '/assets/images/gallery/Small%20Luxury%20Bathroom%20With%20Warm%20Stone%20and%20a%20Sleek%20Walk-In%20Shower.jpg', alt: 'Small Luxury Bathroom With Warm Stone and a Sleek Walk-In Shower' },
+        { src: '/assets/images/gallery/So%20elegant!%20%F0%9F%98%8D%F0%9F%98%8D%F0%9F%98%8D.jpg', alt: 'So elegant! 😍😍😍' },
+        { src: '/assets/images/gallery/Soft%20Pastel%20Epoxy%20for%20Calming%20Environments.jpg', alt: 'Soft Pastel Epoxy for Calming Environments' },
+        { src: '/assets/images/gallery/Splendor%2048x48%20Gray%20Beige%20Porcelain%20Large%20Format%20Veining%20Wall%20and%20Floor%20Tile%20(15_5%20sq%20ft_case)%20-%201%20Pack.jpg', alt: 'Splendor 48x48 Gray Beige Porcelain Large Format Veining Wall and Floor Tile (15 5 sq ft case) - 1 Pack' },
+        { src: '/assets/images/gallery/Transform%20Your%20Space%20with%20These%2022%20Unique%20Bloxburg%20Living%20Room%20Ideas.jpg', alt: 'Transform Your Space with These 22 Unique Bloxburg Living Room Ideas' },
+        { src: '/assets/images/gallery/Ultra%20White%20Contemporary%20Living%20Room.jpg', alt: 'Ultra White Contemporary Living Room' },
+        { src: '/assets/images/gallery/White%20Modern%20Bedroom%20%E2%80%93%20Elegant%20Minimalist%20Design%20Inspiration.jpg', alt: 'White Modern Bedroom – Elegant Minimalist Design Inspiration' },
+        { src: '/assets/images/gallery/Yellowknife%20Glue-Down%20Luxury%20Vinyl%20Planks%20%E2%80%93%20Waterproof%2C%20Durable%2C%20Real-Wood%20Look.jpg', alt: 'Yellowknife Glue-Down Luxury Vinyl Planks – Waterproof, Durable, Real-Wood Look' }
       ];
 
       const grid = document.querySelector('#gallery-grid');
@@ -164,24 +178,14 @@
         .replace(/"/g, '&quot;');
 
       grid.innerHTML = galleryItems.map((item, index) => `
-        <button class="gallery-item" type="button" data-category="${escapeHtml(item.category)}" data-index="${index}" aria-label="${escapeHtml(item.alt)}">
-          <img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.alt)}" width="800" height="600" loading="${index < 4 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} onerror="this.closest('.gallery-item').remove()" />
+        <button class="gallery-item" type="button" data-index="${index}" aria-label="${escapeHtml(item.alt)}">
+          <img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.alt)}" loading="${index < 4 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} onerror="this.closest('.gallery-item').remove()" />
         </button>
       `).join('');
 
-      let activeFilter = 'all';
       let visibleIndexes = galleryItems.map((_, index) => index);
       let currentIndex = 0;
-
-      const applyFilter = () => {
-        visibleIndexes = [];
-        document.querySelectorAll('#gallery-grid .gallery-item').forEach((item) => {
-          const isVisible = activeFilter === 'all' || item.dataset.category === activeFilter;
-          item.hidden = !isVisible;
-          if (isVisible) visibleIndexes.push(Number(item.dataset.index));
-        });
-        emptyState.classList.toggle('is-visible', visibleIndexes.length === 0);
-      };
+      emptyState.classList.toggle('is-visible', visibleIndexes.length === 0);
 
       const openLightbox = (index) => {
         currentIndex = index;
@@ -207,12 +211,6 @@
         const nextPosition = (position + direction + visibleIndexes.length) % visibleIndexes.length;
         openLightbox(visibleIndexes[nextPosition]);
       };
-
-      document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
-        activeFilter = button.dataset.filter;
-        document.querySelectorAll('[data-filter]').forEach((item) => item.classList.toggle('is-active', item === button));
-        applyFilter();
-      }));
 
       grid.addEventListener('click', (event) => {
         const item = event.target.closest('.gallery-item');
@@ -243,8 +241,6 @@
         if (Math.abs(delta) < 40) return;
         stepLightbox(delta > 0 ? -1 : 1);
       }, { passive: true });
-
-      applyFilter();
     </script>
     <div class="contact-float" style="position:fixed;right:18px;bottom:18px;z-index:30;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><a href="tel:+8801979614216" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#171513;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">Call Now</a><a href="https://wa.me/8801979614216?text=Hello%20CERAVO%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#1d8b55;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">WhatsApp</a></div>
   </body>

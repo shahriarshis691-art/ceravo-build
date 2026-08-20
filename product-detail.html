@@ -71,7 +71,7 @@
   <script>
     const catalogSrcFor = (id) => {
       if (!id) return null;
-      if (id.startsWith('mir-') || id.startsWith('dbl-') || id.startsWith('fresh-') || id.startsWith('kcl-s-') || id.startsWith('kcl-m-') || id.startsWith('kcl-g-')) return 'assets/js/washroom-products.js';
+      if (id.startsWith('mir-') || id.startsWith('dbl-') || id.startsWith('fresh-') || id.startsWith('kcl-s-') || id.startsWith('kcl-m-') || id.startsWith('kcl-g-')) return 'assets/js/washroom-products.js?v=khadim-images-1';
       if (id.startsWith('kcl-p-')) return 'assets/js/bedroom-products.js';
       if (id.startsWith('kcl-w-')) return 'assets/js/wall-tiles-products.js';
       if (id.includes('-acc-')) return 'assets/js/accessories-products.js';
@@ -116,7 +116,22 @@
       const name = washroomProduct.productName || washroomProduct.title;
       const sku = washroomProduct.sku || washroomProduct.code;
       const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${name} (${sku}).`);
-      const galleryImages = (washroomProduct.images || []).filter((src) => typeof src === 'string' && /^https?:\/\//i.test(src));
+      const isUsableImage = (src) => {
+        if (typeof src !== 'string') return false;
+        const value = src.trim();
+        if (!value) return false;
+        if (/^[a-zA-Z]:[\\/]/.test(value) || /^file:/i.test(value)) return false;
+        return /^(https?:\/\/|\/?assets\/|\/images\/)/i.test(value);
+      };
+      const galleryImages = [];
+      const seenImages = new Set();
+      []
+        .concat(washroomProduct.images, washroomProduct.image, washroomProduct.imageUrl, washroomProduct.thumbnail)
+        .forEach((src) => {
+          if (!isUsableImage(src) || seenImages.has(src.trim())) return;
+          seenImages.add(src.trim());
+          galleryImages.push(src.trim());
+        });
       const galleryMarkup = galleryImages.length
         ? galleryImages.map((image, index) => `<img class="is-contain" src="${image}" alt="${washroomProduct.brand} ${name} ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} />`).join('')
         : '<div class="gallery-placeholder">Image not specified</div>';

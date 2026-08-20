@@ -238,4 +238,99 @@
   };
 
   window.CERAVO_WASHROOM_PRODUCTS = orderByBrandGroup(catalog);
+
+  /* Khadim Ceramic Pavers Collection — official parking / driving-porch floor products.
+     Not added to CERAVO_WASHROOM_PRODUCTS so washroom listing stays unchanged. */
+  const parkingImage = (file) => `https://khadimceramics.com/wp-content/uploads/2024/03/${file}`;
+  const khadimPaver = ({ id, sku, productName, color, size, imageFile, sourcePath, facts }) => product({
+    id,
+    brandSlug: 'khadim',
+    productName,
+    sku,
+    collection: 'Pavers Collection',
+    tileType: 'Floor',
+    size,
+    finish: unspecified,
+    surface: unspecified,
+    color,
+    suitableSpace: 'Parking',
+    description: facts,
+    sourceUrl: `https://khadimceramics.com/product/${sourcePath}/`,
+    sourceLabel: 'Khadim Ceramic product page',
+    image: parkingImage(imageFile),
+    images: [parkingImage(imageFile)]
+  });
+
+  window.CERAVO_PARKING_PRODUCTS = [
+    khadimPaver({
+      id: 'kcl-pk-55-charcoal',
+      sku: 'Parking Tile 55',
+      productName: 'Parking Tile 55 – Charcoal',
+      color: 'Charcoal',
+      size: '5 in × 5 in × 0.39 in',
+      imageFile: 'CT-R_edit-charcoal.png',
+      sourcePath: 'parking-tile-55',
+      facts: 'Parking Tile 55 is listed by Khadim Ceramic Limited in the Pavers Collection as a parking tile. The manufacturer states size 5in X 5in X 0.39in, weight 0.42 kg, and colour Charcoal. Finish type is not specified on the product page. A manufacturer SKU code is not published.'
+    }),
+    khadimPaver({
+      id: 'kcl-pk-55-cream',
+      sku: 'Parking Tile 55',
+      productName: 'Parking Tile 55 – Cream',
+      color: 'Cream',
+      size: '5 in × 5 in × 0.39 in',
+      imageFile: 'CT-R_edit-cream.png',
+      sourcePath: 'parking-tile-55',
+      facts: 'Parking Tile 55 is listed by Khadim Ceramic Limited in the Pavers Collection as a parking tile. The manufacturer states size 5in X 5in X 0.39in, weight 0.42 kg, and colour Cream. Finish type is not specified on the product page. A manufacturer SKU code is not published.'
+    }),
+    khadimPaver({
+      id: 'kcl-pk-55-pistachio',
+      sku: 'Parking Tile 55',
+      productName: 'Parking Tile 55 – Pistachio',
+      color: 'Pistachio',
+      size: '5 in × 5 in × 0.39 in',
+      imageFile: 'CT-R_edit-green.png',
+      sourcePath: 'parking-tile-55',
+      facts: 'Parking Tile 55 is listed by Khadim Ceramic Limited in the Pavers Collection as a parking tile. The manufacturer states size 5in X 5in X 0.39in, weight 0.42 kg, and colour Pistachio. Finish type is not specified on the product page. A manufacturer SKU code is not published.'
+    }),
+    khadimPaver({
+      id: 'kcl-pk-55-silver',
+      sku: 'Parking Tile 55',
+      productName: 'Parking Tile 55 – Silver',
+      color: 'Silver',
+      size: '5 in × 5 in × 0.39 in',
+      imageFile: 'CT-R_edit-silver.png',
+      sourcePath: 'parking-tile-55',
+      facts: 'Parking Tile 55 is listed by Khadim Ceramic Limited in the Pavers Collection as a parking tile. The manufacturer states size 5in X 5in X 0.39in, weight 0.42 kg, and colour Silver. Finish type is not specified on the product page. A manufacturer SKU code is not published.'
+    }),
+    khadimPaver({
+      id: 'kcl-pk-klinker',
+      sku: 'Klinker Paver',
+      productName: 'Klinker Paver',
+      color: 'Red',
+      size: '8 in × 4 in × 2 in',
+      imageFile: 'Klinker-Paver.webp',
+      sourcePath: 'klinker-paver',
+      facts: 'Klinker Paver is listed by Khadim Ceramic Limited in the Pavers Collection for outdoor load-bearing use including driving porch. The manufacturer states size 8in X 4in X 2in and colour Red. Finish type is not specified on the product page. A manufacturer SKU code is not published.'
+    }),
+    khadimPaver({
+      id: 'kcl-pk-square-l',
+      sku: 'Square Paver (L)',
+      productName: 'Square Paver (L)',
+      color: 'Beige, Black, Grey, Red',
+      size: '8 in × 8 in',
+      imageFile: 'Paver-plain.webp',
+      sourcePath: 'square-paver-l',
+      facts: 'Square Paver (L) is listed by Khadim Ceramic Limited in the Pavers Collection for outdoor load-bearing use including driving porch. The manufacturer states size 8in X 8in and colours Beige, Black, Grey, and Red. Separate colour images and a manufacturer SKU code are not published. Finish type is not specified on the product page.'
+    }),
+    khadimPaver({
+      id: 'kcl-pk-ct-6',
+      sku: 'CT-6',
+      productName: 'CT-6',
+      color: 'Beige, Black, Grey, Red',
+      size: '8 in × 4 in × 0.65 in',
+      imageFile: 'CT-6-Rock-face.webp',
+      sourcePath: 'ct-6',
+      facts: 'CT-6 is listed by Khadim Ceramic Limited in the Pavers Collection for outdoor load-bearing use including driving porch. The manufacturer states size 8in X 4in X 0.65in, weight 1.10 kg, and colours Beige, Black, Grey, and Red. Colour variants share the published product image. Finish type is not specified on the product page. A manufacturer SKU code is not published.'
+    })
+  ];
 })();

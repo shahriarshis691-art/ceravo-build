@@ -84,19 +84,22 @@
       }
 
       .brand-mark {
-        width: 74px;
-        height: 74px;
+        width: auto;
+        height: 56px;
+        max-width: min(42vw, 140px);
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         flex-shrink: 0;
       }
 
       .brand-mark img {
         display: block;
-        width: 100%;
-        height: 100%;
+        width: auto;
+        height: 56px;
+        max-width: 100%;
         object-fit: contain;
+        object-position: left center;
         filter: drop-shadow(0 10px 14px rgba(21, 29, 34, 0.08));
       }
 
@@ -778,6 +781,7 @@
         justify-content: flex-end;
         gap: 10px;
         width: auto;
+        flex-shrink: 0;
       }
 
       .topbar .header-inner {
@@ -1081,9 +1085,12 @@
 
       @media (max-width: 420px) {
         .brand-mark {
-          width: 58px;
-          height: 58px;
-          font-size: 38px;
+          height: 52px;
+          max-width: min(38vw, 120px);
+        }
+
+        .brand-mark img {
+          height: 52px;
         }
 
         .ceravo-wordmark {
@@ -1118,6 +1125,15 @@
         .topbar .header-inner {
           padding-left: 24px;
           padding-right: 24px;
+        }
+
+        .brand-mark {
+          height: 74px;
+          max-width: 160px;
+        }
+
+        .brand-mark img {
+          height: 74px;
         }
       }
 
@@ -1167,7 +1183,7 @@
 
           <div class="brand-group">
             <div class="brand-mark" aria-label="CERAVO logo">
-              <img src="assets/ceravo-original-logo.svg" alt="CERAVO original logo" decoding="async" />
+              <img src="/images/ceravo-main-logo.png" alt="CERAVO" width="2048" height="2048" decoding="async" />
             </div>
             <div class="text-center leading-none" style="display:none;">
               <div class="ceravo-wordmark" style="font-size: clamp(20px, 4vw, 42px); line-height: 0.9;">CERAVO</div>

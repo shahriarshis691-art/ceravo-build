@@ -1070,6 +1070,98 @@
           object-position: center center;
         }
 
+        .collection-showcase {
+          padding: 22px 0 26px;
+          background: #fff;
+        }
+
+        .collection-showcase-heading {
+          margin: 0 12px 14px;
+          font-size: clamp(22px, 6.2vw, 28px);
+        }
+
+        .collection-showcase .collection-tabs {
+          gap: 20px;
+          margin: 0 12px 16px;
+        }
+
+        .collection-showcase .collection-tab {
+          font-size: 15px;
+        }
+
+        .collection-showcase .collection-track {
+          align-items: start;
+          gap: 8px;
+          padding: 0 12px 2px;
+          scroll-padding-inline: 12px;
+          grid-auto-columns: calc((100% - 16px) / 2.72);
+        }
+
+        .collection-showcase .collection-card-home {
+          display: flex;
+          flex-direction: column;
+          align-self: start;
+          min-width: 0;
+        }
+
+        .collection-showcase .collection-card-home img {
+          width: 100%;
+          aspect-ratio: 1.28;
+          object-fit: cover;
+        }
+
+        .collection-showcase .collection-card-home:hover {
+          box-shadow: none;
+        }
+
+        .collection-showcase .collection-card-home:hover img {
+          transform: none;
+        }
+
+        .collection-showcase .collection-card-home h3 {
+          display: -webkit-box;
+          margin: 8px 0 0;
+          min-height: 2.7em;
+          overflow: hidden;
+          font-size: clamp(10.5px, 2.85vw, 12.5px);
+          font-weight: 600;
+          letter-spacing: 0.01em;
+          line-height: 1.35;
+          text-align: center;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          line-clamp: 2;
+        }
+
+        .collection-showcase .collection-navigation {
+          gap: 12px;
+          margin-top: 14px;
+        }
+
+        .collection-showcase .collection-arrow {
+          width: 30px;
+          height: 30px;
+        }
+
+        .collection-showcase .collection-dots {
+          align-items: center;
+          justify-content: center;
+        }
+
+        .collection-showcase .collection-dot {
+          width: 6px;
+          height: 6px;
+          background: rgba(17, 17, 17, 0.22);
+        }
+
+        .collection-showcase .collection-dot.is-active {
+          width: 8px;
+          height: 8px;
+          outline: 1px solid #111;
+          outline-offset: 3px;
+          background: #111;
+        }
+
         .showcase-followup {
           padding: 32px 16px;
         }
@@ -1130,6 +1222,30 @@
 
         .brand-showcase-separator:nth-child(6) {
           display: none;
+        }
+      }
+
+      @media (max-width: 359px) {
+        .collection-showcase .collection-track {
+          gap: 8px;
+          padding: 0 10px 2px;
+          scroll-padding-inline: 10px;
+          grid-auto-columns: calc((100% - 16px) / 2.55);
+        }
+
+        .collection-showcase-heading,
+        .collection-showcase .collection-tabs {
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+      }
+
+      @media (min-width: 390px) and (max-width: 767px) {
+        .collection-showcase .collection-track {
+          gap: 10px;
+          padding: 0 14px 2px;
+          scroll-padding-inline: 14px;
+          grid-auto-columns: calc((100% - 20px) / 2.88);
         }
       }
 
@@ -1595,17 +1711,27 @@
 
       const collectionGap = 18;
       const originalCollectionCount = () => Number(activeCollectionTrack()?.dataset.originalCount || 0);
+      const isCollectionMobile = () => window.matchMedia('(max-width: 767px)').matches;
+
+      const collectionTrackGap = (track) => {
+        const gap = parseFloat(getComputedStyle(track).columnGap);
+        return Number.isFinite(gap) ? gap : collectionGap;
+      };
 
       const collectionStep = () => {
         const track = activeCollectionTrack();
         const card = track?.querySelector('.collection-card-home');
         if (!track || !card) return 0;
-        return card.getBoundingClientRect().width + collectionGap;
+        return card.getBoundingClientRect().width + collectionTrackGap(track);
       };
 
       const lockCollectionCardWidth = () => {
         const track = collectionTrack;
         if (!track) return;
+        if (isCollectionMobile()) {
+          track.style.gridAutoColumns = '';
+          return;
+        }
         const count = Number(track.dataset.originalCount || 5);
         const styles = getComputedStyle(track);
         const inner = track.clientWidth - parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight);

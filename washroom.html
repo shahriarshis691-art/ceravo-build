@@ -169,7 +169,16 @@
       const emptyState = document.querySelector('#washroom-empty');
       const brandFilterBar = document.querySelector('#washroom-brand-filters');
       const typeFilterBar = document.querySelector('#washroom-type-filters');
-      const washroomProducts = window.CERAVO_WASHROOM_PRODUCTS || [];
+      const orderByBrandGroup = (products) => {
+        const grouped = { khadim: [], mir: [], other: [] };
+        products.forEach((item) => {
+          if (item.brandSlug === 'khadim') grouped.khadim.push(item);
+          else if (item.brandSlug === 'mir') grouped.mir.push(item);
+          else grouped.other.push(item);
+        });
+        return grouped.khadim.concat(grouped.mir, grouped.other);
+      };
+      const washroomProducts = orderByBrandGroup(window.CERAVO_WASHROOM_PRODUCTS || []);
       const escapeHtml = (value) => String(value)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')

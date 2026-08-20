@@ -169,5 +169,15 @@
   khadimProduct({ id: 'kcl-m-487', sku: 'KCL-M-487', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-487' });
   khadimProduct({ id: 'kcl-m-488', sku: 'KCL-M-488', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-488' });
 
-  window.CERAVO_WASHROOM_PRODUCTS = catalog;
+  const orderByBrandGroup = (products) => {
+    const grouped = { khadim: [], mir: [], other: [] };
+    products.forEach((item) => {
+      if (item.brandSlug === 'khadim') grouped.khadim.push(item);
+      else if (item.brandSlug === 'mir') grouped.mir.push(item);
+      else grouped.other.push(item);
+    });
+    return grouped.khadim.concat(grouped.mir, grouped.other);
+  };
+
+  window.CERAVO_WASHROOM_PRODUCTS = orderByBrandGroup(catalog);
 })();

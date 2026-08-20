@@ -28,6 +28,7 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" />
     </noscript>
     <script src="assets/js/ceravo-ui.js" defer></script>
+    <script src="assets/js/hero-slider.js" defer></script>
     <style>
       :root {
         --ceravo-taupe: #5c524a;
@@ -184,7 +185,10 @@
         position: relative;
         height: 550px;
         overflow: hidden;
+        isolation: isolate;
         background: #111;
+        touch-action: pan-y;
+        contain: layout style;
         transform: translate3d(0, 0, 0);
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
@@ -193,44 +197,115 @@
       .hero-slide {
         position: absolute;
         inset: 0;
+        z-index: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-size: cover;
-        background-position: center;
         opacity: 0;
-        transition: opacity 0.8s ease;
-        transform: translate3d(0, 0, 0);
+        pointer-events: none;
+        transform: translate3d(5.5%, 0, 0);
+        transition:
+          transform 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.92s cubic-bezier(0.33, 0.05, 0.2, 1);
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
       }
 
       .hero-slide.is-active {
+        z-index: 1;
         opacity: 1;
+        pointer-events: auto;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .hero-slide.is-prepared-left,
+      .hero-slide.is-prepared-right {
+        z-index: 2;
+        opacity: 0;
+        transition: none;
+      }
+
+      .hero-slide.is-prepared-left {
+        transform: translate3d(-5.5%, 0, 0);
+      }
+
+      .hero-slide.is-prepared-right {
+        transform: translate3d(5.5%, 0, 0);
+      }
+
+      .hero-slide.is-leave-left,
+      .hero-slide.is-leave-right {
+        z-index: 1;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .hero-slide.is-leave-left {
+        transform: translate3d(-5.5%, 0, 0);
+      }
+
+      .hero-slide.is-leave-right {
+        transform: translate3d(5.5%, 0, 0);
+      }
+
+      .hero.is-dragging .hero-slide {
+        transition: none;
+      }
+
+      .hero.is-animating .hero-slide,
+      .hero.is-dragging .hero-slide {
+        will-change: transform, opacity;
+      }
+
+      .hero-media {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        contain: paint;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .hero-media-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        pointer-events: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        transform: translate3d(0, 0, 0) scale(1.018);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+
+      .hero-media-img:not([src]) {
+        opacity: 0;
+      }
+
+      .hero-slide.is-active .hero-media-img {
+        animation: hero-drift 8.6s cubic-bezier(0.25, 0.08, 0.25, 1) both;
+      }
+
+      .hero.is-dragging .hero-slide.is-active .hero-media-img {
+        animation-play-state: paused;
+      }
+
+      @keyframes hero-drift {
+        from { transform: translate3d(0, 0, 0) scale(1.018); }
+        to { transform: translate3d(-1.2%, -0.7%, 0) scale(1.045); }
       }
 
       .hero-slide::before {
         content: "";
         position: absolute;
         inset: 0;
+        z-index: 1;
         background: linear-gradient(180deg, rgba(42, 34, 28, 0.08), rgba(0,0,0,0.12));
       }
 
-      .hero-slide-one {
-        background-image: url('assets/images/download.jpg');
-      }
-
-      .hero-slide-two {
-        background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=72');
-      }
-
-      @media (min-width: 768px) {
-        .hero-slide-two {
-          background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80');
-        }
-      }
-
-      .hero-copy {
+        .hero-copy {
         position: absolute;
         left: 50%;
         bottom: auto;
@@ -238,7 +313,7 @@
         transform: translate3d(-50%, -50%, 0);
         text-align: center;
         color: rgba(255,255,255,0.95);
-        z-index: 1;
+        z-index: 2;
         width: min(92%, 620px);
         letter-spacing: 0;
         text-transform: none;
@@ -1038,6 +1113,7 @@
         }
 
         .hero-slide,
+        .hero-slide.is-active .hero-media-img,
         .collection-panel.is-active,
         .site-menu,
         .site-menu-panel {
@@ -1121,12 +1197,37 @@
       <main>
         <section class="hero" aria-label="Luxury interior banner">
           <div class="hero-slide hero-slide-one is-active" data-slide="0">
+            <div class="hero-media">
+              <img
+                class="hero-media-img"
+                src="assets/images/download.jpg"
+                alt=""
+                width="1600"
+                height="900"
+                decoding="async"
+                fetchpriority="high"
+                draggable="false"
+              />
+            </div>
             <div class="hero-copy">
               <span>Crafted for Elevated Interiors</span>
               <a class="hero-discover" href="tiles.html">DISCOVER MORE</a>
             </div>
           </div>
           <div class="hero-slide hero-slide-two" data-slide="1">
+            <div class="hero-media">
+              <img
+                class="hero-media-img"
+                alt=""
+                width="1600"
+                height="900"
+                decoding="async"
+                draggable="false"
+                data-src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80"
+                data-srcset="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80 900w, https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80 1600w"
+                sizes="100vw"
+              />
+            </div>
             <div class="hero-copy">
               <span>Surfaces with Presence</span>
               <a class="hero-discover" href="tiles.html">DISCOVER MORE</a>
@@ -1300,63 +1401,7 @@
     </div>
 
     <script>
-      const hero = document.querySelector('.hero');
-      const heroSlides = [...document.querySelectorAll('.hero-slide')];
-      const heroDots = [...document.querySelectorAll('.hero-dot')];
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let activeHeroSlide = 0;
-      let heroTimer;
-      let touchStartX = 0;
-
-      const showHeroSlide = (slideIndex) => {
-        activeHeroSlide = (slideIndex + heroSlides.length) % heroSlides.length;
-        heroSlides.forEach((slide, index) => slide.classList.toggle('is-active', index === activeHeroSlide));
-        heroDots.forEach((dot, index) => {
-          dot.classList.toggle('is-active', index === activeHeroSlide);
-          dot.setAttribute('aria-current', index === activeHeroSlide ? 'true' : 'false');
-        });
-      };
-
-      const startHeroTimer = () => {
-        if (reducedMotion) return;
-        clearInterval(heroTimer);
-        heroTimer = setInterval(() => showHeroSlide(activeHeroSlide + 1), 6000);
-      };
-
-      document.querySelector('[data-hero-previous]').addEventListener('click', () => {
-        showHeroSlide(activeHeroSlide - 1);
-        startHeroTimer();
-      });
-
-      document.querySelector('[data-hero-next]').addEventListener('click', () => {
-        showHeroSlide(activeHeroSlide + 1);
-        startHeroTimer();
-      });
-
-      heroDots.forEach((dot) => {
-        dot.addEventListener('click', () => {
-          showHeroSlide(Number(dot.dataset.heroDot));
-          startHeroTimer();
-        });
-      });
-
-      hero.addEventListener('mouseenter', () => clearInterval(heroTimer));
-      hero.addEventListener('mouseleave', startHeroTimer);
-      hero.addEventListener('focusin', () => clearInterval(heroTimer));
-      hero.addEventListener('focusout', startHeroTimer);
-      hero.addEventListener('touchstart', (event) => {
-        touchStartX = event.changedTouches[0].screenX;
-      }, { passive: true });
-      hero.addEventListener('touchend', (event) => {
-        const touchDistance = event.changedTouches[0].screenX - touchStartX;
-        if (Math.abs(touchDistance) > 45) {
-          showHeroSlide(activeHeroSlide + (touchDistance < 0 ? 1 : -1));
-          startHeroTimer();
-        }
-      }, { passive: true });
-
-      showHeroSlide(0);
-      requestAnimationFrame(startHeroTimer);
 
       const collectionFilm = document.querySelector('.collection-film-video');
       const collectionFilmWrap = document.querySelector('.collection-film');

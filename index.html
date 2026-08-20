@@ -414,11 +414,28 @@
         min-height: 124px;
         background: #000;
         color: #fff;
+        overflow: hidden;
+        touch-action: pan-y;
+        overscroll-behavior-x: contain;
+      }
+
+      .brand-showcase-track {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
         align-items: center;
         justify-items: center;
+        min-height: 124px;
         padding: 0 24px;
+      }
+
+      .brand-showcase-group {
+        display: contents;
+      }
+
+      .brand-showcase-group--clone,
+      .brand-showcase-separator--loop,
+      .brand-showcase-break {
+        display: none;
       }
 
       .brand-showcase-name {
@@ -442,10 +459,6 @@
         font-size: clamp(15px, 2.4vw, 28px);
         font-weight: 300;
         line-height: 1;
-      }
-
-      .brand-showcase-break {
-        display: none;
       }
 
       .collection-showcase {
@@ -1149,52 +1162,80 @@
         }
 
         .brand-showcase {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center;
-          column-gap: 10px;
-          row-gap: 14px;
-          padding: 22px 12px;
+          display: block;
+          min-height: 58px;
+          padding: 0;
           max-width: 100%;
-          min-width: 0;
+        }
+
+        .brand-showcase-track {
+          display: flex;
+          align-items: center;
+          width: max-content;
+          min-height: 58px;
+          padding: 0;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          transform: translate3d(0, 0, 0);
+        }
+
+        .brand-showcase-track:has(.brand-showcase-group--clone) {
+          animation: brand-marquee 34s linear infinite;
+          will-change: transform;
+        }
+
+        .brand-showcase-group {
+          display: flex;
+          flex: 0 0 auto;
+          flex-wrap: nowrap;
+          align-items: center;
+          gap: 18px;
+          padding: 18px 0 18px 18px;
+        }
+
+        .brand-showcase-group--clone {
+          display: flex;
         }
 
         .brand-showcase-name {
           flex: 0 0 auto;
-          font-size: clamp(13px, 3.4vw, 16px);
-          letter-spacing: 0.05em;
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
         }
 
         .brand-showcase-separator {
+          display: flex;
           flex: 0 0 auto;
-          font-size: 15px;
+          color: rgba(255, 255, 255, 0.38);
+          font-size: 13px;
+          font-weight: 300;
         }
+
+        .brand-showcase-break {
+          display: none;
+        }
+
+        .brand-showcase-separator--loop {
+          display: flex;
+        }
+      }
+
+      @keyframes brand-marquee {
+        from { transform: translate3d(0, 0, 0); }
+        to { transform: translate3d(-50%, 0, 0); }
       }
 
       @media (max-width: 640px) {
         .brand-showcase-break {
-          display: block;
-          flex: 0 0 100%;
-          width: 100%;
-          height: 0;
-          overflow: hidden;
-        }
-
-        .brand-showcase-separator:nth-child(6) {
           display: none;
         }
       }
 
       @media (max-width: 420px) {
-        .brand-showcase {
-          column-gap: 6px;
-          padding: 18px 8px;
-        }
-
         .brand-showcase-name {
-          font-size: clamp(11px, 3vw, 13px);
-          letter-spacing: 0.05em;
+          font-size: 12px;
+          letter-spacing: 0.07em;
         }
 
         .brand-showcase-separator {
@@ -1288,6 +1329,28 @@
         .collection-film-poster {
           filter: none;
           transform: none;
+        }
+
+        .brand-showcase-track {
+          animation: none !important;
+          will-change: auto;
+          transform: none;
+        }
+
+        .brand-showcase-group--clone {
+          display: none;
+        }
+      }
+
+      @media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+        .brand-showcase {
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+        }
+
+        .brand-showcase::-webkit-scrollbar {
+          display: none;
         }
       }
     </style>
@@ -1395,16 +1458,20 @@
         </section>
 
         <section class="brand-showcase" aria-label="SHATHI GROUP companies">
-          <a class="brand-showcase-name" href="ceravo-brand.html">CERAVO</a>
-          <div class="brand-showcase-separator" aria-hidden="true">|</div>
-          <a class="brand-showcase-name" href="shis-fashion.html">SHIS FASHION</a>
-          <div class="brand-showcase-separator" aria-hidden="true">|</div>
-          <a class="brand-showcase-name" href="xeroxii.html">XEROXII</a>
-          <div class="brand-showcase-separator" aria-hidden="true">|</div>
-          <div class="brand-showcase-break" aria-hidden="true"></div>
-          <a class="brand-showcase-name" href="ghorwa-tea.html">GHORWA TEA</a>
-          <div class="brand-showcase-separator" aria-hidden="true">|</div>
-          <a class="brand-showcase-name" href="https://velorix.cc" target="_blank" rel="noopener noreferrer">VELORIX MOTORS</a>
+          <div class="brand-showcase-track">
+            <div class="brand-showcase-group">
+              <a class="brand-showcase-name" href="ceravo-brand.html">CERAVO</a>
+              <div class="brand-showcase-separator" aria-hidden="true">|</div>
+              <a class="brand-showcase-name" href="shis-fashion.html">SHIS FASHION</a>
+              <div class="brand-showcase-separator" aria-hidden="true">|</div>
+              <a class="brand-showcase-name" href="xeroxii.html">XEROXII</a>
+              <div class="brand-showcase-separator" aria-hidden="true">|</div>
+              <a class="brand-showcase-name" href="ghorwa-tea.html">GHORWA TEA</a>
+              <div class="brand-showcase-separator" aria-hidden="true">|</div>
+              <a class="brand-showcase-name" href="https://velorix.cc" target="_blank" rel="noopener noreferrer">VELORIX MOTORS</a>
+              <div class="brand-showcase-separator brand-showcase-separator--loop" aria-hidden="true">|</div>
+            </div>
+          </div>
         </section>
 
         <section class="collection-showcase" aria-label="Explore CERAVO categories">
@@ -1938,6 +2005,18 @@
       preloadCollectionImage(0);
       preloadCollectionImage(1);
       startCollectionAutoplay();
+
+      const brandTrack = document.querySelector('.brand-showcase-track');
+      const brandGroup = brandTrack?.querySelector('.brand-showcase-group');
+      if (brandTrack && brandGroup && !brandTrack.querySelector('.brand-showcase-group--clone')) {
+        const brandClone = brandGroup.cloneNode(true);
+        brandClone.classList.add('brand-showcase-group--clone');
+        brandClone.setAttribute('aria-hidden', 'true');
+        brandClone.querySelectorAll('a').forEach((link) => {
+          link.tabIndex = -1;
+        });
+        brandTrack.appendChild(brandClone);
+      }
     </script>
     <div class="contact-float" style="position:fixed;right:18px;bottom:18px;z-index:30;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><a href="tel:+8801979614216" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#171513;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">Call Now</a><a href="https://wa.me/8801979614216?text=Hello%20CERAVO%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#1d8b55;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">WhatsApp</a></div>
   </body>

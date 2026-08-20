@@ -28,6 +28,10 @@
       .brand-wordmark { display: block; font: 700 clamp(23px, 3vw, 36px)/.85 'Cormorant Garamond', serif; letter-spacing: .1em; }
       .brand-subtitle { display: block; margin-top: 5px; font-size: 9px; letter-spacing: .25em; }
       .icon-button { width: 36px; height: 36px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; }
+      .hero { position: relative; overflow: hidden; width: 100%; max-width: 100%; min-height: min(52vh, 560px); height: min(52vh, 560px); background: #111; }
+      .hero-video { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: 100%; object-fit: cover; object-position: center center; pointer-events: none; background: #111; }
+      .hero-video::-webkit-media-controls, .hero-video::-webkit-media-controls-enclosure, .hero-video::-webkit-media-controls-panel, .hero-video::-webkit-media-controls-start-playback-button { display: none !important; opacity: 0; }
+      .hero-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(17,17,17,.18) 0%, rgba(17,17,17,.06) 42%, rgba(17,17,17,.32) 100%); }
       .listing-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding: 34px 3.3% 18px; }
       .eyebrow { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
       .listing-header h2 { margin: 0; font: 600 clamp(36px, 5vw, 60px)/.9 'Cormorant Garamond', serif; }
@@ -36,6 +40,7 @@
       .brand-filter { padding: 11px 18px; border: 1px solid var(--ink); background: transparent; font: 800 11px 'Manrope', sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
       .brand-filter.is-active, .brand-filter:hover { background: var(--ink); color: #fff; }
       .filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 3.3% 22px; }
+      #washroom-type-filters { display: contents; }
       .filter { padding: 10px 16px; border: 1px solid var(--ink); background: transparent; font: 700 11px 'Manrope', sans-serif; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
       .filter.is-active, .filter:hover { background: var(--ink); color: #fff; }
       .filter-control { display: inline-flex; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid rgba(17,17,17,.35); color: rgba(17,17,17,.68); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
@@ -44,6 +49,8 @@
       .filter-control input::placeholder { color: rgba(17,17,17,.42); text-transform: none; }
       .listing-empty { display: none; margin: 0; padding: 0 3.3% 36px; color: rgba(17,17,17,.62); font-size: 14px; }
       .listing-empty.is-visible { display: block; }
+      .product-media.is-empty { aspect-ratio: 1; display: grid; place-items: center; padding: 16px; background: #f4f1ec; text-align: center; }
+      .product-media-placeholder { color: rgba(17,17,17,.48); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
       .product-grid { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 0 3.3% 42px; background: #f7f7f7; }
       .product-card { min-width: 0; overflow: hidden; background: #fff; transition: box-shadow .35s ease; }
       .product-card[hidden] { display: none; }
@@ -80,8 +87,8 @@
       .site-menu-link { display: block; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 600; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
       @media (min-width: 640px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
       @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
-      @media (max-width: 760px) { .listing-header { display: block; } .listing-header h2 { margin-bottom: 18px; } .brand-filters, .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .brand-filters::-webkit-scrollbar, .filters::-webkit-scrollbar { display: none; } .filters { padding-bottom: 18px; } .brand-filter, .filter, .filter-control { flex: 0 0 auto; min-height: 44px; } .product-grid { gap: 16px; } .product-body { padding: 14px 14px 16px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
-      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .listing-header, .brand-filters, .filters, .product-grid, .listing-empty { padding-left: 16px; padding-right: 16px; } }
+      @media (max-width: 760px) { .hero { height: auto; min-height: 0; aspect-ratio: 9 / 16; max-height: 78vh; } .hero-video { object-fit: cover; object-position: center center; } .listing-header { display: block; } .listing-header h2 { margin-bottom: 18px; } .brand-filters, .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .brand-filters::-webkit-scrollbar, .filters::-webkit-scrollbar { display: none; } .filters { padding-bottom: 18px; } .brand-filter, .filter, .filter-control { flex: 0 0 auto; min-height: 44px; } .product-grid { gap: 16px; } .product-body { padding: 14px 14px 16px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
+      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .hero { max-height: 72vh; } .listing-header, .brand-filters, .filters, .product-grid, .listing-empty { padding-left: 16px; padding-right: 16px; } }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } .product-card:hover .product-media img { transform: none; } }
     </style>
     <link rel="stylesheet" href="assets/css/founder-message.css" media="print" onload="this.media='all'" />
@@ -92,26 +99,34 @@
   <body>
     <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
     <main>
+      <section class="hero" aria-label="Washroom atmosphere">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          webkit-playsinline
+          preload="metadata"
+          disablepictureinpicture
+          disableremoteplayback
+          controlslist="nodownload nofullscreen noremoteplayback"
+          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 16'%3E%3Crect width='9' height='16' fill='%23111111'/%3E%3C/svg%3E"
+          aria-hidden="true"
+        >
+          <source src="assets/videos/washroom-hero.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-scrim" aria-hidden="true"></div>
+      </section>
       <section class="listing-header"><div><p class="eyebrow">CERAVO washroom · MIR · KHADIM · DBL · FRESH</p><h2>Washroom Tiles</h2></div><p>Wall tiles, floor tiles, and matching wall + floor collections from Bangladesh ceramic manufacturers — published models only, ready to enquire.</p></section>
-      <div class="brand-filters" role="group" aria-label="Filter washroom tiles by brand">
-        <button class="brand-filter is-active" type="button" data-brand-filter="all">All Brands</button>
-        <button class="brand-filter" type="button" data-brand-filter="mir">MIR Ceramic</button>
-        <button class="brand-filter" type="button" data-brand-filter="khadim">Khadim Ceramic</button>
-        <button class="brand-filter" type="button" data-brand-filter="dbl">DBL Ceramics</button>
-        <button class="brand-filter" type="button" data-brand-filter="fresh">Fresh Ceramics</button>
-      </div>
+      <div class="brand-filters" role="group" aria-label="Filter washroom tiles by brand" id="washroom-brand-filters"></div>
       <div class="filters" role="group" aria-label="Filter washroom tiles">
-        <button class="filter is-active" type="button" data-filter="all">All</button>
-        <button class="filter" type="button" data-filter="wall">Wall Tiles</button>
-        <button class="filter" type="button" data-filter="floor">Floor Tiles</button>
-        <button class="filter" type="button" data-filter="wall-floor">Matching Wall + Floor</button>
-        <label class="filter-control">Size<select data-filter-select="size" aria-label="Filter by size"><option value="all">All sizes</option><option value="20x120">20 × 120 cm</option><option value="30x50">30 × 50 cm</option><option value="30x60">30 × 60 cm</option><option value="60x60">60 × 60 cm</option><option value="not-specified">Not specified</option></select></label>
-        <label class="filter-control">Color<select data-filter-select="color" aria-label="Filter by color"><option value="all">All colours</option><option value="Ivory">Ivory</option><option value="Brown">Brown</option><option value="Blue">Blue</option><option value="Pink">Pink</option><option value="Beige">Beige</option><option value="Cream">Cream</option><option value="Grey">Grey</option><option value="Not specified">Not specified</option></select></label>
-        <label class="filter-control">Finish<select data-filter-select="finish" aria-label="Filter by finish"><option value="all">All finishes</option><option value="Glossy">Glossy</option><option value="Matt">Matt</option><option value="Punch Glossy">Punch Glossy</option><option value="Curving Matt">Curving Matt</option><option value="Dosing">Dosing</option><option value="Glazed Mirror Polish">Glazed Mirror Polish</option><option value="Not specified">Not specified</option></select></label>
-        <label class="filter-control">Surface<select data-filter-select="surface" aria-label="Filter by surface"><option value="all">All surfaces</option><option value="Glossy">Glossy</option><option value="Punch">Punch</option><option value="Punch Glossy">Punch Glossy</option><option value="Curving Matt">Curving Matt</option><option value="Dosing">Dosing</option><option value="Glazed Mirror Polish">Glazed Mirror Polish</option><option value="Sugar">Sugar</option><option value="Not specified">Not specified</option></select></label>
-        <label class="filter-control">Effect<select data-filter-select="effect" aria-label="Filter by effect"><option value="all">All effects</option><option value="Pattern">Pattern</option><option value="Stone">Stone</option><option value="Marble">Marble</option><option value="Wooden">Wooden</option><option value="Wood">Wood</option><option value="Geometric">Geometric</option><option value="Cement">Cement</option><option value="Not specified">Not specified</option></select></label>
-        <label class="filter-control">Collection<select data-filter-select="collection" aria-label="Filter by collection"><option value="all">All collections</option><option value="Odyssey">Odyssey</option><option value="Diseno">Diseno</option><option value="Eternal">Eternal</option><option value="Glossy Wall">Glossy Wall</option><option value="Sugar Effect">Sugar Effect</option><option value="Mattestic">Mattestic</option><option value="DewDrop">DewDrop</option><option value="Candy">Candy</option><option value="Wooden Matt Carving Planks">Wooden Matt Carving Planks</option><option value="Fair Face">Fair Face</option><option value="Glossy Punch">Glossy Punch</option><option value="Not specified">Not specified</option></select></label>
-        <label class="filter-control">Availability<select data-filter-select="availability" aria-label="Filter by availability"><option value="all">All</option><option value="Not specified">Not specified</option></select></label>
+        <div id="washroom-type-filters"></div>
+        <label class="filter-control">Size<select data-filter-select="size" aria-label="Filter by size"><option value="all">All sizes</option></select></label>
+        <label class="filter-control">Color<select data-filter-select="color" aria-label="Filter by color"><option value="all">All colours</option></select></label>
+        <label class="filter-control">Finish<select data-filter-select="finish" aria-label="Filter by finish"><option value="all">All finishes</option></select></label>
+        <label class="filter-control">Surface<select data-filter-select="surface" aria-label="Filter by surface"><option value="all">All surfaces</option></select></label>
+        <label class="filter-control">Collection<select data-filter-select="collection" aria-label="Filter by collection"><option value="all">All collections</option></select></label>
         <label class="filter-control">Search<input id="washroom-search" type="search" placeholder="MIR 30x60" aria-label="Search washroom tiles" autocomplete="off" /></label>
       </div>
       <p class="listing-empty" id="washroom-empty">No washroom tiles match these filters.</p>
@@ -132,20 +147,90 @@
     <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="washroom.html">Washroom</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="contact.html">Contact Us</a></nav></div>
     <script src="assets/js/washroom-products.js"></script>
     <script>
+      const heroVideo = document.querySelector('.hero-video');
+      if (heroVideo) {
+        heroVideo.muted = true;
+        heroVideo.defaultMuted = true;
+        heroVideo.playsInline = true;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const playHero = () => {
+          if (reducedMotion) {
+            heroVideo.pause();
+            return;
+          }
+          heroVideo.play().catch(() => {});
+        };
+        if (heroVideo.readyState >= 2) playHero();
+        else heroVideo.addEventListener('loadeddata', playHero, { once: true });
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) heroVideo.pause();
+          else playHero();
+        });
+      }
+
       const productGrid = document.querySelector('#washroom-product-grid');
       const emptyState = document.querySelector('#washroom-empty');
+      const brandFilterBar = document.querySelector('#washroom-brand-filters');
+      const typeFilterBar = document.querySelector('#washroom-type-filters');
       const washroomProducts = window.CERAVO_WASHROOM_PRODUCTS || [];
+      const escapeHtml = (value) => String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+      const uniqueValues = (key) => {
+        const seen = new Set();
+        washroomProducts.forEach((item) => {
+          if (item[key]) seen.add(item[key]);
+        });
+        return Array.from(seen).sort((a, b) => {
+          if (a === 'Not specified') return 1;
+          if (b === 'Not specified') return -1;
+          return a.localeCompare(b);
+        });
+      };
+      const tileTypeLabel = (tileType) => {
+        if (tileType === 'Wall') return 'Wall Tiles';
+        if (tileType === 'Floor') return 'Floor Tiles';
+        if (tileType === 'Wall & Floor') return 'Matching Wall + Floor';
+        return tileType;
+      };
+      const brandsInData = ['mir', 'khadim', 'dbl', 'fresh']
+        .map((slug) => washroomProducts.find((item) => item.brandSlug === slug))
+        .filter(Boolean)
+        .map((item) => ({ slug: item.brandSlug, name: item.brand }));
+      brandFilterBar.innerHTML = `<button class="brand-filter is-active" type="button" data-brand-filter="all">All Brands</button>${brandsInData.map((brand) => `<button class="brand-filter" type="button" data-brand-filter="${escapeHtml(brand.slug)}">${escapeHtml(brand.name)}</button>`).join('')}`;
+      typeFilterBar.innerHTML = `<button class="filter is-active" type="button" data-filter="all">All</button>${uniqueValues('tileType').map((tileType) => `<button class="filter" type="button" data-filter="${escapeHtml(tileType)}">${escapeHtml(tileTypeLabel(tileType))}</button>`).join('')}`;
+      [
+        ['size', uniqueValues('size')],
+        ['color', uniqueValues('color')],
+        ['finish', uniqueValues('finish')],
+        ['surface', uniqueValues('surface')],
+        ['collection', uniqueValues('collection')]
+      ].forEach(([name, values]) => {
+        const select = document.querySelector(`[data-filter-select="${name}"]`);
+        values.forEach((value) => {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = value;
+          select.appendChild(option);
+        });
+      });
+
       productGrid.innerHTML = washroomProducts.map((item, index) => {
-        const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${item.title} (${item.code}).`);
+        const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${item.productName} (${item.sku}).`);
+        const media = item.hasManufacturerImage
+          ? `<span class="product-media"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.brand)} ${escapeHtml(item.productName)}" width="600" height="600" loading="${index < 2 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} /></span>`
+          : `<span class="product-media is-empty" aria-label="Product image not specified"><span class="product-media-placeholder">Image not specified</span></span>`;
         return `
-        <article class="product-card" data-brand="${item.brandSlug}" data-tile-type="${item.tileTypeSlug}" data-size="${item.sizeSlug}" data-color="${item.color}" data-finish="${item.finish}" data-surface="${item.surface}" data-effect="${item.effect}" data-collection="${item.collection}" data-availability="${item.availability}" data-search="${item.searchText}">
-          <a class="product-card-link" href="product-detail.html?product=${item.id}">
-            <span class="product-media"><img src="${item.image}" alt="${item.brand} ${item.title}" width="600" height="600" loading="${index < 2 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} /></span>
+        <article class="product-card" data-brand="${escapeHtml(item.brandSlug)}" data-tile-type="${escapeHtml(item.tileType)}" data-size="${escapeHtml(item.size)}" data-color="${escapeHtml(item.color)}" data-finish="${escapeHtml(item.finish)}" data-surface="${escapeHtml(item.surface)}" data-collection="${escapeHtml(item.collection)}" data-search="${escapeHtml(item.searchText)}">
+          <a class="product-card-link" href="product-detail.html?product=${escapeHtml(item.id)}">
+            ${media}
             <div class="product-body">
-              <div class="product-meta"><span class="product-brand-tag">${item.brand}</span></div>
-              <h3>${item.title}</h3>
-              <p class="product-model">Model: ${item.code}</p>
-              <dl class="product-specs"><div><dt>Type</dt><dd>${item.tileType}</dd></div><div><dt>Size</dt><dd>${item.size}</dd></div><div><dt>Finish</dt><dd>${item.finish}</dd></div></dl>
+              <div class="product-meta"><span class="product-brand-tag">${escapeHtml(item.brand)}</span></div>
+              <h3>${escapeHtml(item.productName)}</h3>
+              <p class="product-model">Model: ${escapeHtml(item.sku)}</p>
+              <dl class="product-specs"><div><dt>Type</dt><dd>${escapeHtml(item.tileType)}</dd></div><div><dt>Size</dt><dd>${escapeHtml(item.size)}</dd></div><div><dt>Finish</dt><dd>${escapeHtml(item.finish)}</dd></div></dl>
             </div>
           </a>
           <div class="product-card-actions">
@@ -156,11 +241,11 @@
       `;
       }).join('');
 
-      const activeFilters = { brand: 'all', tileType: 'all', size: 'all', color: 'all', finish: 'all', surface: 'all', effect: 'all', collection: 'all', availability: 'all' };
+      const activeFilters = { brand: 'all', tileType: 'all', size: 'all', color: 'all', finish: 'all', surface: 'all', collection: 'all' };
       let searchQuery = '';
       const normalizeQuery = (value) => String(value).toLowerCase().replace(/×/g, 'x').replace(/\s+/g, ' ').trim();
       const applyListingFilters = () => {
-        const query = normalizeQuery(searchQuery);
+        const tokens = normalizeQuery(searchQuery).split(' ').filter(Boolean);
         let visibleCount = 0;
         document.querySelectorAll('.product-card').forEach((card) => {
           const brandMatch = activeFilters.brand === 'all' || card.dataset.brand === activeFilters.brand;
@@ -169,11 +254,10 @@
           const colorMatch = activeFilters.color === 'all' || card.dataset.color === activeFilters.color;
           const finishMatch = activeFilters.finish === 'all' || card.dataset.finish === activeFilters.finish;
           const surfaceMatch = activeFilters.surface === 'all' || card.dataset.surface === activeFilters.surface;
-          const effectMatch = activeFilters.effect === 'all' || card.dataset.effect === activeFilters.effect;
           const collectionMatch = activeFilters.collection === 'all' || card.dataset.collection === activeFilters.collection;
-          const availabilityMatch = activeFilters.availability === 'all' || card.dataset.availability === activeFilters.availability;
-          const searchMatch = !query || (card.dataset.search || '').includes(query) || query.split(' ').every((token) => (card.dataset.search || '').includes(token));
-          const isVisible = brandMatch && typeMatch && sizeMatch && colorMatch && finishMatch && surfaceMatch && effectMatch && collectionMatch && availabilityMatch && searchMatch;
+          const haystack = card.dataset.search || '';
+          const searchMatch = !tokens.length || tokens.every((token) => haystack.includes(token));
+          const isVisible = brandMatch && typeMatch && sizeMatch && colorMatch && finishMatch && surfaceMatch && collectionMatch && searchMatch;
           card.hidden = !isVisible;
           if (isVisible) visibleCount += 1;
         });

@@ -1,61 +1,64 @@
 (function () {
   const unspecified = 'Not specified';
-
-  const plate = (brand, name, code) =>
-    'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
-      `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800"><rect width="800" height="800" fill="#f4f1ec"/><rect x="40" y="40" width="720" height="720" fill="none" stroke="#171513" stroke-width="1.5"/><text x="400" y="350" text-anchor="middle" font-family="Times New Roman, serif" font-size="28" fill="#171513">${brand}</text><text x="400" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#171513">${name}</text><text x="400" y="442" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#6b645c">${code}</text><text x="400" y="510" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" letter-spacing="2.4" fill="#6b645c">OFFICIAL PRODUCT PHOTO NOT PUBLISHED</text></svg>`
-    );
+  const BRAND_NAMES = {
+    mir: 'MIR Ceramic',
+    khadim: 'Khadim Ceramic',
+    dbl: 'DBL Ceramics',
+    fresh: 'Fresh Ceramics'
+  };
 
   const mirTile = (code) => `https://mirceramic.com/public/upload/multi_${String(code).toLowerCase()}.jpg`;
   const khadimImg = (path) => `https://i0.wp.com/khadimceramic.com/wp-content/uploads/${path}?w=900&ssl=1`;
+  const isManufacturerImage = (src) => typeof src === 'string' && /^https?:\/\//i.test(src) && !src.startsWith('data:');
+  const tileTypeSlugFor = (tileType) => {
+    if (!tileType || tileType === unspecified) return 'not-specified';
+    if (tileType === 'Wall') return 'wall';
+    if (tileType === 'Floor') return 'floor';
+    if (tileType === 'Wall & Floor') return 'wall-floor';
+    return 'not-specified';
+  };
 
   const product = (item) => {
+    const brand = BRAND_NAMES[item.brandSlug] || item.brand;
+    const productName = item.productName || item.title;
+    const sku = item.sku || item.code || unspecified;
     const collection = item.collection || unspecified;
+    const tileType = item.tileType || unspecified;
+    const size = item.size || unspecified;
     const color = item.color || unspecified;
     const finish = item.finish || unspecified;
     const surface = item.surface || unspecified;
     const effect = item.effect || unspecified;
     const suitableSpace = item.suitableSpace || unspecified;
     const availability = item.availability || unspecified;
-    const images = item.images && item.images.length ? item.images : [plate(item.brand, item.title, item.code)];
+    const images = (item.images || []).filter(isManufacturerImage);
+    const sizeSearch = String(size).toLowerCase().replace(/×/g, 'x').replace(/\s+/g, ' ');
     return {
       id: item.id,
       brandSlug: item.brandSlug,
-      brand: item.brand,
-      title: item.title,
-      code: item.code,
+      brand,
+      productName,
+      title: productName,
+      sku,
+      code: sku,
       collection,
-      tileType: item.tileType,
-      tileTypeSlug: item.tileTypeSlug,
-      size: item.size,
-      sizeSlug: item.sizeSlug,
+      tileType,
+      tileTypeSlug: tileTypeSlugFor(tileType),
+      size,
       finish,
       surface,
       color,
       effect,
       suitableSpace,
       availability,
-      shortDescription: item.shortDescription,
-      description: item.description,
-      sourceUrl: item.sourceUrl,
-      sourceLabel: item.sourceLabel,
-      image: images[0],
+      shortDescription: item.shortDescription || '',
+      description: item.description || unspecified,
+      sourceUrl: item.sourceUrl || '',
+      sourceLabel: item.sourceLabel || unspecified,
       images,
-      searchText: [
-        item.brand,
-        item.title,
-        item.code,
-        collection,
-        item.tileType,
-        item.tileTypeSlug,
-        'tiles',
-        item.size,
-        finish,
-        surface,
-        color,
-        effect,
-        String(item.size).replace(/×/g, 'x').replace(/\s+/g, '')
-      ].join(' ').toLowerCase()
+      image: images[0] || '',
+      hasManufacturerImage: images.length > 0,
+      searchText: [brand, productName, sku, collection, size, sizeSearch, sizeSearch.replace(/\s+/g, '')].join(' ').toLowerCase()
     };
   };
 
@@ -686,7 +689,7 @@
       id: 'fresh-fair-face',
       brandSlug: 'fresh',
       brand: 'Fresh Ceramics',
-      title: 'Fair Face Rustic Matt',
+      title: 'Fair Face-finished Rustic Matt Tiles',
       code: unspecified,
       collection: 'Fair Face',
       tileType: unspecified,

@@ -25,9 +25,21 @@
       .brand-wordmark { display: block; font: 700 clamp(23px, 3vw, 36px)/.85 'Cormorant Garamond', serif; letter-spacing: .1em; }
       .brand-subtitle { display: block; margin-top: 5px; font-size: 9px; letter-spacing: .25em; }
       .icon-button { width: 36px; height: 36px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; }
-      .hero { display: none; }
-      .hero h1 { max-width: 700px; margin: 0; font: 600 clamp(44px, 7vw, 86px)/.86 'Cormorant Garamond', serif; }
-      .hero p { max-width: 470px; margin: 14px 0 0; font-size: 14px; line-height: 1.7; }
+      .hero { position: relative; overflow: hidden; width: 100%; height: 100vh; height: 100dvh; background: #0a0a0a; }
+      .hero-frame { position: relative; z-index: 1; width: 100%; height: 100%; }
+      .hero-video { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center center; pointer-events: none; background: #0a0a0a; }
+      .hero-video::-webkit-media-controls, .hero-video::-webkit-media-controls-enclosure, .hero-video::-webkit-media-controls-panel, .hero-video::-webkit-media-controls-start-playback-button { display: none !important; opacity: 0; }
+      .hero-overlay { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 45%, rgba(0,0,0,.3) 100%); }
+      .hero-copy { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 0 24px calc(48px + env(safe-area-inset-bottom, 0px)); color: #fff; }
+      .hero-copy h1 { max-width: 18ch; margin: 0; font: 600 clamp(36px, 8vw, 64px)/.9 'Cormorant Garamond', serif; }
+      .hero-copy p { max-width: 36ch; margin: 12px 0 0; color: rgba(255,255,255,.86); font-size: 14px; line-height: 1.7; }
+      .hero-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 18px; padding: 0 18px; border: 1px solid rgba(255,255,255,.38); color: #fff; background: #171513; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
+      @media (min-width: 761px) {
+        .hero { display: grid; place-items: center; height: min(88vh, 960px); background: #070707; }
+        .hero::before { content: ""; position: absolute; inset: -24px; z-index: 0; background: radial-gradient(ellipse at center, rgba(38,34,30,.55), #070707 72%); filter: blur(18px); }
+        .hero-frame { width: auto; height: 100%; aspect-ratio: 9 / 16; max-width: min(100%, calc(min(88vh, 960px) * 9 / 16)); overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+        .hero-copy { padding: 0 40px 56px; }
+      }
       .listing-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding: 34px 3.3% 18px; }
       .eyebrow { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
       .listing-header h2 { margin: 0; font: 600 clamp(36px, 5vw, 60px)/.9 'Cormorant Garamond', serif; }
@@ -35,7 +47,7 @@
       .filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 3.3% 22px; }
       .filter { padding: 10px 16px; border: 1px solid var(--ink); background: transparent; font: 700 11px 'Manrope', sans-serif; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
       .filter.is-active, .filter:hover { background: var(--ink); color: #fff; }
-      .product-grid { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 0 3.3% 42px; background: #f7f7f7; }
+      .product-grid { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 0 3.3% 42px; background: #f7f7f7; scroll-margin-top: 12px; }
       .product-card { min-width: 0; overflow: hidden; background: #fff; transition: box-shadow .35s ease; }
       .product-card[hidden] { display: none; }
       .product-card:hover { box-shadow: 0 18px 40px rgba(17,17,17,.12); }
@@ -73,9 +85,9 @@
       @media (min-width: 640px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
       @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
       @media (min-width: 1280px) { .product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-      @media (max-width: 760px) { .listing-header { display: block; } .listing-header h2 { margin-bottom: 18px; } .filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 18px; scrollbar-width: none; } .filters::-webkit-scrollbar { display: none; } .filter { flex: 0 0 auto; min-height: 44px; } .product-grid { gap: 16px; } .product-body { padding: 14px 14px 16px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
+      @media (max-width: 760px) { .hero { height: 100vh; height: 100dvh; } .hero-video { object-fit: cover; } .listing-header { display: block; } .listing-header h2 { margin-bottom: 18px; } .filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 18px; scrollbar-width: none; } .filters::-webkit-scrollbar { display: none; } .filter { flex: 0 0 auto; min-height: 44px; } .product-grid { gap: 16px; } .product-body { padding: 14px 14px 16px; } .site-footer { grid-template-columns: 1fr; } .footer-links { align-items: start; } }
       @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .listing-header, .filters, .product-grid { padding-left: 16px; padding-right: 16px; } }
-      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } .product-card:hover .product-media img { transform: none; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } .product-card:hover .product-media img { transform: none; } .hero-video { display: none; } }
     </style>
     <link rel="stylesheet" href="assets/css/founder-message.css" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="assets/css/founder-message.css" /></noscript>
@@ -85,7 +97,32 @@
   <body>
     <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
     <main>
-      <section class="hero"><div><h1>Bedroom tiles with a softer point of view.</h1><p>Warm surfaces, quiet texture, and considered finishes for restful spaces.</p></div></section>
+      <section class="hero" aria-label="Bedroom atmosphere">
+        <div class="hero-frame">
+          <video
+            class="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline
+            preload="metadata"
+            disablepictureinpicture
+            disableremoteplayback
+            controlslist="nodownload nofullscreen noremoteplayback"
+            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 16'%3E%3Crect width='9' height='16' fill='%230a0a0a'/%3E%3C/svg%3E"
+            aria-hidden="true"
+          >
+            <source src="assets/videos/bedroom-hero.mp4" type="video/mp4" />
+          </video>
+          <div class="hero-overlay" aria-hidden="true"></div>
+          <div class="hero-copy">
+            <h1>Bedroom tiles with a softer point of view.</h1>
+            <p>Warm surfaces, quiet texture, and considered finishes for restful spaces.</p>
+            <a class="hero-cta" href="#bedroom-product-grid">Explore collection</a>
+          </div>
+        </div>
+      </section>
       <section class="listing-header"><div><p class="eyebrow">CERAVO bedroom collection</p><h2>Choose your atmosphere.</h2></div><p>Explore materials selected to bring warmth, depth, and balance to the bedroom.</p></section>
       <div class="filters" role="group" aria-label="Filter bedroom tile collections"><button class="filter is-active" type="button" data-filter="all">All collections</button><button class="filter" type="button" data-filter="new-arrival">New Arrival</button><button class="filter" type="button" data-filter="popular">Popular</button><button class="filter" type="button" data-filter="premium">Premium</button></div>
       <section class="product-grid" id="bedroom-product-grid" aria-label="Bedroom floor tile collections"></section>
@@ -105,6 +142,26 @@
     <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="contact.html">Contact Us</a></nav></div>
     <script src="assets/js/bedroom-products.js"></script>
     <script>
+      const heroVideo = document.querySelector('.hero-video');
+      if (heroVideo) {
+        heroVideo.muted = true;
+        heroVideo.defaultMuted = true;
+        heroVideo.playsInline = true;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const playHero = () => {
+          if (reducedMotion) {
+            heroVideo.pause();
+            return;
+          }
+          heroVideo.play().catch(() => {});
+        };
+        if (heroVideo.readyState >= 2) playHero();
+        else heroVideo.addEventListener('loadeddata', playHero, { once: true });
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) heroVideo.pause();
+          else playHero();
+        });
+      }
 
       const badgeClassFor = (category) => {
         if (category === 'popular') return ' popular';

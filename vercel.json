@@ -4,6 +4,9 @@
   "buildCommand": "",
   "installCommand": "",
   "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/gallery", "destination": "/gallery.html" }
+  ],
   "headers": [
     {
       "source": "/assets/videos/(.*)",

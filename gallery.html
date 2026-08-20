@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CERAVO Gallery | Premium Tiles &amp; Interior Inspiration</title>
+    <meta name="description" content="Explore CERAVO's collection of premium tile installations, interior spaces, wall and floor designs, bathrooms, kitchens, bedrooms and more." />
+    <link rel="canonical" href="https://www.ceravo.online/gallery.html" />
+    <meta property="og:title" content="CERAVO Gallery | Premium Tiles &amp; Interior Inspiration" />
+    <meta property="og:description" content="Explore CERAVO's collection of premium tile installations, interior spaces, wall and floor designs, bathrooms, kitchens, bedrooms and more." />
+    <meta property="og:url" content="https://www.ceravo.online/gallery.html" />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" /></noscript>
+    <style>
+      :root { --ink: #111; --paper: #f6f4f1; --line: rgba(17,17,17,.14); }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Manrope', sans-serif; }
+      a { color: inherit; }
+      .topbar { min-height: 88px; display: flex; align-items: center; justify-content: space-between; padding: 12px 5%; background: #fff; border-bottom: 1px solid var(--line); }
+      .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+      .brand-mark { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; font: 32px/1 'Cormorant Garamond', serif; }
+      .brand-wordmark { display: block; font: 700 clamp(23px, 3vw, 36px)/.85 'Cormorant Garamond', serif; letter-spacing: .1em; }
+      .brand-subtitle { display: block; margin-top: 5px; font-size: 9px; letter-spacing: .25em; }
+      .icon-button { width: 36px; height: 36px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; }
+      .listing-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding: 34px 3.3% 18px; }
+      .eyebrow { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+      .listing-header h1 { margin: 0; font: 600 clamp(36px, 5vw, 60px)/.9 'Cormorant Garamond', serif; }
+      .listing-header > p { max-width: 420px; margin: 0; color: rgba(17,17,17,.68); font-size: 13px; line-height: 1.7; }
+      .filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 3.3% 22px; }
+      .filter { padding: 10px 16px; border: 1px solid var(--ink); background: transparent; font: 700 11px 'Manrope', sans-serif; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+      .filter.is-active, .filter:hover { background: var(--ink); color: #fff; }
+      .listing-empty { display: none; margin: 0; padding: 0 3.3% 36px; color: rgba(17,17,17,.62); font-size: 14px; }
+      .listing-empty.is-visible { display: block; }
+      .gallery-page-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 3.3% 42px; }
+      .gallery-item { position: relative; min-width: 0; overflow: hidden; background: #ece8e2; border: 0; padding: 0; cursor: pointer; }
+      .gallery-item[hidden] { display: none; }
+      .gallery-item img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; }
+      .gallery-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+      .bottom-actions { display: grid; grid-template-columns: 1fr 1fr; min-height: 64px; background: #000; color: #fff; }
+      .bottom-action { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
+      .bottom-action + .bottom-action { border-left: 1px solid rgba(255,255,255,.5); }
+      .site-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 34px 5% 92px; background: #111; color: #fff; }
+      .footer-brand { font: 30px 'Cormorant Garamond', serif; letter-spacing: .12em; }
+      .footer-copy, .footer-links { margin: 6px 0 0; color: rgba(255,255,255,.68); font-size: 12px; }
+      .footer-links { display: flex; gap: 18px; align-items: end; }
+      .footer-links a { color: #fff; text-decoration: none; }
+      .site-menu { position: fixed; inset: 0; z-index: 5; display: flex; justify-content: flex-end; visibility: hidden; opacity: 0; background: rgba(0,0,0,.35); transition: opacity .25s ease, visibility .25s ease; }
+      .site-menu.is-open { visibility: visible; opacity: 1; }
+      .site-menu-panel { width: min(420px, 88vw); height: 100%; padding: 110px 32px 32px; background: #fff; transform: translateX(100%); transition: transform .3s ease; }
+      .site-menu.is-open .site-menu-panel { transform: translateX(0); }
+      .site-menu-link { display: block; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 600; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+      .lightbox { position: fixed; inset: 0; z-index: 40; display: none; align-items: center; justify-content: center; padding: 18px; background: rgba(17,17,17,.88); }
+      .lightbox.is-open { display: flex; }
+      .lightbox-frame { position: relative; max-width: min(1100px, 92vw); max-height: 86vh; }
+      .lightbox-frame img { display: block; max-width: 92vw; max-height: 78vh; width: auto; height: auto; object-fit: contain; }
+      .lightbox-close, .lightbox-nav { position: absolute; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.55); background: rgba(17,17,17,.55); color: #fff; cursor: pointer; }
+      .lightbox-close { top: -46px; right: 0; width: 40px; height: 40px; font-size: 22px; }
+      .lightbox-nav { top: 50%; width: 40px; height: 40px; transform: translateY(-50%); font-size: 20px; }
+      .lightbox-nav.prev { left: -52px; }
+      .lightbox-nav.next { right: -52px; }
+      .lightbox-caption { margin: 10px 0 0; color: rgba(255,255,255,.78); font-size: 12px; letter-spacing: .06em; text-align: center; }
+      @media (min-width: 768px) { .gallery-page-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; } }
+      @media (min-width: 1100px) { .gallery-page-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; } }
+      @media (max-width: 760px) {
+        .listing-header { display: block; }
+        .listing-header h1 { margin-bottom: 18px; }
+        .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 18px; }
+        .filters::-webkit-scrollbar { display: none; }
+        .filter { flex: 0 0 auto; min-height: 44px; }
+        .site-footer { grid-template-columns: 1fr; }
+        .footer-links { align-items: start; }
+        .lightbox-nav.prev { left: 6px; }
+        .lightbox-nav.next { right: 6px; }
+        .lightbox-close { top: 8px; right: 8px; }
+      }
+      @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .listing-header, .filters, .gallery-page-grid, .listing-empty { padding-left: 16px; padding-right: 16px; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+    </style>
+    <link rel="stylesheet" href="assets/css/founder-message.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="assets/css/founder-message.css" /></noscript>
+    <script src="assets/js/ceravo-ui.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
+    <main>
+      <section class="listing-header">
+        <div>
+          <p class="eyebrow">CERAVO interiors</p>
+          <h1>GALLERY</h1>
+        </div>
+        <p>Tile installations and considered spaces — bathrooms, kitchens, bedrooms, living rooms, walls, floors and outdoor areas.</p>
+      </section>
+      <div class="filters" role="group" aria-label="Filter gallery">
+        <button class="filter is-active" type="button" data-filter="all">All</button>
+        <button class="filter" type="button" data-filter="bathroom">Bathroom</button>
+        <button class="filter" type="button" data-filter="kitchen">Kitchen</button>
+        <button class="filter" type="button" data-filter="bedroom">Bedroom</button>
+        <button class="filter" type="button" data-filter="living">Living</button>
+        <button class="filter" type="button" data-filter="floor">Floor</button>
+        <button class="filter" type="button" data-filter="wall">Wall</button>
+        <button class="filter" type="button" data-filter="outdoor">Outdoor</button>
+      </div>
+      <p class="listing-empty" id="gallery-empty">No gallery images match this category.</p>
+      <section class="gallery-page-grid" id="gallery-grid" aria-label="CERAVO gallery"></section>
+    </main>
+    <div class="lightbox" id="gallery-lightbox" aria-hidden="true">
+      <div class="lightbox-frame">
+        <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close preview">&#215;</button>
+        <button class="lightbox-nav prev" type="button" data-lightbox-prev aria-label="Previous image">&#8592;</button>
+        <img id="lightbox-image" alt="" />
+        <button class="lightbox-nav next" type="button" data-lightbox-next aria-label="Next image">&#8594;</button>
+        <p class="lightbox-caption" id="lightbox-caption"></p>
+      </div>
+    </div>
+    <div class="bottom-actions"><a class="bottom-action" href="showroom.html">Showroom Locator</a><a class="bottom-action" href="contact.html">Request Owner Contact</a></div>
+    <section class="founder-message" aria-labelledby="founder-message-name">
+      <article class="founder-message-card">
+        <img class="founder-message-photo" src="assets/images/founder.jpg" alt="SM Shahriar Walid, Founder and CEO of CERAVO" width="112" height="112" />
+        <div class="founder-message-copy">
+          <p class="founder-message-label">Founder &amp; CEO</p>
+          <h2 class="founder-message-name" id="founder-message-name">SM Shahriar Walid</h2>
+          <p class="founder-message-quote">At CERAVO, our vision is to transform living spaces into timeless works of art through meticulously crafted luxury tiles, uncompromising quality, and enduring design.</p>
+        </div>
+      </article>
+    </section>
+    <footer class="site-footer"><div><div class="footer-brand">CERAVO</div><p class="footer-copy">Tiles &amp; Surfaces for considered spaces.</p><p class="footer-copy">Founder &amp; CEO: SM SHAHRIAR WALID</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="gallery.html">Gallery</a><a href="tiles.html">Tiles</a><a href="contact.html">Contact</a></nav></footer>
+    <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="gallery.html">Gallery</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="contact.html">Contact Us</a></nav></div>
+    <script>
+      const galleryItems = [
+        { src: 'assets/images/categories/basins-luxury.jpg', alt: 'Bathroom basin and tile setting', category: 'bathroom' },
+        { src: 'assets/images/categories/showers-luxury.jpg', alt: 'Bathroom shower tile setting', category: 'bathroom' },
+        { src: 'assets/images/categories/accessories-luxury.jpg', alt: 'Bathroom accessories and tile setting', category: 'bathroom' },
+        { src: 'assets/images/categories/kitchen-luxury-tiles.jpg', alt: 'Kitchen wall and floor tile interior', category: 'kitchen' },
+        { src: 'assets/images/categories/bedroom-luxury-tiles.jpg', alt: 'Bedroom tile interior', category: 'bedroom' },
+        { src: 'assets/images/products/room-kcl-p-1122.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
+        { src: 'assets/images/products/room-kcl-p-1125.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
+        { src: 'assets/images/products/room-kcl-p-1128.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
+        { src: 'assets/images/products/room-kcl-p-1131.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
+        { src: 'assets/images/products/room-kcl-p-1133.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
+        { src: 'assets/images/products/room-kcl-p-1135.jpg', alt: 'Bedroom tile installation', category: 'bedroom' },
+        { src: 'assets/images/categories/living-room-luxury-tiles.jpg', alt: 'Living room tile interior', category: 'living' },
+        { src: 'assets/images/categories/floor-luxury-tiles.jpg', alt: 'Floor tile interior', category: 'floor' },
+        { src: 'assets/images/categories/wall-luxury-tiles.jpg', alt: 'Wall tile interior', category: 'wall' },
+        { src: 'assets/images/products/room-kcl-w-2101.jpg', alt: 'Wall tile installation', category: 'wall' },
+        { src: 'assets/images/products/room-kcl-w-2103.jpg', alt: 'Wall tile installation', category: 'wall' },
+        { src: 'assets/images/products/room-kcl-w-2105.jpg', alt: 'Wall tile installation', category: 'wall' },
+        { src: 'assets/images/products/room-kcl-w-2107.jpg', alt: 'Wall tile installation', category: 'wall' },
+        { src: 'assets/images/products/room-kcl-w-2108.jpg', alt: 'Wall tile installation', category: 'wall' },
+        { src: 'assets/images/categories/parking-luxury-tiles.jpg', alt: 'Parking and outdoor floor tile setting', category: 'outdoor' }
+      ];
+
+      const grid = document.querySelector('#gallery-grid');
+      const emptyState = document.querySelector('#gallery-empty');
+      const lightbox = document.querySelector('#gallery-lightbox');
+      const lightboxImage = document.querySelector('#lightbox-image');
+      const lightboxCaption = document.querySelector('#lightbox-caption');
+      const escapeHtml = (value) => String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+
+      grid.innerHTML = galleryItems.map((item, index) => `
+        <button class="gallery-item" type="button" data-category="${escapeHtml(item.category)}" data-index="${index}" aria-label="${escapeHtml(item.alt)}">
+          <img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.alt)}" width="800" height="600" loading="${index < 4 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} onerror="this.closest('.gallery-item').remove()" />
+        </button>
+      `).join('');
+
+      let activeFilter = 'all';
+      let visibleIndexes = galleryItems.map((_, index) => index);
+      let currentIndex = 0;
+
+      const applyFilter = () => {
+        visibleIndexes = [];
+        document.querySelectorAll('#gallery-grid .gallery-item').forEach((item) => {
+          const isVisible = activeFilter === 'all' || item.dataset.category === activeFilter;
+          item.hidden = !isVisible;
+          if (isVisible) visibleIndexes.push(Number(item.dataset.index));
+        });
+        emptyState.classList.toggle('is-visible', visibleIndexes.length === 0);
+      };
+
+      const openLightbox = (index) => {
+        currentIndex = index;
+        const item = galleryItems[currentIndex];
+        if (!item) return;
+        lightboxImage.src = item.src;
+        lightboxImage.alt = item.alt;
+        lightboxCaption.textContent = item.alt;
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeLightbox = () => {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      const stepLightbox = (direction) => {
+        if (!visibleIndexes.length) return;
+        const position = visibleIndexes.indexOf(currentIndex);
+        const nextPosition = (position + direction + visibleIndexes.length) % visibleIndexes.length;
+        openLightbox(visibleIndexes[nextPosition]);
+      };
+
+      document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
+        activeFilter = button.dataset.filter;
+        document.querySelectorAll('[data-filter]').forEach((item) => item.classList.toggle('is-active', item === button));
+        applyFilter();
+      }));
+
+      grid.addEventListener('click', (event) => {
+        const item = event.target.closest('.gallery-item');
+        if (!item) return;
+        openLightbox(Number(item.dataset.index));
+      });
+
+      document.querySelector('[data-lightbox-close]').addEventListener('click', closeLightbox);
+      document.querySelector('[data-lightbox-prev]').addEventListener('click', () => stepLightbox(-1));
+      document.querySelector('[data-lightbox-next]').addEventListener('click', () => stepLightbox(1));
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (!lightbox.classList.contains('is-open')) return;
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') stepLightbox(-1);
+        if (event.key === 'ArrowRight') stepLightbox(1);
+      });
+
+      let touchStartX = 0;
+      lightbox.addEventListener('touchstart', (event) => {
+        touchStartX = event.changedTouches[0].clientX;
+      }, { passive: true });
+      lightbox.addEventListener('touchend', (event) => {
+        if (!lightbox.classList.contains('is-open')) return;
+        const delta = event.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(delta) < 40) return;
+        stepLightbox(delta > 0 ? -1 : 1);
+      }, { passive: true });
+
+      applyFilter();
+    </script>
+    <div class="contact-float" style="position:fixed;right:18px;bottom:18px;z-index:30;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><a href="tel:+8801979614216" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#171513;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">Call Now</a><a href="https://wa.me/8801979614216?text=Hello%20CERAVO%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#1d8b55;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">WhatsApp</a></div>
+  </body>
+</html>

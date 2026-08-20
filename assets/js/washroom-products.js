@@ -1,6 +1,8 @@
 (function () {
   const unspecified = 'Not specified';
   const BRAND_NAMES = {
+    dbl: 'DBL Ceramic',
+    fresh: 'Fresh Ceramic',
     mir: 'MIR Ceramic',
     khadim: 'Khadim Ceramic'
   };
@@ -239,8 +241,54 @@
 
   window.CERAVO_WASHROOM_PRODUCTS = orderByBrandGroup(catalog);
 
-  /* Khadim Ceramic Pavers Collection — official parking / driving-porch floor products.
-     Not added to CERAVO_WASHROOM_PRODUCTS so washroom listing stays unchanged. */
+  /* Parking catalog — not added to CERAVO_WASHROOM_PRODUCTS so washroom listing stays unchanged. */
+  const dblHtFinish = (label) => {
+    if (/sugar effect/i.test(label)) return 'Sugar Effect';
+    if (/\bgp\b/i.test(label)) return 'GP';
+    return unspecified;
+  };
+  const dblParkingImage = (id, file) => `https://dbl-v2-api.appswind.com/storage/product/${id}/${file}`;
+  const dblHtPaver = ({ sku, label, imageId, imageFile }) => {
+    const finish = dblHtFinish(label);
+    return product({
+      id: `dbl-pk-${sku.toLowerCase()}`,
+      brandSlug: 'dbl',
+      productName: label,
+      sku,
+      collection: 'High Thickness Tile',
+      tileType: 'Floor',
+      size: '20 × 20 cm',
+      finish,
+      surface: finish,
+      color: unspecified,
+      suitableSpace: 'Parking',
+      description: `${sku} is listed by DBL Ceramics on the official sTiles High Thickness Tile collection. The manufacturer states size 20×20 cm (200×200 mm) and that these tiles are for heavy-traffic areas, parking zones and rooftops. Thickness for this HT model is listed as 12 mm. Finish/surface published with the design name: ${finish}.`,
+      sourceUrl: 'https://stiles.dblceramics.com/collection/high-thickness-tile',
+      sourceLabel: 'DBL Ceramics sTiles product page',
+      image: dblParkingImage(imageId, imageFile),
+      images: [dblParkingImage(imageId, imageFile)]
+    });
+  };
+  const mirParkingImage = (file) => `https://mirceramic.com/public/upload/${file}`;
+  const mirOutdoorFloor = ({ sku, detailsId, size, look, surface, colour, imageFile }) => product({
+    id: `mir-pk-${sku.toLowerCase().replace(/\s+/g, '-')}`,
+    brandSlug: 'mir',
+    productName: sku,
+    sku,
+    collection: 'Homogeneous Floor',
+    tileType: 'Floor',
+    size,
+    finish: surface,
+    surface,
+    color: colour,
+    effect: look,
+    suitableSpace: 'Parking',
+    description: `${sku} is listed by MIR Ceramic as a ${size} square ${look.toLowerCase()} homogeneous floor tile in the Outdoors category. Surface: ${surface}. Colour: ${colour}. The technical specification table is labelled Typical Value of Mir Homogeneous Floor.`,
+    sourceUrl: `https://mirceramic.com/details/${detailsId}`,
+    sourceLabel: 'MIR Ceramic product page',
+    image: mirParkingImage(imageFile),
+    images: [mirParkingImage(imageFile)]
+  });
   const parkingImage = (file) => `https://khadimceramics.com/wp-content/uploads/2024/03/${file}`;
   const khadimPaver = ({ id, sku, productName, color, size, imageFile, sourcePath, facts }) => product({
     id,
@@ -261,7 +309,52 @@
     images: [parkingImage(imageFile)]
   });
 
-  window.CERAVO_PARKING_PRODUCTS = [
+  const dblParkingProducts = [
+    dblHtPaver({ sku: 'SQ201-HT', label: 'SQ201-HT (Sugar Effect - 12mm)', imageId: 890, imageFile: 'SQ201-HT-(Sugar-Effect---12mm).jpg' }),
+    dblHtPaver({ sku: 'SQ202-HT', label: 'SQ202-HT (Sugar Effect - 12mm)', imageId: 894, imageFile: 'SQ202-HT-(Sugar-Effect---12mm).jpg' }),
+    dblHtPaver({ sku: 'SQ203-HT', label: 'SQ203-HT (Sugar Effect - 12mm)', imageId: 893, imageFile: 'SQ203-HT-(Sugar-Effect---12mm).jpg' }),
+    dblHtPaver({ sku: 'SQ204-HT', label: 'SQ204-HT (Sugar Effect - 12mm)', imageId: 898, imageFile: 'SQ204-HT-(Sugar-Effect---12mm).jpg' }),
+    dblHtPaver({ sku: 'SQ301-HT', label: 'SQ301-HT (12mm)', imageId: 896, imageFile: 'SQ301-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQ302-HT', label: 'SQ302-HT (12mm)', imageId: 900, imageFile: 'SQ302-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQ303-HT', label: 'SQ303-HT (12mm)', imageId: 902, imageFile: 'SQ303-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA001-HT', label: 'SQA001-HT (GP-12mm)', imageId: 904, imageFile: 'SQA001-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA002-HT', label: 'SQA002-HT (GP-12mm)', imageId: 906, imageFile: 'SQA002-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA003-HT', label: 'SQA003-HT (GP-12mm)', imageId: 908, imageFile: 'SQA003-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA004-HT', label: 'SQA004-HT (GP-12mm)', imageId: 910, imageFile: 'SQA004-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA005-HT', label: 'SQA005-HT (GP-12mm)', imageId: 912, imageFile: 'SQA005-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA006-HT', label: 'SQA006-HT (GP-12mm)', imageId: 914, imageFile: 'SQA006-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA007-HT', label: 'SQA007-HT (GP-12mm)', imageId: 916, imageFile: 'SQA007-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA008-HT', label: 'SQA008-HT (GP-12mm)', imageId: 920, imageFile: 'SQA008-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA009-HT', label: 'SQA009-HT (GP-12mm)', imageId: 918, imageFile: 'SQA009-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA010-HT', label: 'SQA010-HT (GP-12mm)', imageId: 922, imageFile: 'SQA010-HT-(GP-12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA301-HT', label: 'SQA301-HT (12mm)', imageId: 924, imageFile: 'SQA301-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA302-HT', label: 'SQA302-HT (12mm)', imageId: 926, imageFile: 'SQA302-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA303-HT', label: 'SQA303-HT (12mm)', imageId: 928, imageFile: 'SQA303-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA304-HT', label: 'SQA304-HT (12mm)', imageId: 930, imageFile: 'SQA304-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA305-HT', label: 'SQA305-HT (12mm)', imageId: 932, imageFile: 'SQA305-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA306-HT', label: 'SQA306-HT (12mm)', imageId: 934, imageFile: 'SQA306-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA307-HT', label: 'SQA307-HT (12mm)', imageId: 936, imageFile: 'SQA307-HT-(12mm).jpg' }),
+    dblHtPaver({ sku: 'SQA308-HT', label: 'SQA308-HT (12mm)', imageId: 938, imageFile: 'SQA308-HT-(12mm).jpg' })
+  ];
+
+  const mirParkingProducts = [
+    mirOutdoorFloor({ sku: 'G-4409', detailsId: '1101', size: '40 × 40 cm', look: 'Stone', surface: 'Dosing', colour: 'Black', imageFile: '1621919671.jpg' }),
+    mirOutdoorFloor({ sku: 'G-4408', detailsId: '1100', size: '40 × 40 cm', look: 'Stone', surface: 'Dosing', colour: 'Black', imageFile: '1621919647.jpg' }),
+    mirOutdoorFloor({ sku: 'G-4407', detailsId: '1099', size: '40 × 40 cm', look: 'Stone', surface: 'Dosing', colour: 'Green', imageFile: '1621919599.jpg' }),
+    mirOutdoorFloor({ sku: 'G-4405', detailsId: '1098', size: '40 × 40 cm', look: 'Stone', surface: 'Dosing', colour: 'Yellow', imageFile: '1621919567.jpg' }),
+    mirOutdoorFloor({ sku: 'G-4404', detailsId: '1097', size: '40 × 40 cm', look: 'Stone', surface: 'Dosing', colour: 'Pink', imageFile: '1621919539.jpg' }),
+    mirOutdoorFloor({ sku: 'G-4403', detailsId: '1096', size: '40 × 40 cm', look: 'Stone', surface: 'Dosing', colour: 'Pink', imageFile: '1621919508.jpg' }),
+    mirOutdoorFloor({ sku: 'G-6609', detailsId: '1095', size: '60 × 60 cm', look: 'Stone', surface: 'Dosing', colour: 'Black', imageFile: '1621919275.jpg' }),
+    mirOutdoorFloor({ sku: 'G-6608', detailsId: '1094', size: '60 × 60 cm', look: 'Stone', surface: 'Dosing', colour: 'Black', imageFile: '1621919246.jpg' }),
+    mirOutdoorFloor({ sku: 'G-6607', detailsId: '1093', size: '60 × 60 cm', look: 'Stone', surface: 'Dosing', colour: 'Green', imageFile: '1621919190.jpg' }),
+    mirOutdoorFloor({ sku: 'G-3309', detailsId: '1022', size: '30 × 30 cm', look: 'Stone', surface: 'Dosing', colour: 'Black', imageFile: '1621766982.jpg' }),
+    mirOutdoorFloor({ sku: 'G-3307', detailsId: '1021', size: '30 × 30 cm', look: 'Stone', surface: 'Dosing', colour: 'Green', imageFile: '1621766926.jpg' }),
+    mirOutdoorFloor({ sku: 'G-3306', detailsId: '1020', size: '30 × 30 cm', look: 'Stone', surface: 'Dosing', colour: 'Grey', imageFile: '1621766885.jpg' }),
+    mirOutdoorFloor({ sku: 'PP-3300 Y', detailsId: '838', size: '30 × 30 cm', look: 'Color Glaze', surface: 'Matt', colour: 'Yellow', imageFile: '1621676921.jpg' }),
+    mirOutdoorFloor({ sku: 'PP-3300 G', detailsId: '837', size: '30 × 30 cm', look: 'Color Glaze', surface: 'Matt', colour: 'Green', imageFile: '1621676879.jpg' })
+  ];
+
+  const khadimParkingProducts = [
     khadimPaver({
       id: 'kcl-pk-55-charcoal',
       sku: 'Parking Tile 55',
@@ -333,4 +426,6 @@
       facts: 'CT-6 is listed by Khadim Ceramic Limited in the Pavers Collection for outdoor load-bearing use including driving porch. The manufacturer states size 8in X 4in X 0.65in, weight 1.10 kg, and colours Beige, Black, Grey, and Red. Colour variants share the published product image. Finish type is not specified on the product page. A manufacturer SKU code is not published.'
     })
   ];
+
+  window.CERAVO_PARKING_PRODUCTS = dblParkingProducts.concat(mirParkingProducts, khadimParkingProducts);
 })();

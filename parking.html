@@ -92,15 +92,14 @@
         <img class="hero-media" src="assets/images/categories/parking-luxury-tiles.jpg" alt="Parking and driveway floor tiles" width="1600" height="900" decoding="async" fetchpriority="high" />
         <div class="hero-scrim" aria-hidden="true"></div>
       </section>
-      <section class="listing-header"><div><p class="eyebrow">Parking · Khadim Ceramic · Floor</p><h2>Parking Tiles</h2></div><p>Official Khadim Ceramic parking and driveway floor pavers — published products only, ready to enquire.</p></section>
+      <section class="listing-header"><div><p class="eyebrow">Parking · Floor · DBL · Fresh · MIR · Khadim</p><h2>Parking Tiles</h2></div><p>Official parking and driveway floor tiles — published products only, ready to enquire.</p></section>
       <div class="filters" role="group" aria-label="Filter parking tiles">
         <button class="filter is-active" type="button" data-filter="all">All</button>
+        <button class="filter" type="button" data-filter="dbl">DBL Ceramic</button>
+        <button class="filter" type="button" data-filter="fresh">Fresh Ceramic</button>
+        <button class="filter" type="button" data-filter="mir">MIR Ceramic</button>
         <button class="filter" type="button" data-filter="khadim">Khadim</button>
-        <button class="filter" type="button" data-filter="parking-tile-55">Parking Tile 55</button>
-        <button class="filter" type="button" data-filter="klinker-paver">Klinker</button>
-        <button class="filter" type="button" data-filter="square-paver">Square Paver</button>
-        <button class="filter" type="button" data-filter="ct-6">CT-6</button>
-        <label class="filter-control">Search<input id="parking-search" type="search" placeholder="Parking Tile 55" aria-label="Search parking tiles" autocomplete="off" /></label>
+        <label class="filter-control">Search<input id="parking-search" type="search" placeholder="SQ201-HT" aria-label="Search parking tiles" autocomplete="off" /></label>
       </div>
       <p class="listing-empty" id="parking-empty">No parking tiles match these filters.</p>
       <section class="product-grid" id="parking-product-grid" aria-label="Khadim Ceramic parking floor tiles"></section>
@@ -118,7 +117,7 @@
     </section>
     <footer class="site-footer"><div><div class="footer-brand">CERAVO</div><p class="footer-copy">Tiles &amp; Surfaces for considered spaces.</p><p class="footer-copy">Founder &amp; CEO: SM SHAHRIAR WALID</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="tiles.html">Tiles</a><a href="parking.html">Parking</a><a href="bathware.html">Bathware</a></nav></footer>
     <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="parking.html">Parking</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="contact.html">Contact Us</a></nav></div>
-    <script src="assets/js/washroom-products.js?v=parking-1"></script>
+    <script src="assets/js/washroom-products.js?v=parking-2"></script>
     <script>
       const productGrid = document.querySelector('#parking-product-grid');
       const emptyState = document.querySelector('#parking-empty');
@@ -127,14 +126,6 @@
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;');
-      const familyFor = (item) => {
-        const sku = String((item && item.sku) || '').toLowerCase();
-        if (sku.includes('parking tile 55')) return 'parking-tile-55';
-        if (sku.includes('klinker')) return 'klinker-paver';
-        if (sku.includes('square paver')) return 'square-paver';
-        if (sku === 'ct-6') return 'ct-6';
-        return 'other';
-      };
       const parkingProducts = (window.CERAVO_PARKING_PRODUCTS || []).filter((item) => (
         item
         && item.tileType === 'Floor'
@@ -146,7 +137,7 @@
         const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${item.productName} (${item.sku}).`);
         const searchText = [item.searchText, item.color, item.suitableSpace, 'parking floor driveway garage outdoor'].join(' ').toLowerCase();
         return `
-        <article class="product-card" data-brand="${escapeHtml(item.brandSlug)}" data-family="${escapeHtml(familyFor(item))}" data-search="${escapeHtml(searchText)}">
+        <article class="product-card" data-brand="${escapeHtml(item.brandSlug)}" data-search="${escapeHtml(searchText)}">
           <a class="product-card-link" href="product-detail.html?product=${escapeHtml(item.id)}">
             <span class="product-media"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.brand)} ${escapeHtml(item.productName)}" width="600" height="600" loading="${index < 2 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} onerror="this.closest('.product-card').remove()" /></span>
             <div class="product-body">
@@ -171,12 +162,10 @@
         const tokens = normalizeQuery(searchQuery).split(' ').filter(Boolean);
         let visibleCount = 0;
         document.querySelectorAll('#parking-product-grid .product-card').forEach((card) => {
-          const familyMatch = activeFilter === 'all'
-            || (activeFilter === 'khadim' && card.dataset.brand === 'khadim')
-            || card.dataset.family === activeFilter;
+          const brandMatch = activeFilter === 'all' || card.dataset.brand === activeFilter;
           const haystack = card.dataset.search || '';
           const searchMatch = !tokens.length || tokens.every((token) => haystack.includes(token));
-          const isVisible = familyMatch && searchMatch;
+          const isVisible = brandMatch && searchMatch;
           card.hidden = !isVisible;
           if (isVisible) visibleCount += 1;
         });

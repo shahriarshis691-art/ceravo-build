@@ -71,7 +71,7 @@
   <script>
     const catalogSrcFor = (id) => {
       if (!id) return null;
-      if (id.startsWith('kcl-pk-')) return 'assets/js/washroom-products.js?v=parking-1';
+      if (id.startsWith('kcl-pk-') || id.startsWith('dbl-pk-') || id.startsWith('fresh-pk-') || id.startsWith('mir-pk-')) return 'assets/js/washroom-products.js?v=parking-2';
       if (id.startsWith('mir-') || id.startsWith('dbl-') || id.startsWith('fresh-') || id.startsWith('kcl-s-') || id.startsWith('kcl-m-') || id.startsWith('kcl-g-')) return 'assets/js/washroom-products.js?v=khadim-images-1';
       if (id.startsWith('kcl-p-')) return 'assets/js/bedroom-products.js';
       if (id.startsWith('kcl-w-')) return 'assets/js/wall-tiles-products.js';

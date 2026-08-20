@@ -1480,16 +1480,203 @@
       const collectionTabs = [...document.querySelectorAll('[data-collection-tab]')];
       const collectionPanels = [...document.querySelectorAll('[data-collection-panel]')];
       const collectionDots = [...document.querySelectorAll('[data-collection-dot]')];
+      const collectionNav = document.querySelector('.collection-navigation');
+      const collectionTrack = document.querySelector('[data-collection-panel="locations"] .collection-track');
       let activeCollectionIndex = 0;
+      let collectionAutoplayTimer = 0;
+      let collectionRaf = 0;
+      let collectionProgrammatic = false;
+      let collectionHoverPaused = false;
+      let collectionOffscreen = false;
+      let collectionInteracting = false;
+      let collectionResizeTimer = 0;
 
-      const activeCollectionTrack = () => document.querySelector('.collection-panel.is-active .collection-track');
+      const activeCollectionTrack = () => document.querySelector('.collection-panel.is-active .collection-track') || collectionTrack;
+
+      const collectionGap = 18;
+      const originalCollectionCount = () => Number(activeCollectionTrack()?.dataset.originalCount || 0);
+
+      const collectionStep = () => {
+        const track = activeCollectionTrack();
+        const card = track?.querySelector('.collection-card-home');
+        if (!track || !card) return 0;
+        return card.getBoundingClientRect().width + collectionGap;
+      };
+
+      const lockCollectionCardWidth = () => {
+        const track = collectionTrack;
+        if (!track) return;
+        const count = Number(track.dataset.originalCount || 5);
+        const styles = getComputedStyle(track);
+        const inner = track.clientWidth - parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight);
+        const fitted = (inner - collectionGap * (count - 1)) / count;
+        const width = Math.max(280, fitted);
+        track.style.gridAutoColumns = `${width}px`;
+      };
+
+      const setupCollectionLoop = () => {
+        const track = collectionTrack;
+        if (!track || track.dataset.loopReady === 'true') return;
+        const originals = [...track.querySelectorAll('.collection-card-home')];
+        if (!originals.length) return;
+        track.dataset.originalCount = String(originals.length);
+        lockCollectionCardWidth();
+        originals.forEach((card) => {
+          const clone = card.cloneNode(true);
+          clone.tabIndex = -1;
+          clone.setAttribute('aria-hidden', 'true');
+          clone.querySelectorAll('img').forEach((img) => {
+            img.loading = 'lazy';
+            img.decoding = 'async';
+          });
+          track.appendChild(clone);
+        });
+        track.style.scrollBehavior = 'auto';
+        track.dataset.loopReady = 'true';
+      };
+
+      const logicalCollectionIndex = () => {
+        const count = originalCollectionCount() || 1;
+        return ((activeCollectionIndex % count) + count) % count;
+      };
 
       const syncCollectionDots = () => {
-        const cardCount = activeCollectionTrack().querySelectorAll('.collection-card-home').length;
+        const count = originalCollectionCount() || activeCollectionTrack().querySelectorAll('.collection-card-home').length;
+        const logical = logicalCollectionIndex();
         collectionDots.forEach((dot, index) => {
-          dot.hidden = index >= cardCount;
-          dot.classList.toggle('is-active', index === activeCollectionIndex);
+          dot.hidden = index >= count;
+          dot.classList.toggle('is-active', index === logical);
         });
+      };
+
+      const preloadCollectionImage = (logicalIndex) => {
+        const track = collectionTrack;
+        const count = originalCollectionCount();
+        if (!track || !count) return;
+        const img = track.children[((logicalIndex % count) + count) % count]?.querySelector('img');
+        if (!img || img.dataset.warmed === 'true') return;
+        const src = img.currentSrc || img.src;
+        if (!src) return;
+        img.dataset.warmed = 'true';
+        const warm = new Image();
+        warm.decoding = 'async';
+        warm.src = src;
+      };
+
+      const jumpCollectionTo = (index) => {
+        const track = activeCollectionTrack();
+        const step = collectionStep();
+        if (!track || !step) return;
+        collectionProgrammatic = true;
+        track.style.scrollSnapType = 'none';
+        track.scrollLeft = step * index;
+        activeCollectionIndex = index;
+        collectionProgrammatic = false;
+        track.style.scrollSnapType = '';
+        syncCollectionDots();
+      };
+
+      const normalizeCollectionLoop = () => {
+        const count = originalCollectionCount();
+        if (!count) return;
+        if (activeCollectionIndex >= count) jumpCollectionTo(activeCollectionIndex % count);
+        else if (activeCollectionIndex < 0) jumpCollectionTo(count + (activeCollectionIndex % count));
+        else syncCollectionDots();
+        preloadCollectionImage(logicalCollectionIndex() + 1);
+      };
+
+      const stopCollectionAutoplay = () => {
+        window.clearTimeout(collectionAutoplayTimer);
+        collectionAutoplayTimer = 0;
+      };
+
+      const startCollectionAutoplay = () => {
+        stopCollectionAutoplay();
+        if (reducedMotion || collectionHoverPaused || collectionOffscreen || collectionInteracting || document.hidden) return;
+        collectionAutoplayTimer = window.setTimeout(() => goCollectionBy(1), 4500);
+      };
+
+      const easeCollection = (t) => 1 - Math.pow(1 - t, 4);
+
+      const animateCollectionTo = (index) => {
+        const track = activeCollectionTrack();
+        const step = collectionStep();
+        if (!track || !step) return;
+        window.cancelAnimationFrame(collectionRaf);
+        stopCollectionAutoplay();
+        activeCollectionIndex = index;
+        syncCollectionDots();
+        preloadCollectionImage(index + 1);
+
+        const target = step * index;
+        if (reducedMotion) {
+          jumpCollectionTo(index);
+          normalizeCollectionLoop();
+          startCollectionAutoplay();
+          return;
+        }
+
+        const start = track.scrollLeft;
+        const distance = target - start;
+        if (Math.abs(distance) < 0.75) {
+          normalizeCollectionLoop();
+          startCollectionAutoplay();
+          return;
+        }
+
+        const duration = 880;
+        const startedAt = performance.now();
+        collectionProgrammatic = true;
+        track.style.scrollSnapType = 'none';
+        const tick = (now) => {
+          const progress = Math.min(1, (now - startedAt) / duration);
+          track.scrollLeft = start + distance * easeCollection(progress);
+          if (progress < 1) {
+            collectionRaf = window.requestAnimationFrame(tick);
+            return;
+          }
+          collectionProgrammatic = false;
+          track.style.scrollSnapType = '';
+          normalizeCollectionLoop();
+          startCollectionAutoplay();
+        };
+        collectionRaf = window.requestAnimationFrame(tick);
+      };
+
+      const goCollectionBy = (direction) => {
+        const count = originalCollectionCount();
+        if (!count) return;
+        if (direction > 0) {
+          animateCollectionTo(activeCollectionIndex + 1);
+          return;
+        }
+        if (activeCollectionIndex <= 0) {
+          jumpCollectionTo(count);
+          animateCollectionTo(count - 1);
+          return;
+        }
+        animateCollectionTo(activeCollectionIndex - 1);
+      };
+
+      const goCollectionLogical = (logical) => {
+        const count = originalCollectionCount();
+        if (!count) return;
+        const current = logicalCollectionIndex();
+        const target = ((logical % count) + count) % count;
+        if (target === current && activeCollectionIndex < count) {
+          startCollectionAutoplay();
+          return;
+        }
+        if (target === 0 && current === count - 1) {
+          animateCollectionTo(activeCollectionIndex < count ? count : target);
+          return;
+        }
+        if (target === count - 1 && current === 0) {
+          jumpCollectionTo(count);
+          animateCollectionTo(count - 1);
+          return;
+        }
+        animateCollectionTo(target);
       };
 
       const setCollectionTab = (tabName) => {
@@ -1502,36 +1689,97 @@
           panel.classList.toggle('is-active', panel.dataset.collectionPanel === tabName);
         });
         activeCollectionIndex = 0;
-        syncCollectionDots();
+        jumpCollectionTo(0);
+        startCollectionAutoplay();
       };
 
       collectionTabs.forEach((tab) => {
         tab.addEventListener('click', () => setCollectionTab(tab.dataset.collectionTab));
       });
 
-      const scrollCollection = (direction) => {
-        const track = activeCollectionTrack();
-        const card = track.querySelector('.collection-card-home');
-        const distance = card.getBoundingClientRect().width + 18;
-        const lastCardIndex = track.querySelectorAll('.collection-card-home').length - 1;
-        activeCollectionIndex = Math.max(0, Math.min(lastCardIndex, activeCollectionIndex + direction));
-        track.scrollTo({
-          left: distance * activeCollectionIndex,
-          behavior: reducedMotion ? 'auto' : 'smooth'
-        });
-        syncCollectionDots();
-      };
-
-      document.querySelector('[data-collection-previous]').addEventListener('click', () => scrollCollection(-1));
-      document.querySelector('[data-collection-next]').addEventListener('click', () => scrollCollection(1));
+      document.querySelector('[data-collection-previous]').addEventListener('click', () => {
+        collectionHoverPaused = false;
+        goCollectionBy(-1);
+      });
+      document.querySelector('[data-collection-next]').addEventListener('click', () => {
+        collectionHoverPaused = false;
+        goCollectionBy(1);
+      });
       collectionDots.forEach((dot) => {
         dot.addEventListener('click', () => {
-          activeCollectionIndex = Number(dot.dataset.collectionDot);
-          scrollCollection(0);
+          collectionHoverPaused = false;
+          goCollectionLogical(Number(dot.dataset.collectionDot));
         });
       });
 
+      if (collectionTrack) {
+        let scrollEndTimer = 0;
+        collectionTrack.addEventListener('scroll', () => {
+          if (collectionProgrammatic) return;
+          stopCollectionAutoplay();
+          const step = collectionStep();
+          if (!step) return;
+          activeCollectionIndex = Math.round(collectionTrack.scrollLeft / step);
+          syncCollectionDots();
+          window.clearTimeout(scrollEndTimer);
+          scrollEndTimer = window.setTimeout(() => {
+            normalizeCollectionLoop();
+            if (!collectionInteracting && !collectionHoverPaused && !collectionOffscreen) startCollectionAutoplay();
+          }, 140);
+        }, { passive: true });
+
+        collectionTrack.addEventListener('pointerdown', () => {
+          collectionInteracting = true;
+          stopCollectionAutoplay();
+        });
+        window.addEventListener('pointerup', () => {
+          if (!collectionInteracting) return;
+          collectionInteracting = false;
+          startCollectionAutoplay();
+        });
+
+        [collectionTrack, collectionNav].forEach((node) => {
+          if (!node) return;
+          node.addEventListener('mouseenter', () => {
+            collectionHoverPaused = true;
+            stopCollectionAutoplay();
+          });
+          node.addEventListener('mouseleave', () => {
+            collectionHoverPaused = false;
+            startCollectionAutoplay();
+          });
+        });
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) stopCollectionAutoplay();
+          else startCollectionAutoplay();
+        });
+
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              collectionOffscreen = !entry.isIntersecting;
+              if (entry.isIntersecting) startCollectionAutoplay();
+              else stopCollectionAutoplay();
+            });
+          }, { threshold: 0.2 });
+          observer.observe(collectionTrack);
+        }
+
+        window.addEventListener('resize', () => {
+          window.clearTimeout(collectionResizeTimer);
+          collectionResizeTimer = window.setTimeout(() => {
+            lockCollectionCardWidth();
+            jumpCollectionTo(logicalCollectionIndex());
+          }, 120);
+        });
+      }
+
+      setupCollectionLoop();
       syncCollectionDots();
+      preloadCollectionImage(0);
+      preloadCollectionImage(1);
+      startCollectionAutoplay();
     </script>
     <div class="contact-float" style="position:fixed;right:18px;bottom:18px;z-index:30;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><a href="tel:+8801979614216" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#171513;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">Call Now</a><a href="https://wa.me/8801979614216?text=Hello%20CERAVO%2C%20I%20would%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;min-height:42px;padding:0 14px;color:#fff;background:#1d8b55;font:700 11px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase">WhatsApp</a></div>
   </body>

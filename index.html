@@ -838,8 +838,22 @@
           height: 550px;
         }
 
+        .collection-film {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          overflow: visible;
+          background: #111;
+        }
+
         .collection-film-video {
-          height: min(52vh, 420px);
+          display: block;
+          width: 100%;
+          height: auto;
+          max-height: none;
+          aspect-ratio: 9 / 16;
+          object-fit: contain;
+          object-position: center center;
         }
 
         .showcase-followup {
@@ -1006,7 +1020,8 @@
           <div class="collection-film">
             <video
               class="collection-film-video"
-              src="/assets/videos/ceravo-collection-4k.mp4"
+              width="2304"
+              height="4096"
               autoplay
               muted
               loop
@@ -1014,7 +1029,7 @@
               preload="metadata"
               aria-label="CERAVO collection film"
             >
-              <source src="/assets/videos/ceravo-collection-4k.mp4" type="video/mp4" />
+              <source src="assets/videos/ceravo-collection-4k.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="collection-tabs" role="tablist" aria-label="Collection categories">

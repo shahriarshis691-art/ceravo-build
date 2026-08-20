@@ -11,8 +11,9 @@
   <meta property="og:url" content="https://www.ceravo.online/contact.html" />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" /></noscript>
   <style>
     :root { --ink: #171513; --paper: #f5f0eb; --accent: #776b61; --line: rgba(23,21,19,.16); }
     * { box-sizing: border-box; }
@@ -42,7 +43,8 @@
     @media (max-width: 760px) { main { display: block; } .intro { min-height: 390px; padding: 44px 7%; } .form-wrap { padding: 44px 7%; } }
     @media (max-width: 500px) { .topbar { padding-inline: 16px; } .form-grid { grid-template-columns: 1fr; } .field-full { grid-column: auto; } .submit-row { display: block; } .form-note { margin-top: 14px; } }
   </style>
-</head>
+    <script src="assets/js/ceravo-ui.js" defer></script>
+  </head>
 <body>
   <header class="topbar"><a class="brand" href="index.html">CERAVO</a><a class="back" href="index.html">Back to home</a></header>
   <main>

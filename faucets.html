@@ -12,7 +12,8 @@
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" /></noscript>
     <style>
       :root { --ink: #111; --paper: #f6f4f1; --line: rgba(17,17,17,.14); }
       * { box-sizing: border-box; }
@@ -78,7 +79,9 @@
       @media (max-width: 430px) { .topbar { padding-inline: 16px; } .brand-mark { width: 40px; height: 40px; font-size: 27px; } .brand-subtitle { font-size: 8px; } .listing-header, .brand-filters, .filters, .product-grid { padding-left: 16px; padding-right: 16px; } }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } .product-card:hover .product-media img { transform: none; } }
     </style>
-    <link rel="stylesheet" href="assets/css/founder-message.css" />
+    <link rel="stylesheet" href="assets/css/founder-message.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="assets/css/founder-message.css" /></noscript>
+      <script src="assets/js/ceravo-ui.js" defer></script>
   </head>
   <body>
     <header class="topbar"><a class="brand" href="index.html" aria-label="CERAVO home"><span class="brand-mark">C</span><span><span class="brand-wordmark">CERAVO</span><span class="brand-subtitle">TILES &amp; SURFACES</span></span></a><button class="icon-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">&#9776;</button></header>
@@ -116,13 +119,6 @@
     <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="basins.html">Basins</a><a class="site-menu-link" href="faucets.html">Faucets</a><a class="site-menu-link" href="showers.html">Showers</a><a class="site-menu-link" href="accessories.html">Accessories</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="contact.html">Contact Us</a></nav></div>
     <script src="assets/js/faucets-products.js"></script>
     <script>
-      const menu = document.querySelector('#site-menu');
-      const menuButton = document.querySelector('[aria-controls="site-menu"]');
-      const setMenuState = (isOpen) => { menu.classList.toggle('is-open', isOpen); menu.setAttribute('aria-hidden', String(!isOpen)); menuButton.setAttribute('aria-expanded', String(isOpen)); document.body.style.overflow = isOpen ? 'hidden' : ''; };
-      menuButton.addEventListener('click', () => setMenuState(!menu.classList.contains('is-open')));
-      menu.addEventListener('click', (event) => { if (event.target === menu) setMenuState(false); });
-      menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuState(false)));
-      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenuState(false); });
 
       const badgeClassFor = (category) => {
         if (category === 'popular') return ' popular';
@@ -137,7 +133,7 @@
         return `
         <article class="product-card" data-brand="${product.brandSlug}" data-filters="${product.filters.join(' ')}">
           <a class="product-card-link" href="product-detail.html?product=${product.id}">
-            <span class="product-media"><img src="${product.image}" alt="${product.title} ${product.code}" width="600" height="600" loading="${index < 3 ? 'eager' : 'lazy'}" decoding="async" /></span>
+            <span class="product-media"><img src="${product.image}" alt="${product.title} ${product.code}" width="600" height="600" loading="${index < 2 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} /></span>
             <div class="product-body">
               <div class="product-meta"><span class="product-brand-tag">${product.brand}</span><span class="product-badge${badgeClassFor(product.category)}">${product.badge}</span></div>
               <h3>${product.title}</h3>

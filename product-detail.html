@@ -12,8 +12,9 @@
   <meta property="og:type" content="product" />
   <link rel="preconnect" href="https://images.unsplash.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" /></noscript>
   <style>
     :root { --ink: #171513; --paper: #f5f0eb; --accent: #776b61; --line: rgba(23,21,19,.16); }
     * { box-sizing: border-box; }
@@ -60,17 +61,24 @@
     .showcase .specs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     @media (max-width: 760px) { main { display: block; } .visual { min-height: 43vh; max-height: none; padding: 6px; } .gallery-grid { gap: 6px; } .content { padding: 44px 7%; } .actions { gap: 8px; } .action { min-height: 46px; padding-inline: 13px; } .hero-image { aspect-ratio: 4 / 3; } .hero-image.is-cutout { aspect-ratio: 1; } }
   </style>
-</head>
+    <script src="assets/js/ceravo-ui.js" defer></script>
+  </head>
 <body>
   <header class="topbar"><a class="brand" href="index.html">CERAVO</a><a class="back" id="back-link" href="javascript:history.back()">Back</a></header>
   <main id="detail-page"></main>
-  <script src="assets/js/bedroom-products.js"></script>
-  <script src="assets/js/wall-tiles-products.js"></script>
-  <script src="assets/js/basins-products.js"></script>
-  <script src="assets/js/faucets-products.js"></script>
-  <script src="assets/js/showers-products.js"></script>
-  <script src="assets/js/accessories-products.js"></script>
   <script>
+    const catalogSrcFor = (id) => {
+      if (!id) return null;
+      if (id.startsWith('kcl-p-')) return 'assets/js/bedroom-products.js';
+      if (id.startsWith('kcl-w-')) return 'assets/js/wall-tiles-products.js';
+      if (id.includes('-acc-')) return 'assets/js/accessories-products.js';
+      if (id.includes('-fc-') || id.includes('-km-') || id.includes('-wf-') || id.includes('-dt-')) return 'assets/js/faucets-products.js';
+      if (id.includes('-sh-') || id.includes('-sp-') || id.includes('-ds-') || id.includes('-cs-')) return 'assets/js/showers-products.js';
+      if (id.includes('-ab-') || id.includes('-mb-') || id.includes('-cb-') || id.includes('-pb-') || id.includes('-uc-') || id.includes('-vb-') || id.includes('-ub-') || id.includes('-hp-')) return 'assets/js/basins-products.js';
+      return null;
+    };
+
+    const bootProductDetail = () => {
     const products = {
       'terra-stone': { eyebrow: 'CERAVO tiles', name: 'Terra Stone', description: 'Warm mineral tones with a quiet architectural finish for interiors that feel grounded and enduring.', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80', category: 'Stone tiles', finish: 'Natural', size: '600 x 600 mm', application: 'Floor & wall' },
       'vein-marble': { eyebrow: 'CERAVO tiles', name: 'Vein Marble', description: 'Layered movement and refined veining for spaces with a confident, composed point of view.', image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1400&q=80', category: 'Marble tiles', finish: 'Polished', size: '1200 x 600 mm', application: 'Wall & floor' },
@@ -113,7 +121,7 @@
       const finishSpec = cutoutProduct.finish ? `<div class="spec"><dt>Finish</dt><dd>${cutoutProduct.finish}</dd></div>` : '';
       page.classList.add('showcase');
       page.innerHTML = `<div class="visual" role="region" aria-label="${cutoutProduct.title} product view">
-        <img class="hero-image is-cutout" src="${cutoutProduct.image}" alt="${cutoutProduct.title} ${cutoutProduct.code}" />
+        <img class="hero-image is-cutout" src="${cutoutProduct.image}" alt="${cutoutProduct.title} ${cutoutProduct.code}" width="900" height="900" decoding="async" fetchpriority="high" />
       </div>
       <section class="content">
         <span class="product-badge${badgeClass}">${cutoutProduct.badge}</span>
@@ -150,7 +158,7 @@
       const displayName = showcaseProduct.title.replace('Diseño Series - ', '');
       page.classList.add('showcase');
       page.innerHTML = `<div class="visual" role="region" aria-label="${showcaseProduct.title} ${isWall ? 'wall' : isFloor ? 'floor' : 'bedroom'} showcase">
-        <img class="hero-image${roomHeroClass}" id="hero-image" src="${showcaseProduct.roomImage}" alt="${roomAlt}" />
+        <img class="hero-image${roomHeroClass}" id="hero-image" src="${showcaseProduct.roomImage}" alt="${roomAlt}" width="1600" height="1200" decoding="async" fetchpriority="high" />
         <div class="view-toggles" role="tablist" aria-label="Image views">
           <button class="view-toggle is-active" type="button" data-view="room" aria-pressed="true"><img src="${showcaseProduct.roomImage}" alt="" loading="lazy" decoding="async" /><span>Room</span></button>
           <button class="view-toggle" type="button" data-view="tile" aria-pressed="false"><img src="${showcaseProduct.tileImage}" alt="" loading="lazy" decoding="async" /><span>Tile</span></button>
@@ -192,8 +200,21 @@
       document.title = `${product.name} | CERAVO`;
       const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${product.name}.`);
       const galleryImages = [product.image, 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80'];
-      const galleryMarkup = galleryImages.map((image, index) => `<img src="${image}" alt="${product.name} detail view ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async" />`).join('');
+      const galleryMarkup = galleryImages.map((image, index) => `<img src="${image}" alt="${product.name} detail view ${index + 1}" width="900" height="900" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} />`).join('');
       page.innerHTML = `<div class="visual" role="region" aria-label="${product.name} image gallery"><div class="gallery-grid">${galleryMarkup}</div></div><section class="content"><span class="eyebrow">${product.eyebrow}</span><h1>${product.name}</h1><p class="description">${product.description}</p><dl class="specs"><div class="spec"><dt>Category</dt><dd>${product.category}</dd></div><div class="spec"><dt>Finish</dt><dd>${product.finish}</dd></div><div class="spec"><dt>Size</dt><dd>${product.size}</dd></div><div class="spec"><dt>Application</dt><dd>${product.application}</dd></div></dl><div class="actions"><a class="action" href="contact.html?interest=${encodeURIComponent(product.name)}">Request details</a><a class="action sample" href="contact.html?interest=${encodeURIComponent(product.name)}&request=sample">Request a sample</a><a class="action whatsapp" href="https://wa.me/8801979614216?text=${whatsappMessage}" target="_blank" rel="noopener noreferrer">WhatsApp enquiry</a><a class="action secondary" href="tel:+8801979614216">Call Now</a></div></section>`;
+    }
+    };
+
+    const requestedId = new URLSearchParams(window.location.search).get('product');
+    const catalogSrc = catalogSrcFor(requestedId);
+    if (!catalogSrc) {
+      bootProductDetail();
+    } else {
+      const catalogScript = document.createElement('script');
+      catalogScript.src = catalogSrc;
+      catalogScript.onload = bootProductDetail;
+      catalogScript.onerror = bootProductDetail;
+      document.head.appendChild(catalogScript);
     }
   </script>
 </body>

@@ -670,6 +670,37 @@
         text-align: center;
       }
 
+      .collection-showcase .collection-card-home {
+        text-align: center;
+      }
+
+      .collection-showcase .collection-card-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 10px;
+        padding: 8px 14px;
+        max-width: 100%;
+        border: 1px solid rgba(17, 17, 17, 0.28);
+        border-radius: 3px;
+        background: #fff;
+        color: #111;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transition: border-color 0.25s ease, background-color 0.25s ease;
+      }
+
+      .collection-showcase .collection-card-home:hover .collection-card-cta,
+      .collection-showcase .collection-card-home:focus-visible .collection-card-cta {
+        border-color: #111;
+        background: #fff;
+      }
+
       .fittings-showcase {
         padding: 42px 0 48px;
         background: #fff;
@@ -1070,6 +1101,13 @@
           object-position: center center;
         }
 
+        .collection-showcase .collection-card-cta {
+          margin-top: 8px;
+          padding: 6px 10px;
+          font-size: 10px;
+          letter-spacing: 0.08em;
+        }
+
         .showcase-followup {
           padding: 32px 16px;
         }
@@ -1228,6 +1266,10 @@
           transform: none;
         }
 
+        .collection-showcase .collection-card-cta {
+          transition: none;
+        }
+
         .collection-film-poster {
           filter: none;
           transform: none;
@@ -1380,11 +1422,11 @@
 
           <div class="collection-panel is-active" data-collection-panel="locations" role="tabpanel">
             <div class="collection-track">
-              <a class="collection-card-home bedroom-tiles" href="bedroom.html"><img src="assets/images/categories/bedroom-luxury-tiles.jpg" alt="Luxury polished floor tiles in modern bright bedroom setting" loading="lazy" decoding="async" /><h3>Luxury Tiles: Bedroom Collection</h3></a>
-              <a class="collection-card-home kitchen-tiles" href="kitchen.html"><img src="assets/images/categories/kitchen-luxury-tiles.jpg" alt="Modern luxury kitchen featuring elegant wall backsplash tiles and glossy floor tiles" loading="lazy" decoding="async" /><h3>Kitchen</h3></a>
-              <a class="collection-card-home living-room-tiles" href="tiles.html"><img src="assets/images/categories/living-room-luxury-tiles.jpg" alt="Spacious contemporary living room with luxury marble floor tiles and textured accent wall tiles" loading="lazy" decoding="async" /><h3>Living Room</h3></a>
-              <a class="collection-card-home" href="washroom.html"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="CERAVO washroom surfaces" loading="lazy" decoding="async" /><h3>Washroom</h3></a>
-              <a class="collection-card-home parking-tiles" href="parking.html"><img src="assets/images/categories/parking-luxury-tiles.jpg" alt="Modern garage and driveway featuring durable, heavy-duty exterior parking floor tiles" loading="lazy" decoding="async" /><h3>Parking</h3></a>
+              <a class="collection-card-home bedroom-tiles" href="bedroom.html"><img src="assets/images/categories/bedroom-luxury-tiles.jpg" alt="Luxury polished floor tiles in modern bright bedroom setting" loading="lazy" decoding="async" /><h3>Luxury Tiles: Bedroom Collection</h3><span class="collection-card-cta" aria-hidden="true">View Collection <span>→</span></span></a>
+              <a class="collection-card-home kitchen-tiles" href="kitchen.html"><img src="assets/images/categories/kitchen-luxury-tiles.jpg" alt="Modern luxury kitchen featuring elegant wall backsplash tiles and glossy floor tiles" loading="lazy" decoding="async" /><h3>Kitchen</h3><span class="collection-card-cta" aria-hidden="true">View Collection <span>→</span></span></a>
+              <a class="collection-card-home living-room-tiles" href="tiles.html"><img src="assets/images/categories/living-room-luxury-tiles.jpg" alt="Spacious contemporary living room with luxury marble floor tiles and textured accent wall tiles" loading="lazy" decoding="async" /><h3>Living Room</h3><span class="collection-card-cta" aria-hidden="true">View Collection <span>→</span></span></a>
+              <a class="collection-card-home" href="washroom.html"><img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" alt="CERAVO washroom surfaces" loading="lazy" decoding="async" /><h3>Washroom</h3><span class="collection-card-cta" aria-hidden="true">View Collection <span>→</span></span></a>
+              <a class="collection-card-home parking-tiles" href="parking.html"><img src="assets/images/categories/parking-luxury-tiles.jpg" alt="Modern garage and driveway featuring durable, heavy-duty exterior parking floor tiles" loading="lazy" decoding="async" /><h3>Parking</h3><span class="collection-card-cta" aria-hidden="true">View Collection <span>→</span></span></a>
             </div>
           </div>
 

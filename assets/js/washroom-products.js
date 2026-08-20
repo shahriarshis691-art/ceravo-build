@@ -220,12 +220,19 @@
   khadimProduct({ id: 'kcl-m-487', sku: 'KCL-M-487', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-487' });
   khadimProduct({ id: 'kcl-m-488', sku: 'KCL-M-488', collection: 'Diseno', tileType: 'Wall & Floor', finish: 'Matt', sourcePath: 'kcl-m-488' });
 
+  const brandGroupKey = (item) => {
+    const slug = String((item && item.brandSlug) || '').trim().toLowerCase();
+    const name = String((item && item.brand) || '').trim().toLowerCase();
+    if (slug === 'khadim' || name.includes('khadim')) return 'khadim';
+    if (slug === 'mir' || name.includes('mir')) return 'mir';
+    return 'other';
+  };
+
   const orderByBrandGroup = (products) => {
     const grouped = { khadim: [], mir: [], other: [] };
-    products.forEach((item) => {
-      if (item.brandSlug === 'khadim') grouped.khadim.push(item);
-      else if (item.brandSlug === 'mir') grouped.mir.push(item);
-      else grouped.other.push(item);
+    (products || []).forEach((item) => {
+      if (!item) return;
+      grouped[brandGroupKey(item)].push(item);
     });
     return grouped.khadim.concat(grouped.mir, grouped.other);
   };

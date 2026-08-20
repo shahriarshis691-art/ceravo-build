@@ -142,7 +142,7 @@
     </section>
     <footer class="site-footer"><div><div class="footer-brand">CERAVO</div><p class="footer-copy">Tiles &amp; Surfaces for considered spaces.</p><p class="footer-copy">Founder &amp; CEO: SM SHAHRIAR WALID</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="tiles.html">Tiles</a><a href="washroom.html">Washroom</a><a href="bathware.html">Bathware</a></nav></footer>
     <div class="site-menu" id="site-menu" aria-hidden="true"><nav class="site-menu-panel" aria-label="Menu"><a class="site-menu-link" href="index.html">Home</a><a class="site-menu-link" href="tiles.html">Tiles</a><a class="site-menu-link" href="washroom.html">Washroom</a><a class="site-menu-link" href="bathware.html">Bathware</a><a class="site-menu-link" href="showroom.html">Showrooms</a><a class="site-menu-link" href="contact.html">Contact Us</a></nav></div>
-    <script src="assets/js/washroom-products.js?v=khadim-images-1"></script>
+    <script src="assets/js/washroom-products.js?v=mir-visible-1"></script>
     <script>
       const heroVideo = document.querySelector('.hero-video');
       if (heroVideo) {
@@ -169,12 +169,18 @@
       const emptyState = document.querySelector('#washroom-empty');
       const brandFilterBar = document.querySelector('#washroom-brand-filters');
       const typeFilterBar = document.querySelector('#washroom-type-filters');
+      const brandGroupKey = (item) => {
+        const slug = String((item && item.brandSlug) || '').trim().toLowerCase();
+        const name = String((item && item.brand) || '').trim().toLowerCase();
+        if (slug === 'khadim' || name.includes('khadim')) return 'khadim';
+        if (slug === 'mir' || name.includes('mir')) return 'mir';
+        return 'other';
+      };
       const orderByBrandGroup = (products) => {
         const grouped = { khadim: [], mir: [], other: [] };
-        products.forEach((item) => {
-          if (item.brandSlug === 'khadim') grouped.khadim.push(item);
-          else if (item.brandSlug === 'mir') grouped.mir.push(item);
-          else grouped.other.push(item);
+        (products || []).forEach((item) => {
+          if (!item) return;
+          grouped[brandGroupKey(item)].push(item);
         });
         return grouped.khadim.concat(grouped.mir, grouped.other);
       };
@@ -201,10 +207,10 @@
         if (tileType === 'Wall & Floor') return 'Matching Wall + Floor';
         return tileType;
       };
-      const brandsInData = ['mir', 'khadim']
-        .map((slug) => washroomProducts.find((item) => item.brandSlug === slug))
+      const brandsInData = ['khadim', 'mir']
+        .map((slug) => washroomProducts.find((item) => brandGroupKey(item) === slug))
         .filter(Boolean)
-        .map((item) => ({ slug: item.brandSlug, name: item.brand }));
+        .map((item) => ({ slug: brandGroupKey(item), name: item.brand }));
       brandFilterBar.innerHTML = `<button class="brand-filter is-active" type="button" data-brand-filter="all">All Brands</button>${brandsInData.map((brand) => `<button class="brand-filter" type="button" data-brand-filter="${escapeHtml(brand.slug)}">${escapeHtml(brand.name)}</button>`).join('')}`;
       typeFilterBar.innerHTML = `<button class="filter is-active" type="button" data-filter="all">All</button>${uniqueValues('tileType').map((tileType) => `<button class="filter" type="button" data-filter="${escapeHtml(tileType)}">${escapeHtml(tileTypeLabel(tileType))}</button>`).join('')}`;
       [
@@ -225,11 +231,13 @@
 
       productGrid.innerHTML = washroomProducts.map((item, index) => {
         const whatsappMessage = encodeURIComponent(`Hello CERAVO, I would like details about ${item.productName} (${item.sku}).`);
-        const media = item.hasManufacturerImage
+        const brandSlug = brandGroupKey(item);
+        const hasImage = Boolean(item.hasManufacturerImage && item.image);
+        const media = hasImage
           ? `<span class="product-media"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.brand)} ${escapeHtml(item.productName)}" width="600" height="600" loading="${index < 2 ? 'eager' : 'lazy'}" decoding="async"${index === 0 ? ' fetchpriority="high"' : ''} /></span>`
           : `<span class="product-media is-empty" aria-label="Product image not specified"><span class="product-media-placeholder">Image not specified</span></span>`;
         return `
-        <article class="product-card" data-brand="${escapeHtml(item.brandSlug)}" data-tile-type="${escapeHtml(item.tileType)}" data-size="${escapeHtml(item.size)}" data-color="${escapeHtml(item.color)}" data-finish="${escapeHtml(item.finish)}" data-surface="${escapeHtml(item.surface)}" data-collection="${escapeHtml(item.collection)}" data-search="${escapeHtml(item.searchText)}">
+        <article class="product-card" data-brand="${escapeHtml(brandSlug)}" data-tile-type="${escapeHtml(item.tileType)}" data-size="${escapeHtml(item.size)}" data-color="${escapeHtml(item.color)}" data-finish="${escapeHtml(item.finish)}" data-surface="${escapeHtml(item.surface)}" data-collection="${escapeHtml(item.collection)}" data-search="${escapeHtml(item.searchText)}">
           <a class="product-card-link" href="product-detail.html?product=${escapeHtml(item.id)}">
             ${media}
             <div class="product-body">
@@ -253,7 +261,7 @@
       const applyListingFilters = () => {
         const tokens = normalizeQuery(searchQuery).split(' ').filter(Boolean);
         let visibleCount = 0;
-        document.querySelectorAll('.product-card').forEach((card) => {
+        document.querySelectorAll('#washroom-product-grid .product-card').forEach((card) => {
           const brandMatch = activeFilters.brand === 'all' || card.dataset.brand === activeFilters.brand;
           const typeMatch = activeFilters.tileType === 'all' || card.dataset.tileType === activeFilters.tileType;
           const sizeMatch = activeFilters.size === 'all' || card.dataset.size === activeFilters.size;
@@ -269,6 +277,14 @@
         });
         emptyState.classList.toggle('is-visible', visibleCount === 0);
       };
+      document.querySelectorAll('[data-filter-select]').forEach((select) => {
+        select.value = 'all';
+        activeFilters[select.dataset.filterSelect] = 'all';
+      });
+      const searchInput = document.querySelector('#washroom-search');
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      applyListingFilters();
       document.querySelectorAll('[data-brand-filter]').forEach((brandButton) => brandButton.addEventListener('click', () => {
         activeFilters.brand = brandButton.dataset.brandFilter;
         document.querySelectorAll('[data-brand-filter]').forEach((button) => button.classList.toggle('is-active', button === brandButton));

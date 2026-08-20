@@ -187,8 +187,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: #111;
         background-size: cover;
         background-position: center;
+        background-repeat: no-repeat;
         opacity: 0;
         transition: opacity 0.8s ease;
         transform: translate3d(0, 0, 0);
@@ -204,12 +206,25 @@
         content: "";
         position: absolute;
         inset: 0;
+        z-index: 1;
         background: linear-gradient(180deg, rgba(42, 34, 28, 0.08), rgba(0,0,0,0.12));
       }
 
       .hero-slide-one {
-        background-image: url('assets/images/download.jpg');
-        background-position: center 42%;
+        background-image: none;
+      }
+
+      .hero-photo {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+        pointer-events: none;
+        user-select: none;
       }
 
       .hero-slide-two {
@@ -217,6 +232,10 @@
       }
 
       @media (min-width: 768px) {
+        .hero {
+          height: min(86vh, 980px);
+        }
+
         .hero-slide-two {
           background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80');
         }
@@ -230,7 +249,7 @@
         transform: translate3d(-50%, -50%, 0);
         text-align: center;
         color: rgba(255,255,255,0.95);
-        z-index: 1;
+        z-index: 2;
         width: min(92%, 620px);
         letter-spacing: 0;
         text-transform: none;
@@ -1104,6 +1123,14 @@
       <main>
         <section class="hero" aria-label="Luxury interior banner">
           <div class="hero-slide hero-slide-one is-active" data-slide="0">
+            <img
+              class="hero-photo"
+              src="assets/images/download.jpg"
+              alt="Luxury penthouse living room with premium marble flooring"
+              width="736"
+              height="981"
+              decoding="async"
+            />
             <div class="hero-copy">
               <span>Crafted for Elevated Interiors</span>
               <a class="hero-discover" href="tiles.html">DISCOVER MORE</a>

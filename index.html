@@ -365,7 +365,11 @@
         width: 100%;
         margin: 0 0 28px;
         overflow: hidden;
+        isolation: isolate;
         background: #111;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
       }
 
       .collection-film-video {
@@ -374,6 +378,45 @@
         height: min(72vh, 640px);
         object-fit: cover;
         object-position: center;
+        background: #111;
+        border: 0;
+        outline: none;
+        pointer-events: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        will-change: transform;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: high-quality;
+      }
+
+      .collection-film-video::-webkit-media-controls,
+      .collection-film-video::-webkit-media-controls-enclosure,
+      .collection-film-video::-webkit-media-controls-panel,
+      .collection-film-video::-webkit-media-controls-start-playback-button {
+        display: none !important;
+        -webkit-appearance: none;
+        opacity: 0;
+      }
+
+      .collection-film-scrim {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 40%;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.58) 0%,
+          rgba(0, 0, 0, 0.22) 52%,
+          rgba(0, 0, 0, 0) 100%
+        );
       }
 
       .collection-tabs {
@@ -842,7 +885,7 @@
           width: 100%;
           max-width: 100%;
           height: auto;
-          overflow: visible;
+          overflow: hidden;
           background: #111;
         }
 
@@ -1027,10 +1070,14 @@
               loop
               playsinline
               preload="metadata"
+              disablepictureinpicture
+              disableremoteplayback
+              controlslist="nodownload nofullscreen noremoteplayback"
               aria-label="CERAVO collection film"
             >
               <source src="assets/videos/ceravo-collection-4k.mp4" type="video/mp4" />
             </video>
+            <div class="collection-film-scrim" aria-hidden="true"></div>
           </div>
           <div class="collection-tabs" role="tablist" aria-label="Collection categories">
             <button class="collection-tab is-active" type="button" role="tab" aria-selected="true" data-collection-tab="locations">CATEGORIES</button>
